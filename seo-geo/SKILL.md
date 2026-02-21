@@ -13,6 +13,7 @@ Key insight: AI search engines do not rank pages — they cite sources. Being ci
 
 ## Documentation
 
+- **llms.txt standard**: https://llmstxt.org
 - **GEO research**: https://arxiv.org/abs/2311.09735 (Princeton study)
 - **Schema reference**: https://schema.org
 - **Google guidelines**: https://developers.google.com/search/docs
@@ -66,6 +67,40 @@ Each AI engine has different citation preferences. See references/geo-principles
 **Microsoft Copilot**: requires Bing indexing; page speed under 2 seconds; LinkedIn/GitHub mentions help
 **Anthropic AI**: uses Brave Search indexing (not Google); prioritises factual density and structural clarity
 
+## llms.txt
+
+`llms.txt` is to AI engines what `robots.txt` is to crawlers — a file at your site root that tells AI systems how to understand your content. Always add it to any public-facing site.
+
+Place at `https://yourdomain.com/llms.txt`. Format is Markdown:
+
+```markdown
+# Site or Product Name
+
+> One-paragraph summary of what the site is and who it is for.
+
+Optional additional context (key facts, caveats, important notes).
+
+## Docs
+
+- [Page title](https://yourdomain.com/page.md): What this page covers
+
+## API
+
+- [API reference](https://yourdomain.com/api.md): Endpoint overview
+
+## Optional
+
+- [Changelog](https://yourdomain.com/changelog.md): Recent changes
+```
+
+**Key rules:**
+- H1 = site/product name (required)
+- Blockquote = brief summary of what the site is (required for AI comprehension)
+- H2 sections = curated links to your most important pages with descriptions
+- Link to `.md` versions of pages where possible — AI engines prefer clean Markdown over HTML
+- The `## Optional` section signals lower-priority content that can be skipped in short-context situations
+- Keep it concise — this is a navigation aid, not a full content dump
+
 ## Structured Data
 
 Always add JSON-LD schema. See references/schema-patterns.md for templates.
@@ -81,6 +116,7 @@ Priority schema types:
 
 Apply when reviewing any public-facing page:
 
+- [ ] `llms.txt` present at site root with H1, summary blockquote, and key page links
 - [ ] Unique, keyword-containing H1
 - [ ] Meta title and description present and correct length
 - [ ] Open Graph tags (og:title, og:description, og:image, og:url)

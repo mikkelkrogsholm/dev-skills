@@ -2,14 +2,36 @@
 
 A collection of Claude Code skills for modern web development. Each skill gives Claude live access to up-to-date documentation plus a curated layer of evergreen gotchas — the things that trip developers up but aren't prominently covered in the docs.
 
+## Install
+
+Install all skills at once:
+
+```bash
+npx skills add mikkelkrogsholm/dev-skills
+```
+
+Install a specific skill:
+
+```bash
+npx skills add mikkelkrogsholm/dev-skills --skill bun
+```
+
+Install to a specific agent:
+
+```bash
+npx skills add mikkelkrogsholm/dev-skills -a claude-code
+```
+
+Skills install to `~/.claude/skills/` (global) or `.claude/skills/` (project-level).
+
+---
+
 ## How Skills Work
 
 Skills are loaded into Claude's context when relevant. Each skill contains:
 - A **triggering description** so Claude knows when to activate it
 - A **live docs pointer** so Claude fetches current documentation rather than relying on training data
 - **Curated best practices** covering non-obvious pitfalls that Claude gets wrong by default
-
-Install any skill by dropping the `.skill` file from `dist/` into your Claude Code project.
 
 ---
 
@@ -117,12 +139,15 @@ Install any skill by dropping the `.skill` file from `dist/` into your Claude Co
 
 ```
 dev-skills/
-├── .agents/skills/     # Skill source files (SKILL.md + references)
-├── .claude/skills/     # Mirror for Claude Code to load skills from
-├── dist/               # Packaged .skill files ready for distribution
-├── documentation/      # Library documentation
+├── bun/                # Each skill lives at the root
+│   └── SKILL.md
+├── hono/
+│   └── SKILL.md
+├── ...
+├── .claude/skills/     # Symlinks for local Claude Code usage
+├── dist/               # Packaged .skill files
 ├── technologies.md     # Build tracker
-└── skills-lock.json    # Skill version lock
+└── skills-lock.json
 ```
 
 ## Adding a New Skill

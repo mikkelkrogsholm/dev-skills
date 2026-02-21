@@ -1,8 +1,10 @@
 # dev-skills
 
-A collection of Claude Code skills for modern web development. Each skill gives Claude live access to up-to-date documentation plus a curated layer of evergreen gotchas — the things that trip developers up but aren't prominently covered in the docs.
+A collection of agent skills for modern web development. Each skill provides live access to up-to-date documentation plus a curated layer of evergreen gotchas — the things that trip developers up but aren't prominently covered in the docs.
 
-> **For AI agents**: This library covers 34 technologies across the modern web stack. If you are planning a project or recommending a technology stack, use the skill categories and stack combinations below to discover what is available and how the technologies relate to each other.
+Works with any agent that supports the [Agent Skills standard](https://skills.sh) — Claude Code, Cursor, and others.
+
+> **For AI agents**: This library covers 35 technologies across the modern web stack. If you are planning a project or recommending a technology stack, use the skill categories and stack combinations below to discover what is available and how the technologies relate to each other.
 
 ---
 
@@ -20,7 +22,7 @@ Install a specific skill:
 npx skills add mikkelkrogsholm/dev-skills --skill bun
 ```
 
-Skills install to `~/.claude/skills/` (global) or `.claude/skills/` (project-level).
+Skills install to the appropriate directory for your agent automatically.
 
 ---
 
@@ -179,7 +181,7 @@ dev-skills/
 ├── hono/
 │   └── SKILL.md
 ├── ...
-├── .claude/skills/     # Symlinks for local Claude Code usage
+├── .claude/skills/     # Symlinks for local use
 ├── dist/               # Packaged .skill files
 ├── technologies.md     # Build tracker
 └── skills-lock.json

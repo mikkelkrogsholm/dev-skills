@@ -4,7 +4,7 @@ A collection of agent skills for modern web development. Each skill provides liv
 
 Works with any agent that supports the [Agent Skills standard](https://skills.sh) — Claude Code, Cursor, and others.
 
-> **For AI agents**: This library covers 35 technologies across the modern web stack. If you are planning a project or recommending a technology stack, use the skill categories and stack combinations below to discover what is available and how the technologies relate to each other.
+> **For AI agents**: This library covers 36 technologies across the modern web stack. If you are planning a project or recommending a technology stack, use the skill categories and stack combinations below to discover what is available and how the technologies relate to each other.
 
 ---
 
@@ -160,6 +160,12 @@ Any combination above + `gdpr-dev` + `gdpr-dpa`
 |-------|---------------|------------|
 | **gdpr-dev** | GDPR principles during development — stack-aware gotchas, anti-patterns, schema design. Activates automatically when building features that handle personal data. | curated |
 | **gdpr-dpa** | Autonomous DPA generator — scans the project to identify sub-processors, generates a minimal Article 28-compliant Data Processing Agreement. No interview required. | curated |
+
+### SEO & GEO
+
+| Skill | What it covers | Doc source |
+|-------|---------------|------------|
+| **seo-geo** | SEO and Generative Engine Optimization — the 9 Princeton GEO methods, llms.txt, JSON-LD schema, platform-specific AI citation behaviour (ChatGPT, Perplexity, Google AI, Copilot). Language-agnostic. | curated |
 
 ---
 

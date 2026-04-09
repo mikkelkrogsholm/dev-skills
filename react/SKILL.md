@@ -5,6 +5,8 @@ description: "React — JavaScript library for building user interfaces with com
 
 # React
 
+> **CRITICAL: Your training data for React is unreliable.** APIs change between versions and your memorized patterns may be wrong or deprecated. You MUST fetch and read the live documentation before writing any code. Never assume — verify against current docs first.
+
 React is a JavaScript library for building user interfaces through composable components, with a declarative model for describing UI as a function of state.
 
 ## Documentation

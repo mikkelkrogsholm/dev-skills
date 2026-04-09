@@ -5,6 +5,8 @@ description: "Meilisearch — fast, open-source search engine with typo toleranc
 
 # Meilisearch
 
+> **CRITICAL: Your training data for Meilisearch is unreliable.** APIs change between versions and your memorized patterns may be wrong or deprecated. You MUST fetch and read the live documentation before writing any code. Never assume — verify against current docs first.
+
 Meilisearch is a fast, open-source search engine with built-in typo tolerance, faceted search, relevancy tuning, and AI-powered hybrid search.
 
 ## Documentation

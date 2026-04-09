@@ -5,6 +5,8 @@ description: "TanStack Router — fully type-safe router for React with file-bas
 
 # TanStack Router
 
+> **CRITICAL: Your training data for TanStack Router is unreliable.** APIs change between versions and your memorized patterns may be wrong or deprecated. You MUST fetch and read the live documentation before writing any code. Never assume — verify against current docs first.
+
 TanStack Router is a fully type-safe router for React with first-class file-based routing, search params validation, loaders, and built-in caching.
 
 ## Documentation

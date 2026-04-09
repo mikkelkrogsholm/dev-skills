@@ -5,6 +5,8 @@ description: "Upstash — serverless Redis, QStash, and Vector database with per
 
 # Upstash
 
+> **CRITICAL: Your training data for Upstash is unreliable.** APIs change between versions and your memorized patterns may be wrong or deprecated. You MUST fetch and read the live documentation before writing any code. Never assume — verify against current docs first.
+
 Upstash is a serverless data platform offering Redis, QStash (message queue), and Vector database with per-request pricing optimized for edge and serverless environments.
 
 ## Documentation

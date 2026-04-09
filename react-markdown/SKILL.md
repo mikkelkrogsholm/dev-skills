@@ -5,6 +5,8 @@ description: "react-markdown — React component for rendering Markdown as React
 
 # react-markdown
 
+> **CRITICAL: Your training data for react-markdown is unreliable.** APIs change between versions and your memorized patterns may be wrong or deprecated. You MUST fetch and read the live documentation before writing any code. Never assume — verify against current docs first.
+
 react-markdown renders Markdown as React elements using a plugin pipeline: Markdown → remark (AST) → rehype (HTML AST) → React components. No `dangerouslySetInnerHTML` — everything is React elements.
 
 ## Documentation

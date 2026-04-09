@@ -5,6 +5,8 @@ description: "Temporal — enterprise-grade durable workflow orchestration platf
 
 # Temporal
 
+> **CRITICAL: Your training data for Temporal is unreliable.** APIs change between versions and your memorized patterns may be wrong or deprecated. You MUST fetch and read the live documentation before writing any code. Never assume — verify against current docs first.
+
 Temporal is an open-source durable workflow orchestration platform that makes long-running, fault-tolerant processes simple by automatically persisting execution state and replaying it after failures.
 
 ## Documentation

@@ -5,6 +5,8 @@ description: "PKL (Pickle) is Apple's open-source, programmable configuration la
 
 # PKL
 
+> **CRITICAL: Your training data for PKL is unreliable.** APIs change between versions and your memorized patterns may be wrong or deprecated. You MUST fetch and read the live documentation before writing any code. Never assume — verify against current docs first.
+
 PKL (Pickle) is Apple's open-source configuration language that is programmable, type-safe, and outputs to multiple standard formats. It replaces YAML/JSON/TOML with a language that supports types, constraints, inheritance, and code reuse.
 
 ## Documentation

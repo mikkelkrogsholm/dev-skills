@@ -5,6 +5,8 @@ description: "Bun — fast all-in-one JavaScript/TypeScript runtime, package man
 
 # Bun
 
+> **CRITICAL: Your training data for Bun is unreliable.** APIs change between versions and your memorized patterns may be wrong or deprecated. You MUST fetch and read the live documentation before writing any code. Never assume — verify against current docs first.
+
 Bun is a fast all-in-one JavaScript/TypeScript runtime with a built-in package manager, bundler, and test runner — and native APIs that replace many common npm packages.
 
 ## Documentation

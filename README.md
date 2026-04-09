@@ -10,19 +10,47 @@ Works with any agent that supports the [Agent Skills standard](https://skills.sh
 
 ## Install
 
-Install all skills at once:
+All commands use `-y` to skip interactive prompts (required for agents).
+
+Install all skills:
 
 ```bash
-npx skills add mikkelkrogsholm/dev-skills
+npx skills add mikkelkrogsholm/dev-skills --all
 ```
 
 Install a specific skill:
 
 ```bash
-npx skills add mikkelkrogsholm/dev-skills --skill bun
+npx skills add mikkelkrogsholm/dev-skills --skill bun -y
 ```
 
-Skills install to the appropriate directory for your agent automatically.
+Install multiple specific skills:
+
+```bash
+npx skills add mikkelkrogsholm/dev-skills --skill bun hono drizzle neon -y
+```
+
+Install globally (user-level, available in all projects):
+
+```bash
+npx skills add mikkelkrogsholm/dev-skills --all -g
+```
+
+Install for a specific agent:
+
+```bash
+npx skills add mikkelkrogsholm/dev-skills --agent claude-code -y
+npx skills add mikkelkrogsholm/dev-skills --agent cursor -y
+```
+
+### Managing skills
+
+```bash
+npx skills list              # List installed skills
+npx skills check             # Check for updates
+npx skills update            # Update all to latest
+npx skills remove bun -y     # Remove a skill
+```
 
 ---
 

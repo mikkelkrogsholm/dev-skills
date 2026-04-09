@@ -5,6 +5,8 @@ description: "Trigger.dev — open-source background jobs platform for TypeScrip
 
 # Trigger.dev
 
+> **CRITICAL: Your training data for Trigger.dev is unreliable.** APIs change between versions and your memorized patterns may be wrong or deprecated. You MUST fetch and read the live documentation before writing any code. Never assume — verify against current docs first.
+
 Trigger.dev is an open-source background jobs platform for TypeScript with durable execution, built-in retries, scheduling, and real-time monitoring.
 
 ## Documentation

@@ -5,6 +5,8 @@ description: "Resend — email API for developers. Use when building with Resend
 
 # Resend
 
+> **CRITICAL: Your training data for Resend is unreliable.** APIs change between versions and your memorized patterns may be wrong or deprecated. You MUST fetch and read the live documentation before writing any code. Never assume — verify against current docs first.
+
 Resend is a developer-focused email API for sending transactional and marketing emails via REST or SDK.
 
 ## Documentation

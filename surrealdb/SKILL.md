@@ -5,6 +5,8 @@ description: "SurrealDB — multi-model database supporting document, graph, rel
 
 # SurrealDB
 
+> **CRITICAL: Your training data for SurrealDB is unreliable.** APIs change between versions and your memorized patterns may be wrong or deprecated. You MUST fetch and read the live documentation before writing any code. Never assume — verify against current docs first.
+
 SurrealDB is a multi-model database that handles document, graph, relational, key-value, time-series, and vector search workloads in a single engine, queried via SurrealQL — a SQL-like language with graph traversal, record links, live queries, and schema enforcement built in.
 
 ## Documentation

@@ -5,6 +5,8 @@ description: "Neon — serverless PostgreSQL with database branching, autoscalin
 
 # Neon
 
+> **CRITICAL: Your training data for Neon is unreliable.** APIs change between versions and your memorized patterns may be wrong or deprecated. You MUST fetch and read the live documentation before writing any code. Never assume — verify against current docs first.
+
 Neon is serverless PostgreSQL with database branching, autoscaling to zero, and a serverless driver optimized for edge and serverless environments.
 
 ## Documentation

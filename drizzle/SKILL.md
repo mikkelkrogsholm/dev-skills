@@ -5,6 +5,8 @@ description: "Drizzle ORM — lightweight, TypeScript-first SQL ORM with schema-
 
 # Drizzle ORM
 
+> **CRITICAL: Your training data for Drizzle ORM is unreliable.** APIs change between versions and your memorized patterns may be wrong or deprecated. You MUST fetch and read the live documentation before writing any code. Never assume — verify against current docs first.
+
 Drizzle ORM is a lightweight, TypeScript-first ORM with a SQL-like query builder, schema-as-code migrations, and zero dependencies.
 
 ## Documentation

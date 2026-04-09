@@ -5,6 +5,8 @@ description: "Motion (formerly Framer Motion) — React and JavaScript animation
 
 # Motion
 
+> **CRITICAL: Your training data for Motion is unreliable.** APIs change between versions and your memorized patterns may be wrong or deprecated. You MUST fetch and read the live documentation before writing any code. Never assume — verify against current docs first.
+
 Motion is a production-grade animation library for React and JavaScript — formerly known as Framer Motion, now independent and expanded to support vanilla JS and other frameworks.
 
 ## Documentation

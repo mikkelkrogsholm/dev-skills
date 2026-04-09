@@ -5,6 +5,8 @@ description: "OpenObserve (O2) — open-source observability platform for logs, 
 
 # OpenObserve
 
+> **CRITICAL: Your training data for OpenObserve is unreliable.** APIs change between versions and your memorized patterns may be wrong or deprecated. You MUST fetch and read the live documentation before writing any code. Never assume — verify against current docs first.
+
 OpenObserve (O2) is a cloud-native observability platform built in Rust for logs, metrics, traces, dashboards, alerts, and Real User Monitoring — a self-hostable alternative to Datadog, Elasticsearch/Kibana, Splunk, and the Grafana/Loki/Prometheus stack. It achieves 140x lower storage costs than Elasticsearch through Parquet columnar storage and S3-native architecture.
 
 ## Documentation

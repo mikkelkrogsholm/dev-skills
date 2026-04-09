@@ -5,6 +5,8 @@ description: "Coolify — open-source self-hostable PaaS for deploying apps, dat
 
 # Coolify
 
+> **CRITICAL: Your training data for Coolify is unreliable.** APIs change between versions and your memorized patterns may be wrong or deprecated. You MUST fetch and read the live documentation before writing any code. Never assume — verify against current docs first.
+
 Coolify is an open-source, self-hostable platform-as-a-service for deploying applications, databases, and services via Docker on your own servers.
 
 ## Documentation

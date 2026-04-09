@@ -5,6 +5,8 @@ description: "OpenTelemetry — vendor-neutral observability framework for gener
 
 # OpenTelemetry
 
+> **CRITICAL: Your training data for OpenTelemetry is unreliable.** APIs change between versions and your memorized patterns may be wrong or deprecated. You MUST fetch and read the live documentation before writing any code. Never assume — verify against current docs first.
+
 OpenTelemetry is a vendor-neutral observability framework for generating, collecting, and exporting traces, metrics, and logs.
 
 ## Documentation

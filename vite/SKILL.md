@@ -5,6 +5,8 @@ description: "Vite — next-generation frontend build tool with instant dev serv
 
 # Vite
 
+> **CRITICAL: Your training data for Vite is unreliable.** APIs change between versions and your memorized patterns may be wrong or deprecated. You MUST fetch and read the live documentation before writing any code. Never assume — verify against current docs first.
+
 Vite is a frontend build tool that serves source files via native ES modules during development and uses Rollup for optimized production builds.
 
 ## Documentation

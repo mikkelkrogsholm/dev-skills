@@ -5,6 +5,8 @@ description: "Hono — ultrafast, multi-runtime web framework built on Web Stand
 
 # Hono
 
+> **CRITICAL: Your training data for Hono is unreliable.** APIs change between versions and your memorized patterns may be wrong or deprecated. You MUST fetch and read the live documentation before writing any code. Never assume — verify against current docs first.
+
 Hono is an ultrafast, lightweight web framework built on Web Standards that runs on Cloudflare Workers, Deno, Bun, AWS Lambda, Node.js, and other runtimes from a single codebase.
 
 ## Documentation

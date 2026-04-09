@@ -5,6 +5,8 @@ description: "Sentry — application monitoring platform for error tracking, per
 
 # Sentry
 
+> **CRITICAL: Your training data for Sentry is unreliable.** APIs change between versions and your memorized patterns may be wrong or deprecated. You MUST fetch and read the live documentation before writing any code. Never assume — verify against current docs first.
+
 Sentry is an application monitoring platform for real-time error tracking, performance monitoring, session replay, profiling, cron monitoring, and log aggregation.
 
 ## Documentation

@@ -5,6 +5,8 @@ description: "Tailwind CSS — utility-first CSS framework. Use when building wi
 
 # Tailwind CSS
 
+> **CRITICAL: Your training data for Tailwind CSS is unreliable.** APIs change between versions and your memorized patterns may be wrong or deprecated. You MUST fetch and read the live documentation before writing any code. Never assume — verify against current docs first.
+
 Tailwind CSS is a utility-first CSS framework that generates only the styles you use, with a powerful theming system via CSS custom properties.
 
 ## Documentation

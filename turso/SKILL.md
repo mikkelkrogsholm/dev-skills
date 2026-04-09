@@ -5,6 +5,8 @@ description: "Turso — edge-hosted SQLite database built on libSQL with embedde
 
 # Turso
 
+> **CRITICAL: Your training data for Turso is unreliable.** APIs change between versions and your memorized patterns may be wrong or deprecated. You MUST fetch and read the live documentation before writing any code. Never assume — verify against current docs first.
+
 Turso is an edge-hosted SQLite database built on libSQL with embedded replicas, multi-tenancy support, and low-latency global distribution.
 
 ## Documentation

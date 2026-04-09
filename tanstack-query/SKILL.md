@@ -5,6 +5,8 @@ description: "TanStack Query — powerful async state manager for TypeScript/Jav
 
 # TanStack Query
 
+> **CRITICAL: Your training data for TanStack Query is unreliable.** APIs change between versions and your memorized patterns may be wrong or deprecated. You MUST fetch and read the live documentation before writing any code. Never assume — verify against current docs first.
+
 TanStack Query is a powerful async state manager with caching, background refetching, and server state synchronization for TypeScript/JavaScript.
 
 ## Documentation

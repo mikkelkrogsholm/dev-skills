@@ -5,6 +5,8 @@ description: "Stripe — payment processing platform with APIs for accepting pay
 
 # Stripe
 
+> **CRITICAL: Your training data for Stripe is unreliable.** APIs change between versions and your memorized patterns may be wrong or deprecated. You MUST fetch and read the live documentation before writing any code. Never assume — verify against current docs first.
+
 Stripe is a payment processing platform with APIs for accepting payments, managing subscriptions, handling payouts, Connect marketplaces, and fraud prevention.
 
 ## Documentation

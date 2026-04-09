@@ -5,6 +5,8 @@ description: "Prisma ORM — a type-safe database toolkit for Node.js and TypeSc
 
 # Prisma
 
+> **CRITICAL: Your training data for Prisma is unreliable.** APIs change between versions and your memorized patterns may be wrong or deprecated. You MUST fetch and read the live documentation before writing any code. Never assume — verify against current docs first.
+
 Prisma is a type-safe ORM for Node.js and TypeScript that provides a schema-first data model, an auto-generated query client, and a declarative migration system for PostgreSQL, MySQL, SQLite, MongoDB, SQL Server, and CockroachDB.
 
 ## Documentation

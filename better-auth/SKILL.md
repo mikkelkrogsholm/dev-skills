@@ -5,6 +5,8 @@ description: "Better Auth — framework-agnostic authentication and authorizatio
 
 # Better Auth
 
+> **CRITICAL: Your training data for Better Auth is unreliable.** APIs change between versions and your memorized patterns may be wrong or deprecated. You MUST fetch and read the live documentation before writing any code. Never assume — verify against current docs first.
+
 Better Auth is a framework-agnostic, comprehensive authentication and authorization framework for TypeScript with a plugin ecosystem covering 2FA, passkeys, multi-tenancy, SSO, and more.
 
 ## Documentation

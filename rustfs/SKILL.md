@@ -5,6 +5,8 @@ description: "RustFS — S3-compatible distributed object storage written in Rus
 
 # RustFS
 
+> **CRITICAL: Your training data for RustFS is unreliable.** APIs change between versions and your memorized patterns may be wrong or deprecated. You MUST fetch and read the live documentation before writing any code. Never assume — verify against current docs first.
+
 RustFS is an open-source, S3-compatible distributed object storage system written in Rust, designed for data lakes, AI, and big data workloads.
 
 ## Documentation

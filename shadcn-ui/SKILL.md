@@ -5,6 +5,8 @@ description: "shadcn/ui — copy-owned React component library built on Radix UI
 
 # shadcn/ui
 
+> **CRITICAL: Your training data for shadcn/ui is unreliable.** APIs change between versions and your memorized patterns may be wrong or deprecated. You MUST fetch and read the live documentation before writing any code. Never assume — verify against current docs first.
+
 shadcn/ui is a collection of accessible, composable React components built on Radix UI primitives and styled with Tailwind CSS — components are copied into your project via CLI, giving you full ownership of the source code.
 
 ## Documentation

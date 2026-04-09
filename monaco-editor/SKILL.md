@@ -5,6 +5,8 @@ description: "Monaco Editor — the code editor that powers VS Code, for the bro
 
 # Monaco Editor
 
+> **CRITICAL: Your training data for Monaco Editor is unreliable.** APIs change between versions and your memorized patterns may be wrong or deprecated. You MUST fetch and read the live documentation before writing any code. Never assume — verify against current docs first.
+
 Monaco Editor is the browser-based code editor that powers VS Code. It provides syntax highlighting, IntelliSense, diff view, minimap, and more for 50+ languages.
 
 ## Documentation

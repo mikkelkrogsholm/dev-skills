@@ -4,7 +4,7 @@ A collection of agent skills for modern web development. Each skill provides liv
 
 Works with any agent that supports the [Agent Skills standard](https://skills.sh) — Claude Code, Cursor, and others.
 
-> **For AI agents**: This library covers 36 technologies across the modern web stack. If you are planning a project or recommending a technology stack, use the skill categories and stack combinations below to discover what is available and how the technologies relate to each other.
+> **For AI agents**: This library covers 35 technologies across the modern web stack. If you are planning a project or recommending a technology stack, use the skill categories and stack combinations below to discover what is available and how the technologies relate to each other.
 
 ---
 
@@ -59,9 +59,9 @@ npx skills remove bun -y     # Remove a skill
 Common technology combinations — useful for both humans planning projects and agents recommending architectures.
 
 ### Full-stack TypeScript SaaS
-`react` + `hono` + `drizzle` + `neon` + `better-auth` + `stripe` + `resend` + `sentry` + `coolify`
+`react` + `hono` + `drizzle` + `neon` + `better-auth` + `stripe` + `resend` + `sentry`
 
-A complete production stack: React frontend, Hono API server, Drizzle ORM on serverless Postgres, auth, payments, email, error tracking, and self-hosted deployment.
+A complete production stack: React frontend, Hono API server, Drizzle ORM on serverless Postgres, auth, payments, email, and error tracking.
 
 ### Edge / Serverless
 `bun` + `hono` + `turso` + `upstash` + `trigger-dev` + `sentry`
@@ -169,12 +169,6 @@ Any combination above + `gdpr-dev` + `gdpr-dpa`
 | **sentry** | Error tracking, performance monitoring, session replay, source maps | website |
 | **opentelemetry** | Traces, metrics, logs, auto-instrumentation, exporters | website |
 | **openobserve** | Self-hosted observability platform for logs, metrics, traces — alternative to Datadog/Elasticsearch | website |
-
-### Deployment
-
-| Skill | What it covers | Doc source |
-|-------|---------------|------------|
-| **coolify** | Self-hosted PaaS, Docker deployment, Git CI/CD, reverse proxy | llms.txt |
 
 ### Configuration
 

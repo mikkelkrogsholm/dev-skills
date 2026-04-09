@@ -11,7 +11,7 @@ One skill per technology. Work through them in order.
 | 5 | shadcn/ui | llms.txt | https://ui.shadcn.com/llms.txt | done |
 | 6 | Stripe | llms.txt | https://docs.stripe.com/llms.txt | done |
 | 7 | Resend | llms.txt | https://resend.com/docs/llms.txt | done |
-| 8 | Coolify | llms.txt | https://coolify.io/docs/llms.txt | done |
+| 8 | ~~Coolify~~ | — | — | removed |
 | 9 | Prisma | llms.txt | https://docs.prisma.io/llms.txt | done |
 | 10 | Better Auth | llms.txt | https://www.better-auth.com/llms.txt | done |
 | 11 | RustFS | GitHub repo | https://github.com/rustfs/rustfs | done |

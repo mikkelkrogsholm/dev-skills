@@ -4,7 +4,7 @@ A collection of agent skills for modern web development. Each skill provides liv
 
 Works with any agent that supports the [Agent Skills standard](https://skills.sh) — Claude Code, Cursor, and others.
 
-> **For AI agents**: This library covers 36 skills across the modern web stack plus one cross-cutting engineering-practice skill. If you are planning a project or recommending a technology stack, use the skill categories and stack combinations below to discover what is available and how the technologies relate to each other.
+> **For AI agents**: This library covers 36 technology skills across the modern web stack plus one cross-cutting engineering-practice skill (`agent-readable-code`) that ships a zero-dependency linter for AI-friendly code. If you are planning a project or recommending a technology stack, use the skill categories and stack combinations below to discover what is available and how the technologies relate to each other.
 
 ---
 
@@ -88,6 +88,11 @@ Any combination above + `gdpr-dev` + `gdpr-dpa`
 
 `gdpr-dev` applies GDPR principles automatically during development. `gdpr-dpa` scans the project and generates a Data Processing Agreement based on the actual sub-processors detected.
 
+### AI-paired development (any stack + readability layer)
+Any combination above + `agent-readable-code`
+
+`agent-readable-code` makes a codebase easier for AI agents (Claude Code, Cursor, Copilot, Aider, Devin) to read and modify correctly. Useful from day one on a new project and for auditing legacy code before increasing AI-paired usage. Ships a zero-dep Python/TypeScript linter with nine rules covering the highest-impact anti-patterns (generic naming, metaprogramming, untyped boundaries, oversized files, distant tests, barrel re-exports).
+
 ---
 
 ## All Skills
@@ -106,13 +111,17 @@ Any combination above + `gdpr-dev` + `gdpr-dpa`
 |-------|---------------|------------|
 | **react** | Hooks, state, effects, Server Components, Suspense | llms.txt |
 | **hono** | Multi-runtime web framework, middleware, routing, RPC | llms.txt |
+| **elysia** | Bun-native web framework with end-to-end type safety via Eden RPC, Sucrose plugin model, WebSockets, OpenAPI generation | llms.txt |
 
 ### UI & Animation
 
 | Skill | What it covers | Doc source |
 |-------|---------------|------------|
 | **shadcn-ui** | Component library, CLI, theming, Tailwind integration | llms.txt |
+| **tailwindcss** | Utility-first CSS framework — v4 engine, configuration, variants, theme, content detection | website |
 | **motion** | Animations, transitions, gestures, AnimatePresence, layout animations (formerly Framer Motion) | website |
+| **monaco-editor** | VS Code's browser editor — mounting, models, language services, theming | website |
+| **react-markdown** | Safe React Markdown renderer with remark/rehype plugin pipeline, syntax highlighting, custom components | website |
 
 ### Databases
 
@@ -193,7 +202,7 @@ Any combination above + `gdpr-dev` + `gdpr-dpa`
 
 | Skill | What it covers | Doc source |
 |-------|---------------|------------|
-| **agent-readable-code** | Principles and a zero-dependency linter for writing code that AI coding agents (Claude Code, Cursor, Copilot, Aider, Devin) can read and modify correctly. 8 rules covering file size, duplicate blocks, generic names, metaprogramming, inheritance depth, typed boundaries, test colocation, and long lines. Research-informed with evidence strength labels and inline suppressions. | curated |
+| **agent-readable-code** | Principles and a zero-dependency linter for writing code that AI coding agents (Claude Code, Cursor, Copilot, Aider, Devin) can read and modify correctly. Nine research-informed rules: file size (AR001), near-duplicates (AR002), generic names (AR003), metaprogramming (AR004), inheritance depth (AR005), untyped public boundaries (AR006), test colocation (AR007), long lines (AR008), barrel re-export files (AR011). Python (via stdlib `ast`) and TypeScript/JavaScript (regex, zero-dep) fully supported. Inline and file-level suppressions (`# agent-lint: disable=AR00X`). Benchmarked: 100% vs 76% pass rate against an unassisted baseline (+24% delta, 3 iterations, 12 runs). | curated |
 
 ---
 

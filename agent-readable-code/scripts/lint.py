@@ -316,6 +316,29 @@ _TS_EXPORT_ARROW_RE = re.compile(
     r"^[ \t]*export[ \t]+(?:const|let)[ \t]+([A-Za-z_]\w*)[ \t]*(?::[ \t]*[^=\n]+)?=[ \t]*(?:async[ \t]+)?(?:<[^>]*>[ \t]*)?\(",
     re.MULTILINE,
 )
+# For AR006 TS class methods: an exported class header. The body is located by
+# balanced-brace traversal after this match (not captured in the regex).
+_TS_EXPORT_CLASS_HEADER_RE = re.compile(
+    r"^[ \t]*export[ \t]+(?:default[ \t]+)?(?:abstract[ \t]+)?class[ \t]+([A-Za-z_]\w*)"
+    r"(?:<[^>]*>)?(?:[ \t]+extends[ \t]+[\w$.]+(?:<[^>]*>)?)?"
+    r"(?:[ \t]+implements[ \t]+[\w,\s<>.$]+?)?[ \t]*\{",
+    re.MULTILINE,
+)
+# Method-like declaration inside a class body. Restricted to lines that begin with
+# whitespace and have a parenthesised parameter list. False positives are filtered
+# downstream (e.g. control-flow keywords, private/protected methods, constructor).
+_TS_CLASS_METHOD_RE = re.compile(
+    r"^[ \t]+"
+    r"(?:(public|private|protected)[ \t]+)?"
+    r"(?:(?:static|readonly|async|override|abstract)[ \t]+)*"
+    r"(?:(?:get|set)[ \t]+)?"
+    r"(#?[A-Za-z_$][\w$]*)[ \t]*(?:<[^>]*>[ \t]*)?\(",
+    re.MULTILINE,
+)
+_TS_METHOD_SKIP_NAMES = {
+    "if", "for", "while", "switch", "catch", "return", "throw",
+    "else", "do", "try", "function", "new",
+}
 
 
 def _is_generic_class_name(name: str, banlist: set[str]) -> str | None:
@@ -476,10 +499,10 @@ _PUBLIC_DUNDERS = {"__init__", "__call__"}
 # ---------- TS/JS parser helpers (regex-level, no parser dependency) ----------
 
 
-def _find_matching_paren(s: str, open_idx: int) -> int:
-    """Given s[open_idx] == '(', return the index of the matching ')', or -1 if unbalanced.
+def _find_matching(s: str, open_idx: int, open_c: str, close_c: str) -> int:
+    """Return the index of the closing bracket matching s[open_idx], or -1 if unbalanced.
     Respects string/template-literal state so nested quotes don't confuse the counter."""
-    if open_idx >= len(s) or s[open_idx] != "(":
+    if open_idx >= len(s) or s[open_idx] != open_c:
         return -1
     depth = 0
     i = open_idx
@@ -494,14 +517,22 @@ def _find_matching_paren(s: str, open_idx: int) -> int:
                 in_str = None
         elif c in "'\"`":
             in_str = c
-        elif c == "(":
+        elif c == open_c:
             depth += 1
-        elif c == ")":
+        elif c == close_c:
             depth -= 1
             if depth == 0:
                 return i
         i += 1
     return -1
+
+
+def _find_matching_paren(s: str, open_idx: int) -> int:
+    return _find_matching(s, open_idx, "(", ")")
+
+
+def _find_matching_brace(s: str, open_idx: int) -> int:
+    return _find_matching(s, open_idx, "{", "}")
 
 
 def _split_params(s: str) -> list[str]:
@@ -634,34 +665,69 @@ def check_ar006_ts(path: Path, source: str) -> list[Finding]:
 
     findings: list[Finding] = []
 
-    def check_match(match: re.Match, kind: str) -> None:
-        name = match.group(1)
-        open_idx = match.end() - 1
-        close_idx = _find_matching_paren(source, open_idx)
+    def untyped_params_from(text: str, paren_open_idx: int) -> list[str] | None:
+        """Given text[paren_open_idx] == '(', parse the parameter list and return the
+        labels of untyped parameters (or None on parse failure)."""
+        close_idx = _find_matching_paren(text, paren_open_idx)
         if close_idx < 0:
-            return
-        params_str = source[open_idx + 1 : close_idx]
-        params = _split_params(params_str)
-        untyped_labels: list[str] = []
+            return None
+        params = _split_params(text[paren_open_idx + 1 : close_idx])
+        labels = []
         for p in params:
             pname, typed = _param_name_and_typed(p)
             if not typed:
-                untyped_labels.append(pname)
-        if not untyped_labels:
-            return
-        line = source[: match.start()].count("\n") + 1
+                labels.append(pname)
+        return labels
+
+    def record(line: int, description: str) -> None:
         findings.append(
             Finding(
                 "AR006", str(path), line,
-                f"exported {kind} '{name}' — params without types: {', '.join(untyped_labels)}",
+                f"{description}",
                 RULE_INFO["AR006"][1],
             )
         )
 
     for m in _TS_EXPORT_FN_RE.finditer(source):
-        check_match(m, "function")
+        untyped = untyped_params_from(source, m.end() - 1)
+        if untyped:
+            line = source[: m.start()].count("\n") + 1
+            record(line, f"exported function '{m.group(1)}' — params without types: {', '.join(untyped)}")
     for m in _TS_EXPORT_ARROW_RE.finditer(source):
-        check_match(m, "arrow")
+        untyped = untyped_params_from(source, m.end() - 1)
+        if untyped:
+            line = source[: m.start()].count("\n") + 1
+            record(line, f"exported arrow '{m.group(1)}' — params without types: {', '.join(untyped)}")
+
+    # Public methods of exported classes: walk each class body via balanced braces,
+    # then scan method-like declarations inside. Skip private/protected/# methods and
+    # constructors. Constructor is skipped because it's easy for an agent to locate
+    # via the class name and the typical failure mode (hallucinated methods) doesn't
+    # apply there — the agent isn't going to invent a new constructor.
+    for class_match in _TS_EXPORT_CLASS_HEADER_RE.finditer(source):
+        class_name = class_match.group(1)
+        brace_open = class_match.end() - 1
+        if brace_open >= len(source) or source[brace_open] != "{":
+            continue
+        brace_close = _find_matching_brace(source, brace_open)
+        if brace_close < 0:
+            continue
+        body = source[brace_open + 1 : brace_close]
+        body_offset = brace_open + 1
+
+        for mm in _TS_CLASS_METHOD_RE.finditer(body):
+            visibility = mm.group(1)
+            name = mm.group(2)
+            if visibility in ("private", "protected"):
+                continue
+            if name.startswith("#") or name in _TS_METHOD_SKIP_NAMES or name == "constructor":
+                continue
+            untyped = untyped_params_from(body, mm.end() - 1)
+            if not untyped:
+                continue
+            abs_start = body_offset + mm.start()
+            line = source[:abs_start].count("\n") + 1
+            record(line, f"public method '{class_name}.{name}' — params without types: {', '.join(untyped)}")
 
     return findings
 

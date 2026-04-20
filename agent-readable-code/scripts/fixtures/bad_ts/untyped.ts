@@ -30,3 +30,36 @@ export function saveOrder({ id, total }) {
 export function joinStrings(sep: string, ...parts: string[]): string {
   return parts.join(sep);
 }
+
+// Exported class with mixed typed and untyped public methods
+export class CustomerApi {
+  // Public method, untyped param → flag
+  findCustomer(id) {
+    return id;
+  }
+
+  // Public method, typed param → clean
+  chargeCustomer(customerId: string, amountCents: number): Promise<void> {
+    return Promise.resolve();
+  }
+
+  // Async method with destructured untyped param → flag
+  async updateCustomer({ id, name }) {
+    return { id, name };
+  }
+
+  // Private method — not a public boundary → NOT flagged even if untyped
+  private _internalHelper(thing) {
+    return thing;
+  }
+
+  // Protected — also not flagged
+  protected computeRisk(score) {
+    return score;
+  }
+
+  // Static typed method → clean
+  static fromId(id: string): CustomerApi {
+    return new CustomerApi();
+  }
+}

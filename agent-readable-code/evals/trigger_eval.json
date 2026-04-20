@@ -1,0 +1,22 @@
+[
+  {"query": "I've got this legacy Python module with a bunch of process() functions and Manager classes. I'll be maintaining it with Claude Code going forward — where do I even start cleaning it up so the agent doesn't constantly misread it?", "should_trigger": true},
+  {"query": "Just built a new Hono API and I'll be pair-coding it with Cursor for the next year. What conventions should I lay down now?", "should_trigger": true},
+  {"query": "audit this /Users/me/src/backend/ repo for AI-maintainability — we're switching to heavy claude-code usage next quarter", "should_trigger": true},
+  {"query": "why does claude keep hallucinating methods on my DI container? is it how I structured the code?", "should_trigger": true},
+  {"query": "refactor /Users/me/Projects/api/src/services/legacy_user_service.ts to be easier for an agent to edit. It's 2000 lines and uses a DI framework heavy handedly", "should_trigger": true},
+  {"query": "is putting all our tests in a top-level /tests/ dir going to hurt me when I work with Cursor a lot?", "should_trigger": true},
+  {"query": "debating SOLID vs something else for our new Go service. We do 90% of our coding with AI pairing now — does the old advice still hold?", "should_trigger": true},
+  {"query": "keep getting `str_replace failed: multiple matches` errors from Claude Code when it edits this file. what am I doing wrong structurally?", "should_trigger": true},
+  {"query": "review these 3 files (paths attached) and tell me why an AI agent would struggle to modify them — then show me the fix", "should_trigger": true},
+  {"query": "is there a tool that checks whether a codebase is AI-readable the way eslint checks code quality", "should_trigger": true},
+  {"query": "I've been told to 'structure my code for AI maintainability' but no one explains what that means concretely. what's the actual technical content", "should_trigger": true},
+  {"query": "we have like 40 services all named XxxManager and XxxHandler and our Cursor suggestions are garbage. is this related?", "should_trigger": true},
+  {"query": "can Claude Code write tests for this function? /Users/me/billing/refund.ts", "should_trigger": false},
+  {"query": "write me a Python script that downloads a CSV from s3 and uploads it to bigquery", "should_trigger": false},
+  {"query": "what's the best way to prompt Claude when I want it to refactor a file?", "should_trigger": false},
+  {"query": "review this PR for security issues — focus on SQL injection and XSS", "should_trigger": false},
+  {"query": "should I use Cursor rules files or Claude skills for our team's coding conventions? what's the tradeoff?", "should_trigger": false},
+  {"query": "my cursor feels slow when I have 50 files open. how do I speed it up?", "should_trigger": false},
+  {"query": "help me debug this: I'm getting `AttributeError: 'NoneType' object has no attribute 'email'` in my signup flow", "should_trigger": false},
+  {"query": "claude keeps writing TypeScript with `any` everywhere even when I tell it not to. how do I get it to stop?", "should_trigger": false}
+]

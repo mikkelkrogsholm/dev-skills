@@ -64,11 +64,11 @@ EXPECTATIONS: dict[str, dict[str, int]] = {
         "AR005": 1,   # User depth=4 (TS rule via regex)
     },
     "bad_ts/untyped.ts": {
-        # Only untyped params are flagged (not missing return types — TS infers those).
-        # createUser(name), double(x), saveOrder({id,total}) → 3 findings.
-        # greet has typed param + missing return → NOT flagged (return inference is idiomatic).
-        # chargeCustomer/add/joinStrings fully typed → not flagged.
-        "AR006": 3,
+        # Only untyped params are flagged (TS return-type inference is idiomatic).
+        # Functions: createUser(name), double(x), saveOrder({id,total}) → 3
+        # Class methods (public only): findCustomer(id), updateCustomer({id,name}) → 2
+        # Private/protected methods and typed/static methods → clean
+        "AR006": 5,
     },
     "good_py/refunds.py": {
         # clean

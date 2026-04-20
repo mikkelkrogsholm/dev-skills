@@ -1,0 +1,70 @@
+{
+  "expectations": [
+    {
+      "text": "recommendations.md discusses naming with explicit reference to grep-ability, retrieval, or localization",
+      "passed": true,
+      "evidence": "Section 1 says 'Agents search by filename and pattern' and Section 4 prescribes greppable names."
+    },
+    {
+      "text": "recommendations.md recommends organizing code by feature / vertical slice rather than horizontal layer",
+      "passed": true,
+      "evidence": "Section 1 shows src/users/ feature directory and Section 6 says 'Split by feature, not by layer within a feature.'"
+    },
+    {
+      "text": "recommendations.md warns against metaprogramming, reflection, or dynamic dispatch",
+      "passed": true,
+      "evidence": "Section 13 'Prefer plain data structures over clever abstractions' warns against decorators, Proxy, and runtime metaprogramming."
+    },
+    {
+      "text": "recommendations.md recommends typed public boundaries / type annotations at module seams",
+      "passed": true,
+      "evidence": "Section 2 colocates contracts with implementations and Section 17 mandates schemas at boundaries; Section 20 requires strict TypeScript."
+    },
+    {
+      "text": "recommendations.md recommends verification affordances tied to preventing agent hallucination spirals",
+      "passed": false,
+      "evidence": "Section 12 'Make how to run it trivial' addresses tool commands but does not tie verification loops to preventing hallucination spirals or wrong-patch loops."
+    },
+    {
+      "text": "recommendations.md addresses file size, near-duplicates, or str_replace breakage",
+      "passed": true,
+      "evidence": "Section 6 soft-caps files at 300 lines and flags the agent-missing-cross-references failure, though does not name str_replace."
+    },
+    {
+      "text": "recommendations.md grounds reasoning in specific agent failure modes rather than generic clean-code platitudes",
+      "passed": false,
+      "evidence": "Failure modes are described generically ('agent patches wrong layer', 'hallucinate type signatures') without naming context-window limits, str_replace, lost-in-the-middle, or specific documented spirals."
+    },
+    {
+      "text": "recommendations.md presents the list in a prioritized order",
+      "passed": true,
+      "evidence": "Explicit Tier 1 through Tier 4 ordering by impact."
+    },
+    {
+      "text": "recommendations.md covers deterministic tests (seeded randomness, frozen time) OR injectable side effects \u2014 v1.3 guidance",
+      "passed": false,
+      "evidence": "Section 22 mentions seeds and fixtures in passing but does not prescribe seeded randomness, frozen time, or injectable clocks/side effects for deterministic tests."
+    },
+    {
+      "text": "recommendations.md mentions branded/nominal types OR discriminated unions over magic strings \u2014 v1.3 guidance",
+      "passed": false,
+      "evidence": "No mention of branded/nominal types; discriminated unions are not recommended as an alternative to magic strings anywhere in the document."
+    },
+    {
+      "text": "recommendations.md flags barrel re-export files or 'export *' as an anti-pattern \u2014 v1.3 guidance (AR011)",
+      "passed": true,
+      "evidence": "Section 7 caps barrel files at one level and prefers direct imports over barrel index.ts re-exports."
+    },
+    {
+      "text": "recommendations.md mentions dependency pinning OR training-data / 'boring stack' considerations \u2014 v1.3 guidance",
+      "passed": true,
+      "evidence": "Section 16 'Pin and document external contracts' explicitly pins exact versions for network-boundary packages."
+    }
+  ],
+  "summary": {
+    "pass_rate": 0.6667,
+    "passed": 8,
+    "failed": 4,
+    "total": 12
+  }
+}

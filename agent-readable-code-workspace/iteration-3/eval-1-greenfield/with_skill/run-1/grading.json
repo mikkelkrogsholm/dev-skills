@@ -1,0 +1,80 @@
+{
+  "expectations": [
+    {
+      "text": "layout.txt organizes by feature (auth/, billing/, users/) rather than primarily by horizontal layer",
+      "passed": true,
+      "evidence": "Top-level src/ directly contains auth/, users/, billing/, health/ feature slices, with only thin http/ and lib/ cross-cutting dirs."
+    },
+    {
+      "text": "layout.txt colocates test files next to source files rather than in a distant tests/ tree",
+      "passed": true,
+      "evidence": "Every source file has a sibling .test.ts (e.g., issue-refund.ts and issue-refund.test.ts) within its feature directory."
+    },
+    {
+      "text": "layout.txt contains concrete domain directories like auth, billing, or users",
+      "passed": true,
+      "evidence": "Layout explicitly includes auth/, users/, and billing/ directories with labeled 'FEATURE SLICE' comments."
+    },
+    {
+      "text": "CONVENTIONS.md explicitly addresses naming \u2014 avoiding generic names or requiring domain-specific names",
+      "passed": true,
+      "evidence": "Section 3 requires domain-specific verbs like issueRefund and bans generic filenames utils.ts, helpers.ts, manager.ts, service.ts, handler.ts."
+    },
+    {
+      "text": "CONVENTIONS.md gives a concrete file-size guideline with a number",
+      "passed": true,
+      "evidence": "Section 2 states 'Hard cap: 300 lines per file. Soft target: 150.'"
+    },
+    {
+      "text": "CONVENTIONS.md requires type annotations on public / module-boundary functions",
+      "passed": true,
+      "evidence": "Section 4 requires 'Typed public signatures everywhere. No any' with strict and noImplicitAny enabled."
+    },
+    {
+      "text": "CONVENTIONS.md mentions tests/lint/typecheck as the verification loop",
+      "passed": true,
+      "evidence": "Section 8 defines 'bun run check runs bun typecheck && bun lint && bun test' as the agent's feedback loop."
+    },
+    {
+      "text": "CONVENTIONS.md discourages dynamic/metaprogramming patterns for agent-traceability",
+      "passed": true,
+      "evidence": "Section 5 bans Proxy, Reflect, runtime monkey-patching, and decorator stacks because 'Agents can't grep through them.'"
+    },
+    {
+      "text": "CONVENTIONS.md explains at least one decision in terms of AI-agent behavior",
+      "passed": true,
+      "evidence": "Rationale repeatedly cited, e.g., 'Files over 300 regularly break agent apply-model merges' and 'Agent memory of an API is version-specific.'"
+    },
+    {
+      "text": "CONVENTIONS.md recommends branded / nominal types for IDs (e.g. UserId as branded string) \u2014 v1.3 guidance",
+      "passed": true,
+      "evidence": "Section 4 specifies 'type UserId = string & { readonly __brand: UserId }' and forbids passing raw string where an ID is meant."
+    },
+    {
+      "text": "CONVENTIONS.md prefers discriminated unions (or equivalent) over magic-string dispatch / string-keyed registries \u2014 v1.3 guidance",
+      "passed": true,
+      "evidence": "Section 4 and 5 mandate discriminated unions with exhaustive switch and ban 'magic-string dispatch' / registerHandler tables."
+    },
+    {
+      "text": "CONVENTIONS.md addresses dependency pinning, version pinning, or 'boring stack' / training-data hygiene \u2014 v1.3 guidance",
+      "passed": true,
+      "evidence": "Section 9 requires exact pinned versions and 'Prefer boring, popular packages' because 'Agent memory of an API is version-specific.'"
+    },
+    {
+      "text": "CONVENTIONS.md covers deterministic tests (seeded randomness, frozen time) OR injectable side effects (clock, fetch, env as arguments) \u2014 v1.3 guidance",
+      "passed": true,
+      "evidence": "Section 8 mandates freezing time via injected clock, seeded randomness, and fixed UUIDs; Section 5 injects deps { db, clock, logger, fetch, env }."
+    },
+    {
+      "text": "CONVENTIONS.md explicitly discourages barrel / re-export index files \u2014 v1.3 guidance (AR011)",
+      "passed": true,
+      "evidence": "Section 2 states 'No barrel files (index.ts that only re-exports). Import from the defining file.'"
+    }
+  ],
+  "summary": {
+    "pass_rate": 1.0,
+    "passed": 14,
+    "failed": 0,
+    "total": 14
+  }
+}

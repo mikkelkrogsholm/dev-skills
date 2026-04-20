@@ -1,0 +1,70 @@
+{
+  "expectations": [
+    {
+      "text": "recommendations.md discusses naming with explicit reference to grep-ability, retrieval, or localization",
+      "passed": true,
+      "evidence": "Section 4 says 'Agents grep for createUser and find it in utils.ts... They edit the wrong one.'"
+    },
+    {
+      "text": "recommendations.md recommends organizing code by feature / vertical slice rather than horizontal layer",
+      "passed": true,
+      "evidence": "Section 3 advocates flat feature files and keeping route, validation, handler, and types within 1-2 files."
+    },
+    {
+      "text": "recommendations.md warns against metaprogramming, reflection, or dynamic dispatch",
+      "passed": true,
+      "evidence": "Section 17 'Avoid magic metaprogramming' warns against decorators, Proxy-based ORMs, and plugin transforms."
+    },
+    {
+      "text": "recommendations.md recommends typed public boundaries / type annotations at module seams",
+      "passed": true,
+      "evidence": "Section 2 'Make the type system the source of truth' plus Section 16 JSDoc on public APIs."
+    },
+    {
+      "text": "recommendations.md recommends verification affordances tied to preventing agent hallucination spirals",
+      "passed": false,
+      "evidence": "Section 12 mentions one validation command but does not tie verification to hallucination spirals or wrong-patch loops."
+    },
+    {
+      "text": "recommendations.md addresses file size, near-duplicates, or str_replace breakage",
+      "passed": true,
+      "evidence": "Section 8 targets 5-40 line functions and flags 300-line functions as a failure mode, though does not mention str_replace."
+    },
+    {
+      "text": "recommendations.md grounds reasoning in specific agent failure modes rather than generic clean-code platitudes",
+      "passed": false,
+      "evidence": "Failure modes are mostly generic ('agent picks one uniformly', 'agent will invent'); lacks concrete context window, str_replace, lost-in-the-middle, or documented spiral citations."
+    },
+    {
+      "text": "recommendations.md presents the list in a prioritized order",
+      "passed": true,
+      "evidence": "Explicit P0/P1/P2 legend with sections ordered accordingly."
+    },
+    {
+      "text": "recommendations.md covers deterministic tests (seeded randomness, frozen time) OR injectable side effects \u2014 v1.3 guidance",
+      "passed": true,
+      "evidence": "Section 19 prescribes seeded randomness, fixture factories, and injecting a clock instead of Date.now()."
+    },
+    {
+      "text": "recommendations.md mentions branded/nominal types OR discriminated unions over magic strings \u2014 v1.3 guidance",
+      "passed": true,
+      "evidence": "Section 22 'Make failure states first-class' uses discriminated union {ok:true} | {ok:false} pattern; Section 7 uses exhaustive switches on unions."
+    },
+    {
+      "text": "recommendations.md flags barrel re-export files or 'export *' as an anti-pattern \u2014 v1.3 guidance (AR011)",
+      "passed": true,
+      "evidence": "Section 4 explicitly advises avoiding barrel index.ts re-exports across the whole app."
+    },
+    {
+      "text": "recommendations.md mentions dependency pinning OR training-data / 'boring stack' considerations \u2014 v1.3 guidance",
+      "passed": true,
+      "evidence": "Section 11 'Commit lockfiles' covers dependency pinning via lockfiles."
+    }
+  ],
+  "summary": {
+    "pass_rate": 0.8333,
+    "passed": 10,
+    "failed": 2,
+    "total": 12
+  }
+}

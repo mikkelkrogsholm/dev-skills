@@ -1,0 +1,70 @@
+{
+  "expectations": [
+    {
+      "text": "recommendations.md discusses naming with explicit reference to grep-ability, retrieval, or localization",
+      "passed": true,
+      "evidence": "Section 1 states 'Agents localize code by grepping names' and cites the 87%->59% comprehension drop."
+    },
+    {
+      "text": "recommendations.md recommends organizing code by feature / vertical slice rather than horizontal layer",
+      "passed": true,
+      "evidence": "Section 4 'Organize by feature (vertical slices), not by layer' with concrete refunds/ directory example."
+    },
+    {
+      "text": "recommendations.md warns against metaprogramming, reflection, or dynamic dispatch",
+      "passed": true,
+      "evidence": "Section 5 explicitly avoids __getattr__, eval, Proxy, Reflect, and magic-string event dispatch."
+    },
+    {
+      "text": "recommendations.md recommends typed public boundaries / type annotations at module seams",
+      "passed": true,
+      "evidence": "Section 2 'Type public boundaries' plus Section 10 require typed signatures and inferred types."
+    },
+    {
+      "text": "recommendations.md recommends verification affordances tied to preventing agent hallucination spirals",
+      "passed": true,
+      "evidence": "Section 3 cites the 693-line / 39-turn Gemini spiral and prescribes colocated tests and a single command."
+    },
+    {
+      "text": "recommendations.md addresses file size, near-duplicates, or str_replace breakage",
+      "passed": true,
+      "evidence": "Section 6 names 800-1000 line merge failures, lost-in-the-middle, and str_replace near-duplicate defeat."
+    },
+    {
+      "text": "recommendations.md grounds reasoning in specific agent failure modes rather than generic clean-code platitudes",
+      "passed": true,
+      "evidence": "Each tier cites specific failure modes: context windows, grep misses, str_replace, hallucination spirals, lost-in-the-middle."
+    },
+    {
+      "text": "recommendations.md presents the list in a prioritized order",
+      "passed": true,
+      "evidence": "Explicit Tier 1 / Tier 2 / Tier 3 ordering by leverage."
+    },
+    {
+      "text": "recommendations.md covers deterministic tests (seeded randomness, frozen time) OR injectable side effects \u2014 v1.3 guidance",
+      "passed": true,
+      "evidence": "Section 9 'Inject side effects; seed all randomness; freeze time in tests' with concrete signToken example."
+    },
+    {
+      "text": "recommendations.md mentions branded/nominal types OR discriminated unions over magic strings \u2014 v1.3 guidance",
+      "passed": true,
+      "evidence": "Section 2 shows branded UserId/OrgId and discriminated union Event variants."
+    },
+    {
+      "text": "recommendations.md flags barrel re-export files or 'export *' as an anti-pattern \u2014 v1.3 guidance (AR011)",
+      "passed": true,
+      "evidence": "Section 7 'Avoid barrel re-export files' explicitly calls out the extra grep hop."
+    },
+    {
+      "text": "recommendations.md mentions dependency pinning OR training-data / 'boring stack' considerations \u2014 v1.3 guidance",
+      "passed": true,
+      "evidence": "Section 11 'Write for training-data gravity' covers pinning and boring-stack bias."
+    }
+  ],
+  "summary": {
+    "pass_rate": 1.0,
+    "passed": 12,
+    "failed": 0,
+    "total": 12
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "eval_id": 1,
+  "eval_name": "greenfield-typescript-api",
+  "prompt": "Recommend initial layout and CONVENTIONS.md for a new Hono + Drizzle + Postgres TypeScript API that will be maintained mostly by Claude Code and Cursor.",
+  "assertions": [
+    {"id": "layout-uses-vertical-slices", "text": "layout.txt organizes by feature (auth/, billing/, users/) rather than primarily by horizontal layer"},
+    {"id": "layout-colocates-tests", "text": "layout.txt colocates test files next to source files rather than in a distant tests/ tree"},
+    {"id": "layout-has-concrete-feature-dirs", "text": "layout.txt contains concrete domain directories like auth, billing, or users"},
+    {"id": "conventions-covers-naming", "text": "CONVENTIONS.md explicitly addresses naming — avoiding generic names or requiring domain-specific names"},
+    {"id": "conventions-covers-file-size", "text": "CONVENTIONS.md gives a concrete file-size guideline with a number"},
+    {"id": "conventions-covers-typed-boundaries", "text": "CONVENTIONS.md requires type annotations on public / module-boundary functions"},
+    {"id": "conventions-covers-verification", "text": "CONVENTIONS.md mentions tests/lint/typecheck as the verification loop"},
+    {"id": "conventions-discourages-metaprogramming", "text": "CONVENTIONS.md discourages dynamic/metaprogramming patterns for agent-traceability"},
+    {"id": "conventions-mentions-agent-specific-rationale", "text": "CONVENTIONS.md explains at least one decision in terms of AI-agent behavior"},
+    {"id": "v13-branded-id-types", "text": "CONVENTIONS.md recommends branded / nominal types for IDs (e.g. UserId as branded string) — v1.3 guidance"},
+    {"id": "v13-discriminated-unions-over-magic-strings", "text": "CONVENTIONS.md prefers discriminated unions (or equivalent) over magic-string dispatch / string-keyed registries — v1.3 guidance"},
+    {"id": "v13-dependency-hygiene", "text": "CONVENTIONS.md addresses dependency pinning, version pinning, or 'boring stack' / training-data hygiene — v1.3 guidance"},
+    {"id": "v13-deterministic-tests", "text": "CONVENTIONS.md covers deterministic tests (seeded randomness, frozen time) OR injectable side effects (clock, fetch, env as arguments) — v1.3 guidance"},
+    {"id": "v13-discourages-barrel-files", "text": "CONVENTIONS.md explicitly discourages barrel / re-export index files — v1.3 guidance (AR011)"}
+  ]
+}

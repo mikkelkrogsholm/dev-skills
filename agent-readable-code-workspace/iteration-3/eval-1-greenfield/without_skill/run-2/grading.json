@@ -1,0 +1,80 @@
+{
+  "expectations": [
+    {
+      "text": "layout.txt organizes by feature (auth/, billing/, users/) rather than primarily by horizontal layer",
+      "passed": true,
+      "evidence": "src/features/ is labeled 'Vertical slices' and contains auth/, users/, billing/ each owning routes/service/repo/schemas/errors."
+    },
+    {
+      "text": "layout.txt colocates test files next to source files rather than in a distant tests/ tree",
+      "passed": false,
+      "evidence": "Tests live in a separate top-level tests/ tree that mirrors src/ one-to-one (tests/features/auth/auth.service.test.ts), not colocated with source files."
+    },
+    {
+      "text": "layout.txt contains concrete domain directories like auth, billing, or users",
+      "passed": true,
+      "evidence": "Layout includes features/auth/, features/users/, and features/billing/ directories explicitly."
+    },
+    {
+      "text": "CONVENTIONS.md explicitly addresses naming \u2014 avoiding generic names or requiring domain-specific names",
+      "passed": false,
+      "evidence": "Section 2 covers casing, suffixes, and DTO/Input/Query conventions but does not forbid generic names (utils, helpers, handler) or mandate domain-specific verbs."
+    },
+    {
+      "text": "CONVENTIONS.md gives a concrete file-size guideline with a number",
+      "passed": true,
+      "evidence": "Section 3: 'SKILL ceiling: 250 lines per file' plus 'routes files ... max ~150 lines' and 'Functions: max 40 lines.'"
+    },
+    {
+      "text": "CONVENTIONS.md requires type annotations on public / module-boundary functions",
+      "passed": true,
+      "evidence": "Section 4: 'Return types required on exported functions. Inferred internally is fine.'"
+    },
+    {
+      "text": "CONVENTIONS.md mentions tests/lint/typecheck as the verification loop",
+      "passed": true,
+      "evidence": "Section 12: 'PRs must pass: bun run typecheck, bun run lint, bun test, bun run build.'"
+    },
+    {
+      "text": "CONVENTIONS.md discourages dynamic/metaprogramming patterns for agent-traceability",
+      "passed": false,
+      "evidence": "No ban on Proxy, Reflect, decorators, DI containers, or runtime metaprogramming; only enums and unchecked casts are restricted."
+    },
+    {
+      "text": "CONVENTIONS.md explains at least one decision in terms of AI-agent behavior",
+      "passed": true,
+      "evidence": "Header and Section 13 frame conventions around agents, including 'Agents read whole files; large files waste context.'"
+    },
+    {
+      "text": "CONVENTIONS.md recommends branded / nominal types for IDs (e.g. UserId as branded string) \u2014 v1.3 guidance",
+      "passed": false,
+      "evidence": "Section 6 mentions ULID/UUID generation in lib/id.ts but never introduces branded or nominal ID types."
+    },
+    {
+      "text": "CONVENTIONS.md prefers discriminated unions (or equivalent) over magic-string dispatch / string-keyed registries \u2014 v1.3 guidance",
+      "passed": false,
+      "evidence": "Discriminated unions are not mentioned and no guidance warns against magic-string dispatch or string-keyed registries."
+    },
+    {
+      "text": "CONVENTIONS.md addresses dependency pinning, version pinning, or 'boring stack' / training-data hygiene \u2014 v1.3 guidance",
+      "passed": true,
+      "evidence": "Section 8: 'Pin exact versions in package.json (hono: 4.6.3, not ^4.6.3).'"
+    },
+    {
+      "text": "CONVENTIONS.md covers deterministic tests (seeded randomness, frozen time) OR injectable side effects (clock, fetch, env as arguments) \u2014 v1.3 guidance",
+      "passed": false,
+      "evidence": "Section 9 discusses factories and transaction isolation but never specifies seeded randomness, frozen clocks, or injectable clock/fetch/env dependencies."
+    },
+    {
+      "text": "CONVENTIONS.md explicitly discourages barrel / re-export index files \u2014 v1.3 guidance (AR011)",
+      "passed": true,
+      "evidence": "Section 13: 'Don't add index.ts barrels except in db/schema/.'"
+    }
+  ],
+  "summary": {
+    "pass_rate": 0.5714,
+    "passed": 8,
+    "failed": 6,
+    "total": 14
+  }
+}

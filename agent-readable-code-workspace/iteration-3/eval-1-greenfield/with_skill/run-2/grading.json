@@ -1,0 +1,80 @@
+{
+  "expectations": [
+    {
+      "text": "layout.txt organizes by feature (auth/, billing/, users/) rather than primarily by horizontal layer",
+      "passed": true,
+      "evidence": "src/features/ contains auth/, users/, billing/ slices owning routes, service, repo, schema and tests together."
+    },
+    {
+      "text": "layout.txt colocates test files next to source files rather than in a distant tests/ tree",
+      "passed": true,
+      "evidence": "Each feature contains .routes.test.ts and .service.test.ts files colocated inside its directory."
+    },
+    {
+      "text": "layout.txt contains concrete domain directories like auth, billing, or users",
+      "passed": true,
+      "evidence": "features/auth/, features/users/, and features/billing/ are explicit directories in the layout."
+    },
+    {
+      "text": "CONVENTIONS.md explicitly addresses naming \u2014 avoiding generic names or requiring domain-specific names",
+      "passed": true,
+      "evidence": "Naming section bans utils.ts, helpers.ts, common.ts, Manager, Service (standalone), Handler and requires domain verbs like issueRefund."
+    },
+    {
+      "text": "CONVENTIONS.md gives a concrete file-size guideline with a number",
+      "passed": true,
+      "evidence": "File-size section states 'Hard cap: 300 lines per file. Warn at 200.'"
+    },
+    {
+      "text": "CONVENTIONS.md requires type annotations on public / module-boundary functions",
+      "passed": true,
+      "evidence": "Dependencies section requires inject-ctx as typed first argument and 'One source of truth for types' via z.infer at boundaries; 'Services assume inputs are already typed and valid.'"
+    },
+    {
+      "text": "CONVENTIONS.md mentions tests/lint/typecheck as the verification loop",
+      "passed": true,
+      "evidence": "Testing section: 'bun run check = tsc --noEmit && bun test && bunx drizzle-kit check' must pass before any PR."
+    },
+    {
+      "text": "CONVENTIONS.md discourages dynamic/metaprogramming patterns for agent-traceability",
+      "passed": true,
+      "evidence": "Dependencies section: 'No metaprogramming. No Proxy, no runtime monkey-patching, no decorator stacks that rewrite behaviour.'"
+    },
+    {
+      "text": "CONVENTIONS.md explains at least one decision in terms of AI-agent behavior",
+      "passed": true,
+      "evidence": "Stack section: 'Agents know a specific API version; drifting minor versions break their memory.' Core heuristic frames rules around grep-based agents."
+    },
+    {
+      "text": "CONVENTIONS.md recommends branded / nominal types for IDs (e.g. UserId as branded string) \u2014 v1.3 guidance",
+      "passed": true,
+      "evidence": "Naming section: 'IDs: branded types. type UserId = string & { readonly __brand: UserId }.'"
+    },
+    {
+      "text": "CONVENTIONS.md prefers discriminated unions (or equivalent) over magic-string dispatch / string-keyed registries \u2014 v1.3 guidance",
+      "passed": true,
+      "evidence": "Naming section mandates 'discriminated unions keyed by kind, with one exhaustive switch. No string-keyed dispatch tables.'"
+    },
+    {
+      "text": "CONVENTIONS.md addresses dependency pinning, version pinning, or 'boring stack' / training-data hygiene \u2014 v1.3 guidance",
+      "passed": true,
+      "evidence": "Stack section is titled 'pinned, boring on purpose', requires exact pinned versions, and explains agent memory rationale."
+    },
+    {
+      "text": "CONVENTIONS.md covers deterministic tests (seeded randomness, frozen time) OR injectable side effects (clock, fetch, env as arguments) \u2014 v1.3 guidance",
+      "passed": true,
+      "evidence": "Testing section: 'Deterministic. test/setup.ts seeds faker, freezes the clock, injects a fixed-seed RNG'; ctx with clock is injected to every service."
+    },
+    {
+      "text": "CONVENTIONS.md explicitly discourages barrel / re-export index files \u2014 v1.3 guidance (AR011)",
+      "passed": true,
+      "evidence": "File-size section: 'No barrel re-exports beyond the feature index.ts. Import from the defining file.'"
+    }
+  ],
+  "summary": {
+    "pass_rate": 1.0,
+    "passed": 14,
+    "failed": 0,
+    "total": 14
+  }
+}

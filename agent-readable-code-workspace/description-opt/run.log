@@ -1,0 +1,1585 @@
+Split: 13 train, 7 test (holdout=0.4)
+
+============================================================
+Iteration 1/5
+Description: Principles and a linter for writing code that AI coding agents can read and modify correctly. Use when writing, refactoring, reviewing, or structuring code that will be maintained partly by AI agents (Claude Code, Cursor, Copilot, Aider, Devin). Also use when the user asks about agent-friendly code, AI-friendly architecture, how to structure a repo for AI maintenance, why agents fail on certain codebases, whether SOLID/DRY still apply with AI, or wants to audit an existing codebase for AI-readability. Applies proactively when making naming, file-organization, abstraction, or dependency choices in code the user is likely to maintain with agents — even if they don't explicitly ask for agent-friendly output. Ships with a zero-dependency linter (scripts/lint.py) that flags concrete anti-patterns.
+============================================================
+Train: 15/39 correct, precision=100% recall=0% accuracy=38% (70.0s)
+  [FAIL] rate=0/3 expected=True: we have like 40 services all named XxxManager and XxxHandler
+  [FAIL] rate=0/3 expected=True: is there a tool that checks whether a codebase is AI-readabl
+  [FAIL] rate=0/3 expected=True: why does claude keep hallucinating methods on my DI containe
+  [FAIL] rate=0/3 expected=True: debating SOLID vs something else for our new Go service. We 
+  [FAIL] rate=0/3 expected=True: refactor /Users/me/Projects/api/src/services/legacy_user_ser
+  [FAIL] rate=0/3 expected=True: I've got this legacy Python module with a bunch of process()
+  [FAIL] rate=0/3 expected=True: Just built a new Hono API and I'll be pair-coding it with Cu
+  [FAIL] rate=0/3 expected=True: I've been told to 'structure my code for AI maintainability'
+  [PASS] rate=0/3 expected=False: write me a Python script that downloads a CSV from s3 and up
+  [PASS] rate=0/3 expected=False: should I use Cursor rules files or Claude skills for our tea
+  [PASS] rate=0/3 expected=False: help me debug this: I'm getting `AttributeError: 'NoneType' 
+  [PASS] rate=0/3 expected=False: can Claude Code write tests for this function? /Users/me/bil
+  [PASS] rate=0/3 expected=False: claude keeps writing TypeScript with `any` everywhere even w
+Test : 9/21 correct, precision=100% recall=0% accuracy=43% (0.0s)
+  [FAIL] rate=0/3 expected=True: audit this /Users/me/src/backend/ repo for AI-maintainabilit
+  [FAIL] rate=0/3 expected=True: keep getting `str_replace failed: multiple matches` errors f
+  [FAIL] rate=0/3 expected=True: is putting all our tests in a top-level /tests/ dir going to
+  [FAIL] rate=0/3 expected=True: review these 3 files (paths attached) and tell me why an AI 
+  [PASS] rate=0/3 expected=False: review this PR for security issues — focus on SQL injection 
+  [PASS] rate=0/3 expected=False: my cursor feels slow when I have 50 files open. how do I spe
+  [PASS] rate=0/3 expected=False: what's the best way to prompt Claude when I want it to refac
+
+Improving description...
+Proposed (24.8s): Use when the user is structuring, naming, refactoring, or reviewing code that humans and AI coding agents (Claude Code, Cursor, Copilot, Aider, Devin) will share — or diagnosing why agents misbehave on their codebase. Trigger on symptoms like: agents hallucinating methods or APIs, Cursor/Copilot suggestions being low-quality on a repo, files full of Manager/Service/Handler/Helper/Util/process names, large legacy modules the user wants to make agent-friendly, heavy DI or metaprogramming confusing the agent, questions about whether SOLID/DRY/clean-code still holds in AI-pairing workflows, requests to audit a codebase for AI-readability, or asks about conventions to set up-front for a repo maintained with agents. Also triggers on "structure code for AI maintainability", "agent-friendly architecture", or tool-like asks ("is there a linter for this"). Ships a zero-dep linter flagging concrete anti-patterns. Skip for generic one-off scripts or pure debugging unrelated to code structure.
+
+============================================================
+Iteration 2/5
+Description: Use when the user is structuring, naming, refactoring, or reviewing code that humans and AI coding agents (Claude Code, Cursor, Copilot, Aider, Devin) will share — or diagnosing why agents misbehave on their codebase. Trigger on symptoms like: agents hallucinating methods or APIs, Cursor/Copilot suggestions being low-quality on a repo, files full of Manager/Service/Handler/Helper/Util/process names, large legacy modules the user wants to make agent-friendly, heavy DI or metaprogramming confusing the agent, questions about whether SOLID/DRY/clean-code still holds in AI-pairing workflows, requests to audit a codebase for AI-readability, or asks about conventions to set up-front for a repo maintained with agents. Also triggers on "structure code for AI maintainability", "agent-friendly architecture", or tool-like asks ("is there a linter for this"). Ships a zero-dep linter flagging concrete anti-patterns. Skip for generic one-off scripts or pure debugging unrelated to code structure.
+============================================================
+Train: 15/39 correct, precision=100% recall=0% accuracy=38% (70.5s)
+  [FAIL] rate=0/3 expected=True: we have like 40 services all named XxxManager and XxxHandler
+  [FAIL] rate=0/3 expected=True: is there a tool that checks whether a codebase is AI-readabl
+  [FAIL] rate=0/3 expected=True: why does claude keep hallucinating methods on my DI containe
+  [FAIL] rate=0/3 expected=True: refactor /Users/me/Projects/api/src/services/legacy_user_ser
+  [FAIL] rate=0/3 expected=True: debating SOLID vs something else for our new Go service. We 
+  [FAIL] rate=0/3 expected=True: I've got this legacy Python module with a bunch of process()
+  [FAIL] rate=0/3 expected=True: I've been told to 'structure my code for AI maintainability'
+  [PASS] rate=0/3 expected=False: write me a Python script that downloads a CSV from s3 and up
+  [FAIL] rate=0/3 expected=True: Just built a new Hono API and I'll be pair-coding it with Cu
+  [PASS] rate=0/3 expected=False: should I use Cursor rules files or Claude skills for our tea
+  [PASS] rate=0/3 expected=False: help me debug this: I'm getting `AttributeError: 'NoneType' 
+  [PASS] rate=0/3 expected=False: can Claude Code write tests for this function? /Users/me/bil
+  [PASS] rate=0/3 expected=False: claude keeps writing TypeScript with `any` everywhere even w
+Test : 9/21 correct, precision=100% recall=0% accuracy=43% (0.0s)
+  [FAIL] rate=0/3 expected=True: keep getting `str_replace failed: multiple matches` errors f
+  [FAIL] rate=0/3 expected=True: audit this /Users/me/src/backend/ repo for AI-maintainabilit
+  [FAIL] rate=0/3 expected=True: is putting all our tests in a top-level /tests/ dir going to
+  [PASS] rate=0/3 expected=False: review this PR for security issues — focus on SQL injection 
+  [FAIL] rate=0/3 expected=True: review these 3 files (paths attached) and tell me why an AI 
+  [PASS] rate=0/3 expected=False: my cursor feels slow when I have 50 files open. how do I spe
+  [PASS] rate=0/3 expected=False: what's the best way to prompt Claude when I want it to refac
+
+Improving description...
+Proposed (24.4s): Use this skill when the user is writing, naming, refactoring, structuring, or reviewing code that will be maintained with AI coding agents (Claude Code, Cursor, Copilot, Aider, Devin) — or diagnosing why an agent performs poorly on their codebase. Core intents: making a repo agent-friendly, auditing AI-readability, picking conventions for an AI-paired project, cleaning up legacy code before handing it to an agent, or understanding why agents hallucinate methods, misread files, or give low-quality suggestions. Also use when the user questions whether SOLID/DRY/clean-code still apply with AI pairing, asks about generic naming (Manager/Service/Handler/Helper/Util/process), heavy DI or metaprogramming confusing agents, or asks if a linter exists for AI-readability. Ships a zero-dep linter for concrete anti-patterns. Skip for one-off scripts, pure runtime debugging, or agent tooling config questions unrelated to code structure.
+
+============================================================
+Iteration 3/5
+Description: Use this skill when the user is writing, naming, refactoring, structuring, or reviewing code that will be maintained with AI coding agents (Claude Code, Cursor, Copilot, Aider, Devin) — or diagnosing why an agent performs poorly on their codebase. Core intents: making a repo agent-friendly, auditing AI-readability, picking conventions for an AI-paired project, cleaning up legacy code before handing it to an agent, or understanding why agents hallucinate methods, misread files, or give low-quality suggestions. Also use when the user questions whether SOLID/DRY/clean-code still apply with AI pairing, asks about generic naming (Manager/Service/Handler/Helper/Util/process), heavy DI or metaprogramming confusing agents, or asks if a linter exists for AI-readability. Ships a zero-dep linter for concrete anti-patterns. Skip for one-off scripts, pure runtime debugging, or agent tooling config questions unrelated to code structure.
+============================================================
+Train: 15/39 correct, precision=100% recall=0% accuracy=38% (71.7s)
+  [FAIL] rate=0/3 expected=True: we have like 40 services all named XxxManager and XxxHandler
+  [FAIL] rate=0/3 expected=True: is there a tool that checks whether a codebase is AI-readabl
+  [FAIL] rate=0/3 expected=True: debating SOLID vs something else for our new Go service. We 
+  [FAIL] rate=0/3 expected=True: refactor /Users/me/Projects/api/src/services/legacy_user_ser
+  [FAIL] rate=0/3 expected=True: why does claude keep hallucinating methods on my DI containe
+  [FAIL] rate=0/3 expected=True: I've got this legacy Python module with a bunch of process()
+  [FAIL] rate=0/3 expected=True: I've been told to 'structure my code for AI maintainability'
+  [PASS] rate=0/3 expected=False: write me a Python script that downloads a CSV from s3 and up
+  [PASS] rate=0/3 expected=False: should I use Cursor rules files or Claude skills for our tea
+  [FAIL] rate=0/3 expected=True: Just built a new Hono API and I'll be pair-coding it with Cu
+  [PASS] rate=0/3 expected=False: help me debug this: I'm getting `AttributeError: 'NoneType' 
+  [PASS] rate=0/3 expected=False: can Claude Code write tests for this function? /Users/me/bil
+  [PASS] rate=0/3 expected=False: claude keeps writing TypeScript with `any` everywhere even w
+Test : 9/21 correct, precision=100% recall=0% accuracy=43% (0.0s)
+  [FAIL] rate=0/3 expected=True: is putting all our tests in a top-level /tests/ dir going to
+  [FAIL] rate=0/3 expected=True: audit this /Users/me/src/backend/ repo for AI-maintainabilit
+  [FAIL] rate=0/3 expected=True: keep getting `str_replace failed: multiple matches` errors f
+  [FAIL] rate=0/3 expected=True: review these 3 files (paths attached) and tell me why an AI 
+  [PASS] rate=0/3 expected=False: review this PR for security issues — focus on SQL injection 
+  [PASS] rate=0/3 expected=False: my cursor feels slow when I have 50 files open. how do I spe
+  [PASS] rate=0/3 expected=False: what's the best way to prompt Claude when I want it to refac
+
+Improving description...
+Proposed (18.0s): Use this skill whenever the user's question touches how code should be written, named, organized, or refactored so that AI coding agents (Claude Code, Cursor, Copilot, Aider, Devin) can read and edit it reliably. Trigger on: agents hallucinating methods or APIs; Cursor/Copilot giving bad suggestions on a specific repo; too many Manager/Service/Handler/Helper/Util/process names; large legacy files the user plans to maintain with an agent; heavy DI, metaprogramming, or magic-string dispatch making agents confused; questions about whether SOLID, DRY, or clean-code advice still holds in AI-paired workflows; asks for a linter or audit tool that checks if a codebase is "AI-readable" or "agent-friendly"; setting conventions up-front for a new repo that will be pair-coded with an agent; or generally "how do I structure code for AI maintainability." Ships a zero-dep linter for concrete anti-patterns. Skip for one-off scripts, pure runtime debugging, or agent-tooling config unrelated to code structure.
+
+============================================================
+Iteration 4/5
+Description: Use this skill whenever the user's question touches how code should be written, named, organized, or refactored so that AI coding agents (Claude Code, Cursor, Copilot, Aider, Devin) can read and edit it reliably. Trigger on: agents hallucinating methods or APIs; Cursor/Copilot giving bad suggestions on a specific repo; too many Manager/Service/Handler/Helper/Util/process names; large legacy files the user plans to maintain with an agent; heavy DI, metaprogramming, or magic-string dispatch making agents confused; questions about whether SOLID, DRY, or clean-code advice still holds in AI-paired workflows; asks for a linter or audit tool that checks if a codebase is "AI-readable" or "agent-friendly"; setting conventions up-front for a new repo that will be pair-coded with an agent; or generally "how do I structure code for AI maintainability." Ships a zero-dep linter for concrete anti-patterns. Skip for one-off scripts, pure runtime debugging, or agent-tooling config unrelated to code structure.
+============================================================
+Train: 15/39 correct, precision=100% recall=0% accuracy=38% (71.0s)
+  [FAIL] rate=0/3 expected=True: we have like 40 services all named XxxManager and XxxHandler
+  [FAIL] rate=0/3 expected=True: is there a tool that checks whether a codebase is AI-readabl
+  [FAIL] rate=0/3 expected=True: why does claude keep hallucinating methods on my DI containe
+  [FAIL] rate=0/3 expected=True: debating SOLID vs something else for our new Go service. We 
+  [FAIL] rate=0/3 expected=True: refactor /Users/me/Projects/api/src/services/legacy_user_ser
+  [FAIL] rate=0/3 expected=True: I've got this legacy Python module with a bunch of process()
+  [FAIL] rate=0/3 expected=True: Just built a new Hono API and I'll be pair-coding it with Cu
+  [FAIL] rate=0/3 expected=True: I've been told to 'structure my code for AI maintainability'
+  [PASS] rate=0/3 expected=False: write me a Python script that downloads a CSV from s3 and up
+  [PASS] rate=0/3 expected=False: should I use Cursor rules files or Claude skills for our tea
+  [PASS] rate=0/3 expected=False: help me debug this: I'm getting `AttributeError: 'NoneType' 
+  [PASS] rate=0/3 expected=False: can Claude Code write tests for this function? /Users/me/bil
+  [PASS] rate=0/3 expected=False: claude keeps writing TypeScript with `any` everywhere even w
+Test : 9/21 correct, precision=100% recall=0% accuracy=43% (0.0s)
+  [FAIL] rate=0/3 expected=True: is putting all our tests in a top-level /tests/ dir going to
+  [FAIL] rate=0/3 expected=True: keep getting `str_replace failed: multiple matches` errors f
+  [FAIL] rate=0/3 expected=True: audit this /Users/me/src/backend/ repo for AI-maintainabilit
+  [FAIL] rate=0/3 expected=True: review these 3 files (paths attached) and tell me why an AI 
+  [PASS] rate=0/3 expected=False: review this PR for security issues — focus on SQL injection 
+  [PASS] rate=0/3 expected=False: my cursor feels slow when I have 50 files open. how do I spe
+  [PASS] rate=0/3 expected=False: what's the best way to prompt Claude when I want it to refac
+
+Improving description...
+Proposed (16.9s): Code quality, naming, refactoring, architecture, and conventions for codebases maintained with AI coding agents (Claude Code, Cursor, Copilot, Aider, Devin). Use when the user: asks why an agent hallucinates methods, gives bad suggestions, or misreads their repo; mentions generic names like Manager/Service/Handler/Helper/Util/process; wants to refactor legacy code, large files, DI-heavy code, or metaprogramming to be easier for agents to edit; asks whether SOLID, DRY, or clean-code still applies with AI pairing; wants to set up conventions for a new repo that will be pair-coded with an agent; asks about "AI-readable", "agent-friendly", or "AI-maintainable" code; or wants a linter/audit for agent-readability. Also apply proactively when making naming, file-organization, or abstraction decisions in code the user will maintain with agents. Ships a zero-dep linter for concrete anti-patterns. Skip for one-off scripts, pure runtime debugging, or agent-tooling config unrelated to code structure.
+
+============================================================
+Iteration 5/5
+Description: Code quality, naming, refactoring, architecture, and conventions for codebases maintained with AI coding agents (Claude Code, Cursor, Copilot, Aider, Devin). Use when the user: asks why an agent hallucinates methods, gives bad suggestions, or misreads their repo; mentions generic names like Manager/Service/Handler/Helper/Util/process; wants to refactor legacy code, large files, DI-heavy code, or metaprogramming to be easier for agents to edit; asks whether SOLID, DRY, or clean-code still applies with AI pairing; wants to set up conventions for a new repo that will be pair-coded with an agent; asks about "AI-readable", "agent-friendly", or "AI-maintainable" code; or wants a linter/audit for agent-readability. Also apply proactively when making naming, file-organization, or abstraction decisions in code the user will maintain with agents. Ships a zero-dep linter for concrete anti-patterns. Skip for one-off scripts, pure runtime debugging, or agent-tooling config unrelated to code structure.
+============================================================
+Train: 15/39 correct, precision=100% recall=0% accuracy=38% (69.0s)
+  [FAIL] rate=0/3 expected=True: we have like 40 services all named XxxManager and XxxHandler
+  [FAIL] rate=0/3 expected=True: is there a tool that checks whether a codebase is AI-readabl
+  [FAIL] rate=0/3 expected=True: why does claude keep hallucinating methods on my DI containe
+  [FAIL] rate=0/3 expected=True: debating SOLID vs something else for our new Go service. We 
+  [FAIL] rate=0/3 expected=True: refactor /Users/me/Projects/api/src/services/legacy_user_ser
+  [FAIL] rate=0/3 expected=True: I've got this legacy Python module with a bunch of process()
+  [FAIL] rate=0/3 expected=True: I've been told to 'structure my code for AI maintainability'
+  [FAIL] rate=0/3 expected=True: Just built a new Hono API and I'll be pair-coding it with Cu
+  [PASS] rate=0/3 expected=False: write me a Python script that downloads a CSV from s3 and up
+  [PASS] rate=0/3 expected=False: should I use Cursor rules files or Claude skills for our tea
+  [PASS] rate=0/3 expected=False: help me debug this: I'm getting `AttributeError: 'NoneType' 
+  [PASS] rate=0/3 expected=False: can Claude Code write tests for this function? /Users/me/bil
+  [PASS] rate=0/3 expected=False: claude keeps writing TypeScript with `any` everywhere even w
+Test : 9/21 correct, precision=100% recall=0% accuracy=43% (0.0s)
+  [FAIL] rate=0/3 expected=True: audit this /Users/me/src/backend/ repo for AI-maintainabilit
+  [FAIL] rate=0/3 expected=True: is putting all our tests in a top-level /tests/ dir going to
+  [FAIL] rate=0/3 expected=True: review these 3 files (paths attached) and tell me why an AI 
+  [FAIL] rate=0/3 expected=True: keep getting `str_replace failed: multiple matches` errors f
+  [PASS] rate=0/3 expected=False: review this PR for security issues — focus on SQL injection 
+  [PASS] rate=0/3 expected=False: my cursor feels slow when I have 50 files open. how do I spe
+  [PASS] rate=0/3 expected=False: what's the best way to prompt Claude when I want it to refac
+
+Max iterations reached (5).
+
+Exit reason: max_iterations (5)
+Best score: 3/7 (iteration 1)
+
+Report: /var/folders/hh/znsnvw8s1p31zr7fywf_cgfc0000gn/T/skill_description_report_agent-readable-code_20260420_205452.html
+{
+  "exit_reason": "max_iterations (5)",
+  "original_description": "Principles and a linter for writing code that AI coding agents can read and modify correctly. Use when writing, refactoring, reviewing, or structuring code that will be maintained partly by AI agents (Claude Code, Cursor, Copilot, Aider, Devin). Also use when the user asks about agent-friendly code, AI-friendly architecture, how to structure a repo for AI maintenance, why agents fail on certain codebases, whether SOLID/DRY still apply with AI, or wants to audit an existing codebase for AI-readability. Applies proactively when making naming, file-organization, abstraction, or dependency choices in code the user is likely to maintain with agents \u2014 even if they don't explicitly ask for agent-friendly output. Ships with a zero-dependency linter (scripts/lint.py) that flags concrete anti-patterns.",
+  "best_description": "Principles and a linter for writing code that AI coding agents can read and modify correctly. Use when writing, refactoring, reviewing, or structuring code that will be maintained partly by AI agents (Claude Code, Cursor, Copilot, Aider, Devin). Also use when the user asks about agent-friendly code, AI-friendly architecture, how to structure a repo for AI maintenance, why agents fail on certain codebases, whether SOLID/DRY still apply with AI, or wants to audit an existing codebase for AI-readability. Applies proactively when making naming, file-organization, abstraction, or dependency choices in code the user is likely to maintain with agents \u2014 even if they don't explicitly ask for agent-friendly output. Ships with a zero-dependency linter (scripts/lint.py) that flags concrete anti-patterns.",
+  "best_score": "3/7",
+  "best_train_score": "5/13",
+  "best_test_score": "3/7",
+  "final_description": "Code quality, naming, refactoring, architecture, and conventions for codebases maintained with AI coding agents (Claude Code, Cursor, Copilot, Aider, Devin). Use when the user: asks why an agent hallucinates methods, gives bad suggestions, or misreads their repo; mentions generic names like Manager/Service/Handler/Helper/Util/process; wants to refactor legacy code, large files, DI-heavy code, or metaprogramming to be easier for agents to edit; asks whether SOLID, DRY, or clean-code still applies with AI pairing; wants to set up conventions for a new repo that will be pair-coded with an agent; asks about \"AI-readable\", \"agent-friendly\", or \"AI-maintainable\" code; or wants a linter/audit for agent-readability. Also apply proactively when making naming, file-organization, or abstraction decisions in code the user will maintain with agents. Ships a zero-dep linter for concrete anti-patterns. Skip for one-off scripts, pure runtime debugging, or agent-tooling config unrelated to code structure.",
+  "iterations_run": 5,
+  "holdout": 0.4,
+  "train_size": 13,
+  "test_size": 7,
+  "history": [
+    {
+      "iteration": 1,
+      "description": "Principles and a linter for writing code that AI coding agents can read and modify correctly. Use when writing, refactoring, reviewing, or structuring code that will be maintained partly by AI agents (Claude Code, Cursor, Copilot, Aider, Devin). Also use when the user asks about agent-friendly code, AI-friendly architecture, how to structure a repo for AI maintenance, why agents fail on certain codebases, whether SOLID/DRY still apply with AI, or wants to audit an existing codebase for AI-readability. Applies proactively when making naming, file-organization, abstraction, or dependency choices in code the user is likely to maintain with agents \u2014 even if they don't explicitly ask for agent-friendly output. Ships with a zero-dependency linter (scripts/lint.py) that flags concrete anti-patterns.",
+      "train_passed": 5,
+      "train_failed": 8,
+      "train_total": 13,
+      "train_results": [
+        {
+          "query": "we have like 40 services all named XxxManager and XxxHandler and our Cursor suggestions are garbage. is this related?",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "is there a tool that checks whether a codebase is AI-readable the way eslint checks code quality",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "why does claude keep hallucinating methods on my DI container? is it how I structured the code?",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "debating SOLID vs something else for our new Go service. We do 90% of our coding with AI pairing now \u2014 does the old advice still hold?",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "refactor /Users/me/Projects/api/src/services/legacy_user_service.ts to be easier for an agent to edit. It's 2000 lines and uses a DI framework heavy handedly",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "I've got this legacy Python module with a bunch of process() functions and Manager classes. I'll be maintaining it with Claude Code going forward \u2014 where do I even start cleaning it up so the agent doesn't constantly misread it?",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "Just built a new Hono API and I'll be pair-coding it with Cursor for the next year. What conventions should I lay down now?",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "I've been told to 'structure my code for AI maintainability' but no one explains what that means concretely. what's the actual technical content",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "write me a Python script that downloads a CSV from s3 and uploads it to bigquery",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "should I use Cursor rules files or Claude skills for our team's coding conventions? what's the tradeoff?",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "help me debug this: I'm getting `AttributeError: 'NoneType' object has no attribute 'email'` in my signup flow",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "can Claude Code write tests for this function? /Users/me/billing/refund.ts",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "claude keeps writing TypeScript with `any` everywhere even when I tell it not to. how do I get it to stop?",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        }
+      ],
+      "test_passed": 3,
+      "test_failed": 4,
+      "test_total": 7,
+      "test_results": [
+        {
+          "query": "audit this /Users/me/src/backend/ repo for AI-maintainability \u2014 we're switching to heavy claude-code usage next quarter",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "keep getting `str_replace failed: multiple matches` errors from Claude Code when it edits this file. what am I doing wrong structurally?",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "is putting all our tests in a top-level /tests/ dir going to hurt me when I work with Cursor a lot?",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "review these 3 files (paths attached) and tell me why an AI agent would struggle to modify them \u2014 then show me the fix",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "review this PR for security issues \u2014 focus on SQL injection and XSS",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "my cursor feels slow when I have 50 files open. how do I speed it up?",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "what's the best way to prompt Claude when I want it to refactor a file?",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        }
+      ],
+      "passed": 5,
+      "failed": 8,
+      "total": 13,
+      "results": [
+        {
+          "query": "we have like 40 services all named XxxManager and XxxHandler and our Cursor suggestions are garbage. is this related?",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "is there a tool that checks whether a codebase is AI-readable the way eslint checks code quality",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "why does claude keep hallucinating methods on my DI container? is it how I structured the code?",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "debating SOLID vs something else for our new Go service. We do 90% of our coding with AI pairing now \u2014 does the old advice still hold?",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "refactor /Users/me/Projects/api/src/services/legacy_user_service.ts to be easier for an agent to edit. It's 2000 lines and uses a DI framework heavy handedly",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "I've got this legacy Python module with a bunch of process() functions and Manager classes. I'll be maintaining it with Claude Code going forward \u2014 where do I even start cleaning it up so the agent doesn't constantly misread it?",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "Just built a new Hono API and I'll be pair-coding it with Cursor for the next year. What conventions should I lay down now?",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "I've been told to 'structure my code for AI maintainability' but no one explains what that means concretely. what's the actual technical content",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "write me a Python script that downloads a CSV from s3 and uploads it to bigquery",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "should I use Cursor rules files or Claude skills for our team's coding conventions? what's the tradeoff?",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "help me debug this: I'm getting `AttributeError: 'NoneType' object has no attribute 'email'` in my signup flow",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "can Claude Code write tests for this function? /Users/me/billing/refund.ts",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "claude keeps writing TypeScript with `any` everywhere even when I tell it not to. how do I get it to stop?",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        }
+      ]
+    },
+    {
+      "iteration": 2,
+      "description": "Use when the user is structuring, naming, refactoring, or reviewing code that humans and AI coding agents (Claude Code, Cursor, Copilot, Aider, Devin) will share \u2014 or diagnosing why agents misbehave on their codebase. Trigger on symptoms like: agents hallucinating methods or APIs, Cursor/Copilot suggestions being low-quality on a repo, files full of Manager/Service/Handler/Helper/Util/process names, large legacy modules the user wants to make agent-friendly, heavy DI or metaprogramming confusing the agent, questions about whether SOLID/DRY/clean-code still holds in AI-pairing workflows, requests to audit a codebase for AI-readability, or asks about conventions to set up-front for a repo maintained with agents. Also triggers on \"structure code for AI maintainability\", \"agent-friendly architecture\", or tool-like asks (\"is there a linter for this\"). Ships a zero-dep linter flagging concrete anti-patterns. Skip for generic one-off scripts or pure debugging unrelated to code structure.",
+      "train_passed": 5,
+      "train_failed": 8,
+      "train_total": 13,
+      "train_results": [
+        {
+          "query": "we have like 40 services all named XxxManager and XxxHandler and our Cursor suggestions are garbage. is this related?",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "is there a tool that checks whether a codebase is AI-readable the way eslint checks code quality",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "why does claude keep hallucinating methods on my DI container? is it how I structured the code?",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "refactor /Users/me/Projects/api/src/services/legacy_user_service.ts to be easier for an agent to edit. It's 2000 lines and uses a DI framework heavy handedly",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "debating SOLID vs something else for our new Go service. We do 90% of our coding with AI pairing now \u2014 does the old advice still hold?",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "I've got this legacy Python module with a bunch of process() functions and Manager classes. I'll be maintaining it with Claude Code going forward \u2014 where do I even start cleaning it up so the agent doesn't constantly misread it?",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "I've been told to 'structure my code for AI maintainability' but no one explains what that means concretely. what's the actual technical content",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "write me a Python script that downloads a CSV from s3 and uploads it to bigquery",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "Just built a new Hono API and I'll be pair-coding it with Cursor for the next year. What conventions should I lay down now?",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "should I use Cursor rules files or Claude skills for our team's coding conventions? what's the tradeoff?",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "help me debug this: I'm getting `AttributeError: 'NoneType' object has no attribute 'email'` in my signup flow",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "can Claude Code write tests for this function? /Users/me/billing/refund.ts",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "claude keeps writing TypeScript with `any` everywhere even when I tell it not to. how do I get it to stop?",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        }
+      ],
+      "test_passed": 3,
+      "test_failed": 4,
+      "test_total": 7,
+      "test_results": [
+        {
+          "query": "keep getting `str_replace failed: multiple matches` errors from Claude Code when it edits this file. what am I doing wrong structurally?",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "audit this /Users/me/src/backend/ repo for AI-maintainability \u2014 we're switching to heavy claude-code usage next quarter",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "is putting all our tests in a top-level /tests/ dir going to hurt me when I work with Cursor a lot?",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "review this PR for security issues \u2014 focus on SQL injection and XSS",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "review these 3 files (paths attached) and tell me why an AI agent would struggle to modify them \u2014 then show me the fix",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "my cursor feels slow when I have 50 files open. how do I speed it up?",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "what's the best way to prompt Claude when I want it to refactor a file?",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        }
+      ],
+      "passed": 5,
+      "failed": 8,
+      "total": 13,
+      "results": [
+        {
+          "query": "we have like 40 services all named XxxManager and XxxHandler and our Cursor suggestions are garbage. is this related?",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "is there a tool that checks whether a codebase is AI-readable the way eslint checks code quality",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "why does claude keep hallucinating methods on my DI container? is it how I structured the code?",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "refactor /Users/me/Projects/api/src/services/legacy_user_service.ts to be easier for an agent to edit. It's 2000 lines and uses a DI framework heavy handedly",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "debating SOLID vs something else for our new Go service. We do 90% of our coding with AI pairing now \u2014 does the old advice still hold?",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "I've got this legacy Python module with a bunch of process() functions and Manager classes. I'll be maintaining it with Claude Code going forward \u2014 where do I even start cleaning it up so the agent doesn't constantly misread it?",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "I've been told to 'structure my code for AI maintainability' but no one explains what that means concretely. what's the actual technical content",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "write me a Python script that downloads a CSV from s3 and uploads it to bigquery",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "Just built a new Hono API and I'll be pair-coding it with Cursor for the next year. What conventions should I lay down now?",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "should I use Cursor rules files or Claude skills for our team's coding conventions? what's the tradeoff?",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "help me debug this: I'm getting `AttributeError: 'NoneType' object has no attribute 'email'` in my signup flow",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "can Claude Code write tests for this function? /Users/me/billing/refund.ts",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "claude keeps writing TypeScript with `any` everywhere even when I tell it not to. how do I get it to stop?",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        }
+      ]
+    },
+    {
+      "iteration": 3,
+      "description": "Use this skill when the user is writing, naming, refactoring, structuring, or reviewing code that will be maintained with AI coding agents (Claude Code, Cursor, Copilot, Aider, Devin) \u2014 or diagnosing why an agent performs poorly on their codebase. Core intents: making a repo agent-friendly, auditing AI-readability, picking conventions for an AI-paired project, cleaning up legacy code before handing it to an agent, or understanding why agents hallucinate methods, misread files, or give low-quality suggestions. Also use when the user questions whether SOLID/DRY/clean-code still apply with AI pairing, asks about generic naming (Manager/Service/Handler/Helper/Util/process), heavy DI or metaprogramming confusing agents, or asks if a linter exists for AI-readability. Ships a zero-dep linter for concrete anti-patterns. Skip for one-off scripts, pure runtime debugging, or agent tooling config questions unrelated to code structure.",
+      "train_passed": 5,
+      "train_failed": 8,
+      "train_total": 13,
+      "train_results": [
+        {
+          "query": "we have like 40 services all named XxxManager and XxxHandler and our Cursor suggestions are garbage. is this related?",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "is there a tool that checks whether a codebase is AI-readable the way eslint checks code quality",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "debating SOLID vs something else for our new Go service. We do 90% of our coding with AI pairing now \u2014 does the old advice still hold?",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "refactor /Users/me/Projects/api/src/services/legacy_user_service.ts to be easier for an agent to edit. It's 2000 lines and uses a DI framework heavy handedly",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "why does claude keep hallucinating methods on my DI container? is it how I structured the code?",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "I've got this legacy Python module with a bunch of process() functions and Manager classes. I'll be maintaining it with Claude Code going forward \u2014 where do I even start cleaning it up so the agent doesn't constantly misread it?",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "I've been told to 'structure my code for AI maintainability' but no one explains what that means concretely. what's the actual technical content",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "write me a Python script that downloads a CSV from s3 and uploads it to bigquery",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "should I use Cursor rules files or Claude skills for our team's coding conventions? what's the tradeoff?",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "Just built a new Hono API and I'll be pair-coding it with Cursor for the next year. What conventions should I lay down now?",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "help me debug this: I'm getting `AttributeError: 'NoneType' object has no attribute 'email'` in my signup flow",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "can Claude Code write tests for this function? /Users/me/billing/refund.ts",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "claude keeps writing TypeScript with `any` everywhere even when I tell it not to. how do I get it to stop?",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        }
+      ],
+      "test_passed": 3,
+      "test_failed": 4,
+      "test_total": 7,
+      "test_results": [
+        {
+          "query": "is putting all our tests in a top-level /tests/ dir going to hurt me when I work with Cursor a lot?",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "audit this /Users/me/src/backend/ repo for AI-maintainability \u2014 we're switching to heavy claude-code usage next quarter",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "keep getting `str_replace failed: multiple matches` errors from Claude Code when it edits this file. what am I doing wrong structurally?",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "review these 3 files (paths attached) and tell me why an AI agent would struggle to modify them \u2014 then show me the fix",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "review this PR for security issues \u2014 focus on SQL injection and XSS",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "my cursor feels slow when I have 50 files open. how do I speed it up?",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "what's the best way to prompt Claude when I want it to refactor a file?",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        }
+      ],
+      "passed": 5,
+      "failed": 8,
+      "total": 13,
+      "results": [
+        {
+          "query": "we have like 40 services all named XxxManager and XxxHandler and our Cursor suggestions are garbage. is this related?",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "is there a tool that checks whether a codebase is AI-readable the way eslint checks code quality",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "debating SOLID vs something else for our new Go service. We do 90% of our coding with AI pairing now \u2014 does the old advice still hold?",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "refactor /Users/me/Projects/api/src/services/legacy_user_service.ts to be easier for an agent to edit. It's 2000 lines and uses a DI framework heavy handedly",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "why does claude keep hallucinating methods on my DI container? is it how I structured the code?",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "I've got this legacy Python module with a bunch of process() functions and Manager classes. I'll be maintaining it with Claude Code going forward \u2014 where do I even start cleaning it up so the agent doesn't constantly misread it?",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "I've been told to 'structure my code for AI maintainability' but no one explains what that means concretely. what's the actual technical content",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "write me a Python script that downloads a CSV from s3 and uploads it to bigquery",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "should I use Cursor rules files or Claude skills for our team's coding conventions? what's the tradeoff?",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "Just built a new Hono API and I'll be pair-coding it with Cursor for the next year. What conventions should I lay down now?",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "help me debug this: I'm getting `AttributeError: 'NoneType' object has no attribute 'email'` in my signup flow",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "can Claude Code write tests for this function? /Users/me/billing/refund.ts",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "claude keeps writing TypeScript with `any` everywhere even when I tell it not to. how do I get it to stop?",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        }
+      ]
+    },
+    {
+      "iteration": 4,
+      "description": "Use this skill whenever the user's question touches how code should be written, named, organized, or refactored so that AI coding agents (Claude Code, Cursor, Copilot, Aider, Devin) can read and edit it reliably. Trigger on: agents hallucinating methods or APIs; Cursor/Copilot giving bad suggestions on a specific repo; too many Manager/Service/Handler/Helper/Util/process names; large legacy files the user plans to maintain with an agent; heavy DI, metaprogramming, or magic-string dispatch making agents confused; questions about whether SOLID, DRY, or clean-code advice still holds in AI-paired workflows; asks for a linter or audit tool that checks if a codebase is \"AI-readable\" or \"agent-friendly\"; setting conventions up-front for a new repo that will be pair-coded with an agent; or generally \"how do I structure code for AI maintainability.\" Ships a zero-dep linter for concrete anti-patterns. Skip for one-off scripts, pure runtime debugging, or agent-tooling config unrelated to code structure.",
+      "train_passed": 5,
+      "train_failed": 8,
+      "train_total": 13,
+      "train_results": [
+        {
+          "query": "we have like 40 services all named XxxManager and XxxHandler and our Cursor suggestions are garbage. is this related?",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "is there a tool that checks whether a codebase is AI-readable the way eslint checks code quality",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "why does claude keep hallucinating methods on my DI container? is it how I structured the code?",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "debating SOLID vs something else for our new Go service. We do 90% of our coding with AI pairing now \u2014 does the old advice still hold?",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "refactor /Users/me/Projects/api/src/services/legacy_user_service.ts to be easier for an agent to edit. It's 2000 lines and uses a DI framework heavy handedly",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "I've got this legacy Python module with a bunch of process() functions and Manager classes. I'll be maintaining it with Claude Code going forward \u2014 where do I even start cleaning it up so the agent doesn't constantly misread it?",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "Just built a new Hono API and I'll be pair-coding it with Cursor for the next year. What conventions should I lay down now?",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "I've been told to 'structure my code for AI maintainability' but no one explains what that means concretely. what's the actual technical content",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "write me a Python script that downloads a CSV from s3 and uploads it to bigquery",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "should I use Cursor rules files or Claude skills for our team's coding conventions? what's the tradeoff?",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "help me debug this: I'm getting `AttributeError: 'NoneType' object has no attribute 'email'` in my signup flow",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "can Claude Code write tests for this function? /Users/me/billing/refund.ts",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "claude keeps writing TypeScript with `any` everywhere even when I tell it not to. how do I get it to stop?",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        }
+      ],
+      "test_passed": 3,
+      "test_failed": 4,
+      "test_total": 7,
+      "test_results": [
+        {
+          "query": "is putting all our tests in a top-level /tests/ dir going to hurt me when I work with Cursor a lot?",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "keep getting `str_replace failed: multiple matches` errors from Claude Code when it edits this file. what am I doing wrong structurally?",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "audit this /Users/me/src/backend/ repo for AI-maintainability \u2014 we're switching to heavy claude-code usage next quarter",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "review these 3 files (paths attached) and tell me why an AI agent would struggle to modify them \u2014 then show me the fix",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "review this PR for security issues \u2014 focus on SQL injection and XSS",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "my cursor feels slow when I have 50 files open. how do I speed it up?",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "what's the best way to prompt Claude when I want it to refactor a file?",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        }
+      ],
+      "passed": 5,
+      "failed": 8,
+      "total": 13,
+      "results": [
+        {
+          "query": "we have like 40 services all named XxxManager and XxxHandler and our Cursor suggestions are garbage. is this related?",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "is there a tool that checks whether a codebase is AI-readable the way eslint checks code quality",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "why does claude keep hallucinating methods on my DI container? is it how I structured the code?",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "debating SOLID vs something else for our new Go service. We do 90% of our coding with AI pairing now \u2014 does the old advice still hold?",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "refactor /Users/me/Projects/api/src/services/legacy_user_service.ts to be easier for an agent to edit. It's 2000 lines and uses a DI framework heavy handedly",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "I've got this legacy Python module with a bunch of process() functions and Manager classes. I'll be maintaining it with Claude Code going forward \u2014 where do I even start cleaning it up so the agent doesn't constantly misread it?",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "Just built a new Hono API and I'll be pair-coding it with Cursor for the next year. What conventions should I lay down now?",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "I've been told to 'structure my code for AI maintainability' but no one explains what that means concretely. what's the actual technical content",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "write me a Python script that downloads a CSV from s3 and uploads it to bigquery",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "should I use Cursor rules files or Claude skills for our team's coding conventions? what's the tradeoff?",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "help me debug this: I'm getting `AttributeError: 'NoneType' object has no attribute 'email'` in my signup flow",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "can Claude Code write tests for this function? /Users/me/billing/refund.ts",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "claude keeps writing TypeScript with `any` everywhere even when I tell it not to. how do I get it to stop?",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        }
+      ]
+    },
+    {
+      "iteration": 5,
+      "description": "Code quality, naming, refactoring, architecture, and conventions for codebases maintained with AI coding agents (Claude Code, Cursor, Copilot, Aider, Devin). Use when the user: asks why an agent hallucinates methods, gives bad suggestions, or misreads their repo; mentions generic names like Manager/Service/Handler/Helper/Util/process; wants to refactor legacy code, large files, DI-heavy code, or metaprogramming to be easier for agents to edit; asks whether SOLID, DRY, or clean-code still applies with AI pairing; wants to set up conventions for a new repo that will be pair-coded with an agent; asks about \"AI-readable\", \"agent-friendly\", or \"AI-maintainable\" code; or wants a linter/audit for agent-readability. Also apply proactively when making naming, file-organization, or abstraction decisions in code the user will maintain with agents. Ships a zero-dep linter for concrete anti-patterns. Skip for one-off scripts, pure runtime debugging, or agent-tooling config unrelated to code structure.",
+      "train_passed": 5,
+      "train_failed": 8,
+      "train_total": 13,
+      "train_results": [
+        {
+          "query": "we have like 40 services all named XxxManager and XxxHandler and our Cursor suggestions are garbage. is this related?",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "is there a tool that checks whether a codebase is AI-readable the way eslint checks code quality",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "why does claude keep hallucinating methods on my DI container? is it how I structured the code?",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "debating SOLID vs something else for our new Go service. We do 90% of our coding with AI pairing now \u2014 does the old advice still hold?",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "refactor /Users/me/Projects/api/src/services/legacy_user_service.ts to be easier for an agent to edit. It's 2000 lines and uses a DI framework heavy handedly",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "I've got this legacy Python module with a bunch of process() functions and Manager classes. I'll be maintaining it with Claude Code going forward \u2014 where do I even start cleaning it up so the agent doesn't constantly misread it?",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "I've been told to 'structure my code for AI maintainability' but no one explains what that means concretely. what's the actual technical content",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "Just built a new Hono API and I'll be pair-coding it with Cursor for the next year. What conventions should I lay down now?",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "write me a Python script that downloads a CSV from s3 and uploads it to bigquery",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "should I use Cursor rules files or Claude skills for our team's coding conventions? what's the tradeoff?",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "help me debug this: I'm getting `AttributeError: 'NoneType' object has no attribute 'email'` in my signup flow",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "can Claude Code write tests for this function? /Users/me/billing/refund.ts",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "claude keeps writing TypeScript with `any` everywhere even when I tell it not to. how do I get it to stop?",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        }
+      ],
+      "test_passed": 3,
+      "test_failed": 4,
+      "test_total": 7,
+      "test_results": [
+        {
+          "query": "audit this /Users/me/src/backend/ repo for AI-maintainability \u2014 we're switching to heavy claude-code usage next quarter",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "is putting all our tests in a top-level /tests/ dir going to hurt me when I work with Cursor a lot?",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "review these 3 files (paths attached) and tell me why an AI agent would struggle to modify them \u2014 then show me the fix",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "keep getting `str_replace failed: multiple matches` errors from Claude Code when it edits this file. what am I doing wrong structurally?",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "review this PR for security issues \u2014 focus on SQL injection and XSS",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "my cursor feels slow when I have 50 files open. how do I speed it up?",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "what's the best way to prompt Claude when I want it to refactor a file?",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        }
+      ],
+      "passed": 5,
+      "failed": 8,
+      "total": 13,
+      "results": [
+        {
+          "query": "we have like 40 services all named XxxManager and XxxHandler and our Cursor suggestions are garbage. is this related?",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "is there a tool that checks whether a codebase is AI-readable the way eslint checks code quality",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "why does claude keep hallucinating methods on my DI container? is it how I structured the code?",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "debating SOLID vs something else for our new Go service. We do 90% of our coding with AI pairing now \u2014 does the old advice still hold?",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "refactor /Users/me/Projects/api/src/services/legacy_user_service.ts to be easier for an agent to edit. It's 2000 lines and uses a DI framework heavy handedly",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "I've got this legacy Python module with a bunch of process() functions and Manager classes. I'll be maintaining it with Claude Code going forward \u2014 where do I even start cleaning it up so the agent doesn't constantly misread it?",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "I've been told to 'structure my code for AI maintainability' but no one explains what that means concretely. what's the actual technical content",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "Just built a new Hono API and I'll be pair-coding it with Cursor for the next year. What conventions should I lay down now?",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "write me a Python script that downloads a CSV from s3 and uploads it to bigquery",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "should I use Cursor rules files or Claude skills for our team's coding conventions? what's the tradeoff?",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "help me debug this: I'm getting `AttributeError: 'NoneType' object has no attribute 'email'` in my signup flow",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "can Claude Code write tests for this function? /Users/me/billing/refund.ts",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "claude keeps writing TypeScript with `any` everywhere even when I tell it not to. how do I get it to stop?",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        }
+      ]
+    }
+  ]
+}

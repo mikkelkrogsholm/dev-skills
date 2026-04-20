@@ -1,0 +1,19 @@
+{
+  "eval_id": 2,
+  "eval_name": "principles-prioritized-list",
+  "prompt": "What should I do to make code easier for AI coding agents to read and modify? Prioritized list with concrete examples, grounded in specific failure modes.",
+  "assertions": [
+    {"id": "mentions-naming-for-grep", "text": "recommendations.md discusses naming with explicit reference to grep-ability, retrieval, or localization"},
+    {"id": "mentions-feature-colocation", "text": "recommendations.md recommends organizing code by feature / vertical slice rather than horizontal layer"},
+    {"id": "mentions-metaprogramming-risk", "text": "recommendations.md warns against metaprogramming, reflection, or dynamic dispatch"},
+    {"id": "mentions-typed-boundaries", "text": "recommendations.md recommends typed public boundaries / type annotations at module seams"},
+    {"id": "mentions-verification-loop", "text": "recommendations.md recommends verification affordances tied to preventing agent hallucination spirals"},
+    {"id": "mentions-file-size-or-duplicates", "text": "recommendations.md addresses file size, near-duplicates, or str_replace breakage"},
+    {"id": "uses-failure-modes-not-platitudes", "text": "recommendations.md grounds reasoning in specific agent failure modes rather than generic clean-code platitudes"},
+    {"id": "is-prioritized", "text": "recommendations.md presents the list in a prioritized order"},
+    {"id": "v13-determinism", "text": "recommendations.md covers deterministic tests (seeded randomness, frozen time) OR injectable side effects — v1.3 guidance"},
+    {"id": "v13-branded-or-unions", "text": "recommendations.md mentions branded/nominal types OR discriminated unions over magic strings — v1.3 guidance"},
+    {"id": "v13-barrel-files", "text": "recommendations.md flags barrel re-export files or 'export *' as an anti-pattern — v1.3 guidance (AR011)"},
+    {"id": "v13-training-data", "text": "recommendations.md mentions dependency pinning OR training-data / 'boring stack' considerations — v1.3 guidance"}
+  ]
+}

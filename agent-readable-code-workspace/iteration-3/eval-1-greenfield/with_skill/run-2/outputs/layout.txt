@@ -1,0 +1,58 @@
+src/
+├── index.ts                         # Bun entrypoint: build app, start server, wire signals
+├── app.ts                           # new Hono(), global middleware, mount feature routers, error handler
+├── env.ts                           # Zod-parsed process.env -> typed Env object (fail fast at boot)
+├── context.ts                       # AppContext type: { db, clock, logger, env } — injected everywhere
+│
+├── db/
+│   ├── client.ts                    # createDb(env): Neon HTTP driver + drizzle() instance
+│   ├── schema.ts                    # re-exports all feature tables (single import point for drizzle-kit)
+│   ├── ids.ts                       # branded ID types + makeId() helper (UserId, OrgId, InvoiceId, ...)
+│   └── migrations/                  # drizzle-kit output, never hand-edited
+│       └── 0000_init.sql
+│
+├── http/
+│   ├── errors.ts                    # AppError classes + toHttpResponse(err) — one place for error mapping
+│   ├── middleware.ts                # requestId, logger, auth-guard factory (small, explicit, grep-able)
+│   └── responses.ts                 # ok(), created(), noContent() — thin typed helpers
+│
+├── features/
+│   │
+│   ├── auth/
+│   │   ├── auth.routes.ts           # Hono router: POST /auth/login, /auth/logout, /auth/signup
+│   │   ├── auth.service.ts          # loginWithPassword(), issueSession(), revokeSession()
+│   │   ├── auth.repo.ts             # drizzle queries: findUserByEmail, insertSession, deleteSession
+│   │   ├── auth.schema.ts           # drizzle tables: users, sessions (+ $inferSelect types)
+│   │   ├── auth.dto.ts              # zod: LoginInput, SignupInput, SessionDTO
+│   │   ├── auth.password.ts         # hashPassword / verifyPassword (bun's password API)
+│   │   ├── auth.routes.test.ts      # HTTP-level tests (colocated)
+│   │   ├── auth.service.test.ts     # unit tests (colocated)
+│   │   └── index.ts                 # exports mountAuthRoutes(app, ctx) + public types only
+│   │
+│   ├── users/
+│   │   ├── users.routes.ts          # GET /users/me, PATCH /users/me, GET /users/:id
+│   │   ├── users.service.ts         # getUserById, updateProfile
+│   │   ├── users.repo.ts            # drizzle queries against users table
+│   │   ├── users.schema.ts          # extends auth.schema users table OR owns profile table — pick one, document at top
+│   │   ├── users.dto.ts             # zod: UserPublicDTO, UpdateProfileInput
+│   │   ├── users.routes.test.ts
+│   │   ├── users.service.test.ts
+│   │   └── index.ts
+│   │
+│   └── billing/
+│       ├── billing.routes.ts        # GET /billing/invoices, POST /billing/checkout, webhooks
+│       ├── billing.service.ts       # startCheckoutAndReserveSeat(), markInvoicePaid()
+│       ├── billing.repo.ts          # drizzle queries: invoices, subscriptions
+│       ├── billing.schema.ts        # drizzle tables: invoices, subscriptions, webhook_events
+│       ├── billing.dto.ts           # zod: CheckoutInput, InvoiceDTO, WebhookEvent (discriminated union)
+│       ├── billing.stripe.ts        # thin Stripe client wrapper — only called from billing/
+│       ├── billing.webhook.ts       # verifyAndParseWebhook() + exhaustive switch on event.kind
+│       ├── billing.routes.test.ts
+│       ├── billing.service.test.ts
+│       ├── billing.webhook.test.ts
+│       └── index.ts
+│
+└── test/
+    ├── setup.ts                     # bun:test preload: seed faker, freeze clock, build test ctx
+    ├── db.ts                        # makeTestDb(): ephemeral schema per test file (Neon branch or txn rollback)
+    └── fixtures.ts                  # makeUser(), makeInvoice() — deterministic factories

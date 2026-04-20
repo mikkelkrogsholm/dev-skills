@@ -1,0 +1,70 @@
+{
+  "expectations": [
+    {
+      "text": "recommendations.md discusses naming with explicit reference to grep-ability, retrieval, or localization",
+      "passed": true,
+      "evidence": "Section 1 'Name things for grep, not for elegance' explicitly frames names as retrieval cues for grep-based localization."
+    },
+    {
+      "text": "recommendations.md recommends organizing code by feature / vertical slice rather than horizontal layer",
+      "passed": true,
+      "evidence": "Section 4 'Organize by vertical slice (feature), not horizontal layer' gives concrete colocated feature-directory example."
+    },
+    {
+      "text": "recommendations.md warns against metaprogramming, reflection, or dynamic dispatch",
+      "passed": true,
+      "evidence": "Section 6 explicitly avoids __getattr__, eval, Proxy, Reflect, monkey-patching and magic-string dispatch."
+    },
+    {
+      "text": "recommendations.md recommends typed public boundaries / type annotations at module seams",
+      "passed": true,
+      "evidence": "Section 7 'Type the boundaries, use one source of truth' prescribes typed exported signatures and inferred types."
+    },
+    {
+      "text": "recommendations.md recommends verification affordances tied to preventing agent hallucination spirals",
+      "passed": true,
+      "evidence": "Section 2 cites the documented 693-line / 39-turn hallucination spiral and prescribes a one-command verification loop."
+    },
+    {
+      "text": "recommendations.md addresses file size, near-duplicates, or str_replace breakage",
+      "passed": true,
+      "evidence": "Section 5 names the 800-1000 line threshold, lost-in-the-middle, and str_replace failure on near-duplicate blocks."
+    },
+    {
+      "text": "recommendations.md grounds reasoning in specific agent failure modes rather than generic clean-code platitudes",
+      "passed": true,
+      "evidence": "Names context-window limits, lost-in-the-middle, str_replace, hallucination spirals, and monkey-patch self-doubt postmortems throughout."
+    },
+    {
+      "text": "recommendations.md presents the list in a prioritized order",
+      "passed": true,
+      "evidence": "Explicit Priority 1 through Priority 4 sections ordered by impact."
+    },
+    {
+      "text": "recommendations.md covers deterministic tests (seeded randomness, frozen time) OR injectable side effects \u2014 v1.3 guidance",
+      "passed": true,
+      "evidence": "Section 8 prescribes injecting clock/fetch/db, seeding randomness, and freezing time in tests."
+    },
+    {
+      "text": "recommendations.md mentions branded/nominal types OR discriminated unions over magic strings \u2014 v1.3 guidance",
+      "passed": true,
+      "evidence": "Section 7 specifies branded UserId types and discriminated unions as anti-magic-string patterns."
+    },
+    {
+      "text": "recommendations.md flags barrel re-export files or 'export *' as an anti-pattern \u2014 v1.3 guidance (AR011)",
+      "passed": true,
+      "evidence": "Section 6 explicitly flags barrel re-export files and the extra grep hop they impose."
+    },
+    {
+      "text": "recommendations.md mentions dependency pinning OR training-data / 'boring stack' considerations \u2014 v1.3 guidance",
+      "passed": true,
+      "evidence": "Section 11 'Pick a boring stack and pin it' names training-data coverage and version pinning."
+    }
+  ],
+  "summary": {
+    "pass_rate": 1.0,
+    "passed": 12,
+    "failed": 0,
+    "total": 12
+  }
+}

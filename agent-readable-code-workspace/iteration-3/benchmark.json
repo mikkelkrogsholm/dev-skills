@@ -1,0 +1,1101 @@
+{
+  "metadata": {
+    "skill_name": "agent-readable-code",
+    "skill_path": "<path/to/skill>",
+    "executor_model": "<model-name>",
+    "analyzer_model": "<model-name>",
+    "timestamp": "2026-04-20T19:01:36Z",
+    "evals_run": [
+      0,
+      1,
+      2
+    ],
+    "runs_per_configuration": 3
+  },
+  "runs": [
+    {
+      "eval_id": 0,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 15,
+        "failed": 0,
+        "total": 15,
+        "time_seconds": 102.4,
+        "tokens": 38127,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "problems.md explicitly names 'utils.py' as a dumping-ground / generic filename problem",
+          "passed": true,
+          "evidence": "Section 1 'Dumping-ground filename' explicitly calls out utils.py as a banlisted dumping-ground name."
+        },
+        {
+          "text": "problems.md calls out the generic class name 'Manager' as a naming problem",
+          "passed": true,
+          "evidence": "Section 2 lists 'Manager \u2014 on the banlist; manages nothing specific' and 'Manager.do_stuff' as banlist names."
+        },
+        {
+          "text": "problems.md identifies __getattr__ / dynamic dispatch as a problem for AI agents",
+          "passed": true,
+          "evidence": "Section 4 explicitly calls out DynamicAPI.__getattr__ returning a generic lambda, making callers invisible to grep."
+        },
+        {
+          "text": "problems.md flags the use of eval() as an anti-pattern",
+          "passed": true,
+          "evidence": "Section 4 flags 'eval(expr) in run_expression \u2014 dynamic code execution; also a security hazard.'"
+        },
+        {
+          "text": "problems.md identifies the deep inheritance chain",
+          "passed": true,
+          "evidence": "Section 5 'Deep inheritance chain' explicitly describes User -> Auditable -> Persisted -> Entity -> Base as 4 levels deep."
+        },
+        {
+          "text": "problems.md notes that public functions lack type annotations / return types",
+          "passed": true,
+          "evidence": "Section 3 'Missing type annotations at the public boundary' enumerates each untyped function."
+        },
+        {
+          "text": "refactored.py's public functions have type annotations on parameters and return values",
+          "passed": true,
+          "evidence": "The sole public symbol User dataclass has typed fields (id: str, email: str); no untyped functions exist."
+        },
+        {
+          "text": "refactored.py does not use __getattr__ for runtime method dispatch",
+          "passed": true,
+          "evidence": "refactored.py contains no __getattr__ implementation; only a frozen/slotted User dataclass."
+        },
+        {
+          "text": "refactored.py does not call eval() or exec() on user input",
+          "passed": true,
+          "evidence": "No eval or exec calls appear anywhere in refactored.py."
+        },
+        {
+          "text": "refactored.py replaces the generic 'Manager' class name with something domain-specific (or removes it)",
+          "passed": true,
+          "evidence": "Manager is removed entirely, replaced by the domain-specific User class."
+        },
+        {
+          "text": "refactored.py's inheritance chain is at most 2 levels deep (or uses composition)",
+          "passed": true,
+          "evidence": "User is a flat dataclass inheriting only from object (depth 1)."
+        },
+        {
+          "text": "rationale.md grounds recommendations in specific AI-agent failure modes rather than generic clean-code arguments",
+          "passed": true,
+          "evidence": "Rationale explicitly cites agent hallucination of MRO, grep-visibility for agents, and agents importing private helpers."
+        },
+        {
+          "text": "refactored.py declares __all__ to make the public surface explicit (v1.3 guidance \u2014 Python-specific)",
+          "passed": true,
+          "evidence": "refactored.py line 25 declares __all__ = [\"User\"]."
+        },
+        {
+          "text": "refactored.py uses @dataclass(slots=True) or @dataclass(frozen=True) to prevent ad-hoc attribute fabrication (v1.3 guidance)",
+          "passed": true,
+          "evidence": "User is declared @dataclass(frozen=True, slots=True)."
+        },
+        {
+          "text": "rationale.md or problems.md explains why slots/__all__ matters for agents (hallucinated attributes, import of internal helpers) \u2014 the v1.3 framing",
+          "passed": true,
+          "evidence": "Rationale Practice 8 explains slots fails loudly on typos and __all__ prevents agents importing private helpers."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 0,
+      "configuration": "with_skill",
+      "run_number": 2,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 15,
+        "failed": 0,
+        "total": 15,
+        "time_seconds": 93.0,
+        "tokens": 34833,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "problems.md explicitly names 'utils.py' as a dumping-ground / generic filename problem",
+          "passed": true,
+          "evidence": "AR003 section item 1 'Dumping-ground filename. utils.py is explicitly banlisted.'"
+        },
+        {
+          "text": "problems.md calls out the generic class name 'Manager' as a naming problem",
+          "passed": true,
+          "evidence": "AR003 item 4 'Generic class Manager. Manager is banlisted.'"
+        },
+        {
+          "text": "problems.md identifies __getattr__ / dynamic dispatch as a problem for AI agents",
+          "passed": true,
+          "evidence": "AR004 item 8 flags DynamicAPI.__getattr__ dispatch as silent no-op with no static signal."
+        },
+        {
+          "text": "problems.md flags the use of eval() as an anti-pattern",
+          "passed": true,
+          "evidence": "AR004 item 6 explicitly flags eval(expr) in run_expression as dynamic code execution."
+        },
+        {
+          "text": "problems.md identifies the deep inheritance chain",
+          "passed": true,
+          "evidence": "AR005 item 9 describes the chain User -> Auditable -> Persisted -> Entity -> Base with depth > 3."
+        },
+        {
+          "text": "problems.md notes that public functions lack type annotations / return types",
+          "passed": true,
+          "evidence": "AR006 items 10-13 enumerate missing annotations on process, handle, do_stuff, run_expression, dynamic_import."
+        },
+        {
+          "text": "refactored.py's public functions have type annotations on parameters and return values",
+          "passed": true,
+          "evidence": "echo_payload(payload: T) -> T and add_integers(left: int, right: int) -> int both fully typed."
+        },
+        {
+          "text": "refactored.py does not use __getattr__ for runtime method dispatch",
+          "passed": true,
+          "evidence": "__getattr__ is entirely removed from refactored.py."
+        },
+        {
+          "text": "refactored.py does not call eval() or exec() on user input",
+          "passed": true,
+          "evidence": "No eval or exec calls in refactored.py."
+        },
+        {
+          "text": "refactored.py replaces the generic 'Manager' class name with something domain-specific (or removes it)",
+          "passed": true,
+          "evidence": "Manager is removed; replaced by domain-specific User dataclass."
+        },
+        {
+          "text": "refactored.py's inheritance chain is at most 2 levels deep (or uses composition)",
+          "passed": true,
+          "evidence": "User is a flat dataclass, depth 1 from object."
+        },
+        {
+          "text": "rationale.md grounds recommendations in specific AI-agent failure modes rather than generic clean-code arguments",
+          "passed": true,
+          "evidence": "Rationale cites agent fabrication, grep-visibility, silent success hiding bugs, and type-checker anchoring."
+        },
+        {
+          "text": "refactored.py declares __all__ to make the public surface explicit (v1.3 guidance \u2014 Python-specific)",
+          "passed": true,
+          "evidence": "refactored.py declares __all__ = [\"echo_payload\", \"add_integers\", \"User\"]."
+        },
+        {
+          "text": "refactored.py uses @dataclass(slots=True) or @dataclass(frozen=True) to prevent ad-hoc attribute fabrication (v1.3 guidance)",
+          "passed": true,
+          "evidence": "User declared as @dataclass(frozen=True, slots=True)."
+        },
+        {
+          "text": "rationale.md or problems.md explains why slots/__all__ matters for agents (hallucinated attributes, import of internal helpers) \u2014 the v1.3 framing",
+          "passed": true,
+          "evidence": "Rationale explicitly states slots=True makes typos fail loudly at edit site and __all__ prevents dragging private helpers into consumer namespace."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 1,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 14,
+        "failed": 0,
+        "total": 14,
+        "time_seconds": 103.6,
+        "tokens": 38144,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "layout.txt organizes by feature (auth/, billing/, users/) rather than primarily by horizontal layer",
+          "passed": true,
+          "evidence": "Top-level src/ directly contains auth/, users/, billing/, health/ feature slices, with only thin http/ and lib/ cross-cutting dirs."
+        },
+        {
+          "text": "layout.txt colocates test files next to source files rather than in a distant tests/ tree",
+          "passed": true,
+          "evidence": "Every source file has a sibling .test.ts (e.g., issue-refund.ts and issue-refund.test.ts) within its feature directory."
+        },
+        {
+          "text": "layout.txt contains concrete domain directories like auth, billing, or users",
+          "passed": true,
+          "evidence": "Layout explicitly includes auth/, users/, and billing/ directories with labeled 'FEATURE SLICE' comments."
+        },
+        {
+          "text": "CONVENTIONS.md explicitly addresses naming \u2014 avoiding generic names or requiring domain-specific names",
+          "passed": true,
+          "evidence": "Section 3 requires domain-specific verbs like issueRefund and bans generic filenames utils.ts, helpers.ts, manager.ts, service.ts, handler.ts."
+        },
+        {
+          "text": "CONVENTIONS.md gives a concrete file-size guideline with a number",
+          "passed": true,
+          "evidence": "Section 2 states 'Hard cap: 300 lines per file. Soft target: 150.'"
+        },
+        {
+          "text": "CONVENTIONS.md requires type annotations on public / module-boundary functions",
+          "passed": true,
+          "evidence": "Section 4 requires 'Typed public signatures everywhere. No any' with strict and noImplicitAny enabled."
+        },
+        {
+          "text": "CONVENTIONS.md mentions tests/lint/typecheck as the verification loop",
+          "passed": true,
+          "evidence": "Section 8 defines 'bun run check runs bun typecheck && bun lint && bun test' as the agent's feedback loop."
+        },
+        {
+          "text": "CONVENTIONS.md discourages dynamic/metaprogramming patterns for agent-traceability",
+          "passed": true,
+          "evidence": "Section 5 bans Proxy, Reflect, runtime monkey-patching, and decorator stacks because 'Agents can't grep through them.'"
+        },
+        {
+          "text": "CONVENTIONS.md explains at least one decision in terms of AI-agent behavior",
+          "passed": true,
+          "evidence": "Rationale repeatedly cited, e.g., 'Files over 300 regularly break agent apply-model merges' and 'Agent memory of an API is version-specific.'"
+        },
+        {
+          "text": "CONVENTIONS.md recommends branded / nominal types for IDs (e.g. UserId as branded string) \u2014 v1.3 guidance",
+          "passed": true,
+          "evidence": "Section 4 specifies 'type UserId = string & { readonly __brand: UserId }' and forbids passing raw string where an ID is meant."
+        },
+        {
+          "text": "CONVENTIONS.md prefers discriminated unions (or equivalent) over magic-string dispatch / string-keyed registries \u2014 v1.3 guidance",
+          "passed": true,
+          "evidence": "Section 4 and 5 mandate discriminated unions with exhaustive switch and ban 'magic-string dispatch' / registerHandler tables."
+        },
+        {
+          "text": "CONVENTIONS.md addresses dependency pinning, version pinning, or 'boring stack' / training-data hygiene \u2014 v1.3 guidance",
+          "passed": true,
+          "evidence": "Section 9 requires exact pinned versions and 'Prefer boring, popular packages' because 'Agent memory of an API is version-specific.'"
+        },
+        {
+          "text": "CONVENTIONS.md covers deterministic tests (seeded randomness, frozen time) OR injectable side effects (clock, fetch, env as arguments) \u2014 v1.3 guidance",
+          "passed": true,
+          "evidence": "Section 8 mandates freezing time via injected clock, seeded randomness, and fixed UUIDs; Section 5 injects deps { db, clock, logger, fetch, env }."
+        },
+        {
+          "text": "CONVENTIONS.md explicitly discourages barrel / re-export index files \u2014 v1.3 guidance (AR011)",
+          "passed": true,
+          "evidence": "Section 2 states 'No barrel files (index.ts that only re-exports). Import from the defining file.'"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 1,
+      "configuration": "with_skill",
+      "run_number": 2,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 14,
+        "failed": 0,
+        "total": 14,
+        "time_seconds": 96.0,
+        "tokens": 37720,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "layout.txt organizes by feature (auth/, billing/, users/) rather than primarily by horizontal layer",
+          "passed": true,
+          "evidence": "src/features/ contains auth/, users/, billing/ slices owning routes, service, repo, schema and tests together."
+        },
+        {
+          "text": "layout.txt colocates test files next to source files rather than in a distant tests/ tree",
+          "passed": true,
+          "evidence": "Each feature contains .routes.test.ts and .service.test.ts files colocated inside its directory."
+        },
+        {
+          "text": "layout.txt contains concrete domain directories like auth, billing, or users",
+          "passed": true,
+          "evidence": "features/auth/, features/users/, and features/billing/ are explicit directories in the layout."
+        },
+        {
+          "text": "CONVENTIONS.md explicitly addresses naming \u2014 avoiding generic names or requiring domain-specific names",
+          "passed": true,
+          "evidence": "Naming section bans utils.ts, helpers.ts, common.ts, Manager, Service (standalone), Handler and requires domain verbs like issueRefund."
+        },
+        {
+          "text": "CONVENTIONS.md gives a concrete file-size guideline with a number",
+          "passed": true,
+          "evidence": "File-size section states 'Hard cap: 300 lines per file. Warn at 200.'"
+        },
+        {
+          "text": "CONVENTIONS.md requires type annotations on public / module-boundary functions",
+          "passed": true,
+          "evidence": "Dependencies section requires inject-ctx as typed first argument and 'One source of truth for types' via z.infer at boundaries; 'Services assume inputs are already typed and valid.'"
+        },
+        {
+          "text": "CONVENTIONS.md mentions tests/lint/typecheck as the verification loop",
+          "passed": true,
+          "evidence": "Testing section: 'bun run check = tsc --noEmit && bun test && bunx drizzle-kit check' must pass before any PR."
+        },
+        {
+          "text": "CONVENTIONS.md discourages dynamic/metaprogramming patterns for agent-traceability",
+          "passed": true,
+          "evidence": "Dependencies section: 'No metaprogramming. No Proxy, no runtime monkey-patching, no decorator stacks that rewrite behaviour.'"
+        },
+        {
+          "text": "CONVENTIONS.md explains at least one decision in terms of AI-agent behavior",
+          "passed": true,
+          "evidence": "Stack section: 'Agents know a specific API version; drifting minor versions break their memory.' Core heuristic frames rules around grep-based agents."
+        },
+        {
+          "text": "CONVENTIONS.md recommends branded / nominal types for IDs (e.g. UserId as branded string) \u2014 v1.3 guidance",
+          "passed": true,
+          "evidence": "Naming section: 'IDs: branded types. type UserId = string & { readonly __brand: UserId }.'"
+        },
+        {
+          "text": "CONVENTIONS.md prefers discriminated unions (or equivalent) over magic-string dispatch / string-keyed registries \u2014 v1.3 guidance",
+          "passed": true,
+          "evidence": "Naming section mandates 'discriminated unions keyed by kind, with one exhaustive switch. No string-keyed dispatch tables.'"
+        },
+        {
+          "text": "CONVENTIONS.md addresses dependency pinning, version pinning, or 'boring stack' / training-data hygiene \u2014 v1.3 guidance",
+          "passed": true,
+          "evidence": "Stack section is titled 'pinned, boring on purpose', requires exact pinned versions, and explains agent memory rationale."
+        },
+        {
+          "text": "CONVENTIONS.md covers deterministic tests (seeded randomness, frozen time) OR injectable side effects (clock, fetch, env as arguments) \u2014 v1.3 guidance",
+          "passed": true,
+          "evidence": "Testing section: 'Deterministic. test/setup.ts seeds faker, freezes the clock, injects a fixed-seed RNG'; ctx with clock is injected to every service."
+        },
+        {
+          "text": "CONVENTIONS.md explicitly discourages barrel / re-export index files \u2014 v1.3 guidance (AR011)",
+          "passed": true,
+          "evidence": "File-size section: 'No barrel re-exports beyond the feature index.ts. Import from the defining file.'"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 2,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 12,
+        "failed": 0,
+        "total": 12,
+        "time_seconds": 140.7,
+        "tokens": 44635,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "recommendations.md discusses naming with explicit reference to grep-ability, retrieval, or localization",
+          "passed": true,
+          "evidence": "Section 1 'Name things for grep, not for elegance' explicitly frames names as retrieval cues for grep-based localization."
+        },
+        {
+          "text": "recommendations.md recommends organizing code by feature / vertical slice rather than horizontal layer",
+          "passed": true,
+          "evidence": "Section 4 'Organize by vertical slice (feature), not horizontal layer' gives concrete colocated feature-directory example."
+        },
+        {
+          "text": "recommendations.md warns against metaprogramming, reflection, or dynamic dispatch",
+          "passed": true,
+          "evidence": "Section 6 explicitly avoids __getattr__, eval, Proxy, Reflect, monkey-patching and magic-string dispatch."
+        },
+        {
+          "text": "recommendations.md recommends typed public boundaries / type annotations at module seams",
+          "passed": true,
+          "evidence": "Section 7 'Type the boundaries, use one source of truth' prescribes typed exported signatures and inferred types."
+        },
+        {
+          "text": "recommendations.md recommends verification affordances tied to preventing agent hallucination spirals",
+          "passed": true,
+          "evidence": "Section 2 cites the documented 693-line / 39-turn hallucination spiral and prescribes a one-command verification loop."
+        },
+        {
+          "text": "recommendations.md addresses file size, near-duplicates, or str_replace breakage",
+          "passed": true,
+          "evidence": "Section 5 names the 800-1000 line threshold, lost-in-the-middle, and str_replace failure on near-duplicate blocks."
+        },
+        {
+          "text": "recommendations.md grounds reasoning in specific agent failure modes rather than generic clean-code platitudes",
+          "passed": true,
+          "evidence": "Names context-window limits, lost-in-the-middle, str_replace, hallucination spirals, and monkey-patch self-doubt postmortems throughout."
+        },
+        {
+          "text": "recommendations.md presents the list in a prioritized order",
+          "passed": true,
+          "evidence": "Explicit Priority 1 through Priority 4 sections ordered by impact."
+        },
+        {
+          "text": "recommendations.md covers deterministic tests (seeded randomness, frozen time) OR injectable side effects \u2014 v1.3 guidance",
+          "passed": true,
+          "evidence": "Section 8 prescribes injecting clock/fetch/db, seeding randomness, and freezing time in tests."
+        },
+        {
+          "text": "recommendations.md mentions branded/nominal types OR discriminated unions over magic strings \u2014 v1.3 guidance",
+          "passed": true,
+          "evidence": "Section 7 specifies branded UserId types and discriminated unions as anti-magic-string patterns."
+        },
+        {
+          "text": "recommendations.md flags barrel re-export files or 'export *' as an anti-pattern \u2014 v1.3 guidance (AR011)",
+          "passed": true,
+          "evidence": "Section 6 explicitly flags barrel re-export files and the extra grep hop they impose."
+        },
+        {
+          "text": "recommendations.md mentions dependency pinning OR training-data / 'boring stack' considerations \u2014 v1.3 guidance",
+          "passed": true,
+          "evidence": "Section 11 'Pick a boring stack and pin it' names training-data coverage and version pinning."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 2,
+      "configuration": "with_skill",
+      "run_number": 2,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 12,
+        "failed": 0,
+        "total": 12,
+        "time_seconds": 131.9,
+        "tokens": 43996,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "recommendations.md discusses naming with explicit reference to grep-ability, retrieval, or localization",
+          "passed": true,
+          "evidence": "Section 1 states 'Agents localize code by grepping names' and cites the 87%->59% comprehension drop."
+        },
+        {
+          "text": "recommendations.md recommends organizing code by feature / vertical slice rather than horizontal layer",
+          "passed": true,
+          "evidence": "Section 4 'Organize by feature (vertical slices), not by layer' with concrete refunds/ directory example."
+        },
+        {
+          "text": "recommendations.md warns against metaprogramming, reflection, or dynamic dispatch",
+          "passed": true,
+          "evidence": "Section 5 explicitly avoids __getattr__, eval, Proxy, Reflect, and magic-string event dispatch."
+        },
+        {
+          "text": "recommendations.md recommends typed public boundaries / type annotations at module seams",
+          "passed": true,
+          "evidence": "Section 2 'Type public boundaries' plus Section 10 require typed signatures and inferred types."
+        },
+        {
+          "text": "recommendations.md recommends verification affordances tied to preventing agent hallucination spirals",
+          "passed": true,
+          "evidence": "Section 3 cites the 693-line / 39-turn Gemini spiral and prescribes colocated tests and a single command."
+        },
+        {
+          "text": "recommendations.md addresses file size, near-duplicates, or str_replace breakage",
+          "passed": true,
+          "evidence": "Section 6 names 800-1000 line merge failures, lost-in-the-middle, and str_replace near-duplicate defeat."
+        },
+        {
+          "text": "recommendations.md grounds reasoning in specific agent failure modes rather than generic clean-code platitudes",
+          "passed": true,
+          "evidence": "Each tier cites specific failure modes: context windows, grep misses, str_replace, hallucination spirals, lost-in-the-middle."
+        },
+        {
+          "text": "recommendations.md presents the list in a prioritized order",
+          "passed": true,
+          "evidence": "Explicit Tier 1 / Tier 2 / Tier 3 ordering by leverage."
+        },
+        {
+          "text": "recommendations.md covers deterministic tests (seeded randomness, frozen time) OR injectable side effects \u2014 v1.3 guidance",
+          "passed": true,
+          "evidence": "Section 9 'Inject side effects; seed all randomness; freeze time in tests' with concrete signToken example."
+        },
+        {
+          "text": "recommendations.md mentions branded/nominal types OR discriminated unions over magic strings \u2014 v1.3 guidance",
+          "passed": true,
+          "evidence": "Section 2 shows branded UserId/OrgId and discriminated union Event variants."
+        },
+        {
+          "text": "recommendations.md flags barrel re-export files or 'export *' as an anti-pattern \u2014 v1.3 guidance (AR011)",
+          "passed": true,
+          "evidence": "Section 7 'Avoid barrel re-export files' explicitly calls out the extra grep hop."
+        },
+        {
+          "text": "recommendations.md mentions dependency pinning OR training-data / 'boring stack' considerations \u2014 v1.3 guidance",
+          "passed": true,
+          "evidence": "Section 11 'Write for training-data gravity' covers pinning and boring-stack bias."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 0,
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.9333,
+        "passed": 14,
+        "failed": 1,
+        "total": 15,
+        "time_seconds": 83.7,
+        "tokens": 29955,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "problems.md explicitly names 'utils.py' as a dumping-ground / generic filename problem",
+          "passed": true,
+          "evidence": "Section 1 'Generic / meaningless module name (utils.py)' calls it a dumping-ground module name."
+        },
+        {
+          "text": "problems.md calls out the generic class name 'Manager' as a naming problem",
+          "passed": true,
+          "evidence": "Section 2 explicitly calls out 'do_stuff(thing) on Manager \u2014 maximally generic'."
+        },
+        {
+          "text": "problems.md identifies __getattr__ / dynamic dispatch as a problem for AI agents",
+          "passed": true,
+          "evidence": "Section 4 flags DynamicAPI.__getattr__ returning a no-op lambda and swallowing typos."
+        },
+        {
+          "text": "problems.md flags the use of eval() as an anti-pattern",
+          "passed": true,
+          "evidence": "Section 4 explicitly flags eval(expr) in run_expression as arbitrary code execution."
+        },
+        {
+          "text": "problems.md identifies the deep inheritance chain",
+          "passed": true,
+          "evidence": "Section 5 describes the 5-level chain User -> Auditable -> Persisted -> Entity -> Base as a deep inheritance problem."
+        },
+        {
+          "text": "problems.md notes that public functions lack type annotations / return types",
+          "passed": true,
+          "evidence": "Section 3 'Missing type annotations on public API' enumerates every untyped function."
+        },
+        {
+          "text": "refactored.py's public functions have type annotations on parameters and return values",
+          "passed": true,
+          "evidence": "identity(value: T) -> T and add_integers(left: int, right: int) -> int both fully typed; OperationRegistry methods typed."
+        },
+        {
+          "text": "refactored.py does not use __getattr__ for runtime method dispatch",
+          "passed": true,
+          "evidence": "No __getattr__ implementation; explicit OperationRegistry replaces it."
+        },
+        {
+          "text": "refactored.py does not call eval() or exec() on user input",
+          "passed": true,
+          "evidence": "No eval or exec calls in refactored.py."
+        },
+        {
+          "text": "refactored.py replaces the generic 'Manager' class name with something domain-specific (or removes it)",
+          "passed": true,
+          "evidence": "Manager is removed; no generic equivalent remains."
+        },
+        {
+          "text": "refactored.py's inheritance chain is at most 2 levels deep (or uses composition)",
+          "passed": true,
+          "evidence": "User composes an AuditRecord instead of inheriting; depth 1 from object."
+        },
+        {
+          "text": "rationale.md grounds recommendations in specific AI-agent failure modes rather than generic clean-code arguments",
+          "passed": true,
+          "evidence": "Rationale mentions agent reasoning about call graphs, LLM tooling, agent working memory, and silent typos."
+        },
+        {
+          "text": "refactored.py declares __all__ to make the public surface explicit (v1.3 guidance \u2014 Python-specific)",
+          "passed": true,
+          "evidence": "refactored.py lines 27-34 declare __all__ with six exports."
+        },
+        {
+          "text": "refactored.py uses @dataclass(slots=True) or @dataclass(frozen=True) to prevent ad-hoc attribute fabrication (v1.3 guidance)",
+          "passed": true,
+          "evidence": "AuditRecord uses @dataclass(frozen=True); however User itself is plain @dataclass without slots/frozen."
+        },
+        {
+          "text": "rationale.md or problems.md explains why slots/__all__ matters for agents (hallucinated attributes, import of internal helpers) \u2014 the v1.3 framing",
+          "passed": false,
+          "evidence": "Rationale mentions __all__ pins the public surface but does not frame it in terms of preventing agents importing internal helpers or hallucinated attributes via slots."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 0,
+      "configuration": "without_skill",
+      "run_number": 2,
+      "result": {
+        "pass_rate": 0.9333,
+        "passed": 14,
+        "failed": 1,
+        "total": 15,
+        "time_seconds": 86.0,
+        "tokens": 29445,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "problems.md explicitly names 'utils.py' as a dumping-ground / generic filename problem",
+          "passed": true,
+          "evidence": "Section 1 'Module name is meaningless (utils.py)' calls it a junk drawer / dumping-ground anti-pattern."
+        },
+        {
+          "text": "problems.md calls out the generic class name 'Manager' as a naming problem",
+          "passed": true,
+          "evidence": "Section 2 explicitly lists Manager among the generic non-descriptive identifiers."
+        },
+        {
+          "text": "problems.md identifies __getattr__ / dynamic dispatch as a problem for AI agents",
+          "passed": true,
+          "evidence": "Section 6 'Metaprogramming via __getattr__' explains the silent no-op dispatch problem."
+        },
+        {
+          "text": "problems.md flags the use of eval() as an anti-pattern",
+          "passed": true,
+          "evidence": "Section 4 'Dangerous dynamic execution (eval)' flags it as an RCE vector opaque to static analysis."
+        },
+        {
+          "text": "problems.md identifies the deep inheritance chain",
+          "passed": true,
+          "evidence": "Section 7 'Deep, content-free inheritance chain' describes Base -> Entity -> Persisted -> Auditable -> User as vestigial taxonomy."
+        },
+        {
+          "text": "problems.md notes that public functions lack type annotations / return types",
+          "passed": true,
+          "evidence": "Section 3 'No type annotations on public API' enumerates untyped functions and return types."
+        },
+        {
+          "text": "refactored.py's public functions have type annotations on parameters and return values",
+          "passed": true,
+          "evidence": "identity(value: T) -> T and add_integers(left: int, right: int) -> int both fully typed."
+        },
+        {
+          "text": "refactored.py does not use __getattr__ for runtime method dispatch",
+          "passed": true,
+          "evidence": "No __getattr__ implementation remains in refactored.py."
+        },
+        {
+          "text": "refactored.py does not call eval() or exec() on user input",
+          "passed": true,
+          "evidence": "No eval or exec calls in refactored.py."
+        },
+        {
+          "text": "refactored.py replaces the generic 'Manager' class name with something domain-specific (or removes it)",
+          "passed": true,
+          "evidence": "Manager is removed entirely."
+        },
+        {
+          "text": "refactored.py's inheritance chain is at most 2 levels deep (or uses composition)",
+          "passed": true,
+          "evidence": "User is a flat @dataclass with no inheritance chain (depth 1 from object)."
+        },
+        {
+          "text": "rationale.md grounds recommendations in specific AI-agent failure modes rather than generic clean-code arguments",
+          "passed": true,
+          "evidence": "Rationale cites agents reasoning statically, LLM tooling, agents predicting behavior, and enumerates agent capabilities gained."
+        },
+        {
+          "text": "refactored.py declares __all__ to make the public surface explicit (v1.3 guidance \u2014 Python-specific)",
+          "passed": true,
+          "evidence": "Line 79 declares __all__ = [\"identity\", \"add_integers\", \"User\"]."
+        },
+        {
+          "text": "refactored.py uses @dataclass(slots=True) or @dataclass(frozen=True) to prevent ad-hoc attribute fabrication (v1.3 guidance)",
+          "passed": true,
+          "evidence": "User is declared as @dataclass(frozen=True)."
+        },
+        {
+          "text": "rationale.md or problems.md explains why slots/__all__ matters for agents (hallucinated attributes, import of internal helpers) \u2014 the v1.3 framing",
+          "passed": false,
+          "evidence": "Rationale mentions __all__ makes public surface explicit and frozen=True prevents mutation, but does not frame it as preventing agent hallucinated-attribute or internal-helper-import failure modes."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 1,
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.6429,
+        "passed": 9,
+        "failed": 5,
+        "total": 14,
+        "time_seconds": 86.8,
+        "tokens": 28873,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "layout.txt organizes by feature (auth/, billing/, users/) rather than primarily by horizontal layer",
+          "passed": true,
+          "evidence": "src/features/ contains auth/, users/, billing/, health/ vertical slices each owning their routes, service, repo, schema, dto, and tests."
+        },
+        {
+          "text": "layout.txt colocates test files next to source files rather than in a distant tests/ tree",
+          "passed": true,
+          "evidence": "Each feature directory contains its own .test.ts file (auth.test.ts, users.test.ts, billing.test.ts, health.test.ts) alongside sources."
+        },
+        {
+          "text": "layout.txt contains concrete domain directories like auth, billing, or users",
+          "passed": true,
+          "evidence": "Layout explicitly contains features/auth/, features/users/, and features/billing/."
+        },
+        {
+          "text": "CONVENTIONS.md explicitly addresses naming \u2014 avoiding generic names or requiring domain-specific names",
+          "passed": false,
+          "evidence": "Section 2 covers file/type/function casing and suffixes but does not explicitly forbid generic names (e.g. utils.ts, handler.ts) nor require domain-specific verbs."
+        },
+        {
+          "text": "CONVENTIONS.md gives a concrete file-size guideline with a number",
+          "passed": true,
+          "evidence": "Section 3 states 'Hard cap: 200 lines per file' and 'Functions: 40 lines max.'"
+        },
+        {
+          "text": "CONVENTIONS.md requires type annotations on public / module-boundary functions",
+          "passed": false,
+          "evidence": "No explicit requirement for type annotations on exported/boundary functions; Zod validation at edges is covered but return-type annotations are not mandated."
+        },
+        {
+          "text": "CONVENTIONS.md mentions tests/lint/typecheck as the verification loop",
+          "passed": true,
+          "evidence": "Section 11 requires PRs to 'pass bun run check (typecheck + lint + test).'"
+        },
+        {
+          "text": "CONVENTIONS.md discourages dynamic/metaprogramming patterns for agent-traceability",
+          "passed": true,
+          "evidence": "Section 12: 'No magic. No decorators, no DI containers, no metadata reflection. Plain functions and objects.'"
+        },
+        {
+          "text": "CONVENTIONS.md explains at least one decision in terms of AI-agent behavior",
+          "passed": true,
+          "evidence": "Section 12 (AI-agent notes) explains that stable paths and named exports make grep/refactor predictable for agents."
+        },
+        {
+          "text": "CONVENTIONS.md recommends branded / nominal types for IDs (e.g. UserId as branded string) \u2014 v1.3 guidance",
+          "passed": false,
+          "evidence": "Section 7 specifies ULID strings as primary keys but never introduces branded/nominal types like type UserId = string & { __brand }."
+        },
+        {
+          "text": "CONVENTIONS.md prefers discriminated unions (or equivalent) over magic-string dispatch / string-keyed registries \u2014 v1.3 guidance",
+          "passed": false,
+          "evidence": "Discriminated unions are never mentioned and there is no guidance against magic-string dispatch or string-keyed registries."
+        },
+        {
+          "text": "CONVENTIONS.md addresses dependency pinning, version pinning, or 'boring stack' / training-data hygiene \u2014 v1.3 guidance",
+          "passed": true,
+          "evidence": "Section 5 mandates 'Pinned versions. No ^ or ~ in package.json for production deps; exact versions' and lists a core allowlist."
+        },
+        {
+          "text": "CONVENTIONS.md covers deterministic tests (seeded randomness, frozen time) OR injectable side effects (clock, fetch, env as arguments) \u2014 v1.3 guidance",
+          "passed": false,
+          "evidence": "Section 8 mentions transaction rollback and msw but not seeded randomness, frozen clocks, or injectable clock/fetch/env dependencies."
+        },
+        {
+          "text": "CONVENTIONS.md explicitly discourages barrel / re-export index files \u2014 v1.3 guidance (AR011)",
+          "passed": true,
+          "evidence": "Section 4: 'No barrel files except db/schema.ts ... Barrels defeat tree-shaking and hurt agent navigation.'"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 1,
+      "configuration": "without_skill",
+      "run_number": 2,
+      "result": {
+        "pass_rate": 0.5714,
+        "passed": 8,
+        "failed": 6,
+        "total": 14,
+        "time_seconds": 91.3,
+        "tokens": 28936,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "layout.txt organizes by feature (auth/, billing/, users/) rather than primarily by horizontal layer",
+          "passed": true,
+          "evidence": "src/features/ is labeled 'Vertical slices' and contains auth/, users/, billing/ each owning routes/service/repo/schemas/errors."
+        },
+        {
+          "text": "layout.txt colocates test files next to source files rather than in a distant tests/ tree",
+          "passed": false,
+          "evidence": "Tests live in a separate top-level tests/ tree that mirrors src/ one-to-one (tests/features/auth/auth.service.test.ts), not colocated with source files."
+        },
+        {
+          "text": "layout.txt contains concrete domain directories like auth, billing, or users",
+          "passed": true,
+          "evidence": "Layout includes features/auth/, features/users/, and features/billing/ directories explicitly."
+        },
+        {
+          "text": "CONVENTIONS.md explicitly addresses naming \u2014 avoiding generic names or requiring domain-specific names",
+          "passed": false,
+          "evidence": "Section 2 covers casing, suffixes, and DTO/Input/Query conventions but does not forbid generic names (utils, helpers, handler) or mandate domain-specific verbs."
+        },
+        {
+          "text": "CONVENTIONS.md gives a concrete file-size guideline with a number",
+          "passed": true,
+          "evidence": "Section 3: 'SKILL ceiling: 250 lines per file' plus 'routes files ... max ~150 lines' and 'Functions: max 40 lines.'"
+        },
+        {
+          "text": "CONVENTIONS.md requires type annotations on public / module-boundary functions",
+          "passed": true,
+          "evidence": "Section 4: 'Return types required on exported functions. Inferred internally is fine.'"
+        },
+        {
+          "text": "CONVENTIONS.md mentions tests/lint/typecheck as the verification loop",
+          "passed": true,
+          "evidence": "Section 12: 'PRs must pass: bun run typecheck, bun run lint, bun test, bun run build.'"
+        },
+        {
+          "text": "CONVENTIONS.md discourages dynamic/metaprogramming patterns for agent-traceability",
+          "passed": false,
+          "evidence": "No ban on Proxy, Reflect, decorators, DI containers, or runtime metaprogramming; only enums and unchecked casts are restricted."
+        },
+        {
+          "text": "CONVENTIONS.md explains at least one decision in terms of AI-agent behavior",
+          "passed": true,
+          "evidence": "Header and Section 13 frame conventions around agents, including 'Agents read whole files; large files waste context.'"
+        },
+        {
+          "text": "CONVENTIONS.md recommends branded / nominal types for IDs (e.g. UserId as branded string) \u2014 v1.3 guidance",
+          "passed": false,
+          "evidence": "Section 6 mentions ULID/UUID generation in lib/id.ts but never introduces branded or nominal ID types."
+        },
+        {
+          "text": "CONVENTIONS.md prefers discriminated unions (or equivalent) over magic-string dispatch / string-keyed registries \u2014 v1.3 guidance",
+          "passed": false,
+          "evidence": "Discriminated unions are not mentioned and no guidance warns against magic-string dispatch or string-keyed registries."
+        },
+        {
+          "text": "CONVENTIONS.md addresses dependency pinning, version pinning, or 'boring stack' / training-data hygiene \u2014 v1.3 guidance",
+          "passed": true,
+          "evidence": "Section 8: 'Pin exact versions in package.json (hono: 4.6.3, not ^4.6.3).'"
+        },
+        {
+          "text": "CONVENTIONS.md covers deterministic tests (seeded randomness, frozen time) OR injectable side effects (clock, fetch, env as arguments) \u2014 v1.3 guidance",
+          "passed": false,
+          "evidence": "Section 9 discusses factories and transaction isolation but never specifies seeded randomness, frozen clocks, or injectable clock/fetch/env dependencies."
+        },
+        {
+          "text": "CONVENTIONS.md explicitly discourages barrel / re-export index files \u2014 v1.3 guidance (AR011)",
+          "passed": true,
+          "evidence": "Section 13: 'Don't add index.ts barrels except in db/schema/.'"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 2,
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.8333,
+        "passed": 10,
+        "failed": 2,
+        "total": 12,
+        "time_seconds": 103.9,
+        "tokens": 29200,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "recommendations.md discusses naming with explicit reference to grep-ability, retrieval, or localization",
+          "passed": true,
+          "evidence": "Section 4 says 'Agents grep for createUser and find it in utils.ts... They edit the wrong one.'"
+        },
+        {
+          "text": "recommendations.md recommends organizing code by feature / vertical slice rather than horizontal layer",
+          "passed": true,
+          "evidence": "Section 3 advocates flat feature files and keeping route, validation, handler, and types within 1-2 files."
+        },
+        {
+          "text": "recommendations.md warns against metaprogramming, reflection, or dynamic dispatch",
+          "passed": true,
+          "evidence": "Section 17 'Avoid magic metaprogramming' warns against decorators, Proxy-based ORMs, and plugin transforms."
+        },
+        {
+          "text": "recommendations.md recommends typed public boundaries / type annotations at module seams",
+          "passed": true,
+          "evidence": "Section 2 'Make the type system the source of truth' plus Section 16 JSDoc on public APIs."
+        },
+        {
+          "text": "recommendations.md recommends verification affordances tied to preventing agent hallucination spirals",
+          "passed": false,
+          "evidence": "Section 12 mentions one validation command but does not tie verification to hallucination spirals or wrong-patch loops."
+        },
+        {
+          "text": "recommendations.md addresses file size, near-duplicates, or str_replace breakage",
+          "passed": true,
+          "evidence": "Section 8 targets 5-40 line functions and flags 300-line functions as a failure mode, though does not mention str_replace."
+        },
+        {
+          "text": "recommendations.md grounds reasoning in specific agent failure modes rather than generic clean-code platitudes",
+          "passed": false,
+          "evidence": "Failure modes are mostly generic ('agent picks one uniformly', 'agent will invent'); lacks concrete context window, str_replace, lost-in-the-middle, or documented spiral citations."
+        },
+        {
+          "text": "recommendations.md presents the list in a prioritized order",
+          "passed": true,
+          "evidence": "Explicit P0/P1/P2 legend with sections ordered accordingly."
+        },
+        {
+          "text": "recommendations.md covers deterministic tests (seeded randomness, frozen time) OR injectable side effects \u2014 v1.3 guidance",
+          "passed": true,
+          "evidence": "Section 19 prescribes seeded randomness, fixture factories, and injecting a clock instead of Date.now()."
+        },
+        {
+          "text": "recommendations.md mentions branded/nominal types OR discriminated unions over magic strings \u2014 v1.3 guidance",
+          "passed": true,
+          "evidence": "Section 22 'Make failure states first-class' uses discriminated union {ok:true} | {ok:false} pattern; Section 7 uses exhaustive switches on unions."
+        },
+        {
+          "text": "recommendations.md flags barrel re-export files or 'export *' as an anti-pattern \u2014 v1.3 guidance (AR011)",
+          "passed": true,
+          "evidence": "Section 4 explicitly advises avoiding barrel index.ts re-exports across the whole app."
+        },
+        {
+          "text": "recommendations.md mentions dependency pinning OR training-data / 'boring stack' considerations \u2014 v1.3 guidance",
+          "passed": true,
+          "evidence": "Section 11 'Commit lockfiles' covers dependency pinning via lockfiles."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 2,
+      "configuration": "without_skill",
+      "run_number": 2,
+      "result": {
+        "pass_rate": 0.6667,
+        "passed": 8,
+        "failed": 4,
+        "total": 12,
+        "time_seconds": 111.3,
+        "tokens": 29465,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "recommendations.md discusses naming with explicit reference to grep-ability, retrieval, or localization",
+          "passed": true,
+          "evidence": "Section 1 says 'Agents search by filename and pattern' and Section 4 prescribes greppable names."
+        },
+        {
+          "text": "recommendations.md recommends organizing code by feature / vertical slice rather than horizontal layer",
+          "passed": true,
+          "evidence": "Section 1 shows src/users/ feature directory and Section 6 says 'Split by feature, not by layer within a feature.'"
+        },
+        {
+          "text": "recommendations.md warns against metaprogramming, reflection, or dynamic dispatch",
+          "passed": true,
+          "evidence": "Section 13 'Prefer plain data structures over clever abstractions' warns against decorators, Proxy, and runtime metaprogramming."
+        },
+        {
+          "text": "recommendations.md recommends typed public boundaries / type annotations at module seams",
+          "passed": true,
+          "evidence": "Section 2 colocates contracts with implementations and Section 17 mandates schemas at boundaries; Section 20 requires strict TypeScript."
+        },
+        {
+          "text": "recommendations.md recommends verification affordances tied to preventing agent hallucination spirals",
+          "passed": false,
+          "evidence": "Section 12 'Make how to run it trivial' addresses tool commands but does not tie verification loops to preventing hallucination spirals or wrong-patch loops."
+        },
+        {
+          "text": "recommendations.md addresses file size, near-duplicates, or str_replace breakage",
+          "passed": true,
+          "evidence": "Section 6 soft-caps files at 300 lines and flags the agent-missing-cross-references failure, though does not name str_replace."
+        },
+        {
+          "text": "recommendations.md grounds reasoning in specific agent failure modes rather than generic clean-code platitudes",
+          "passed": false,
+          "evidence": "Failure modes are described generically ('agent patches wrong layer', 'hallucinate type signatures') without naming context-window limits, str_replace, lost-in-the-middle, or specific documented spirals."
+        },
+        {
+          "text": "recommendations.md presents the list in a prioritized order",
+          "passed": true,
+          "evidence": "Explicit Tier 1 through Tier 4 ordering by impact."
+        },
+        {
+          "text": "recommendations.md covers deterministic tests (seeded randomness, frozen time) OR injectable side effects \u2014 v1.3 guidance",
+          "passed": false,
+          "evidence": "Section 22 mentions seeds and fixtures in passing but does not prescribe seeded randomness, frozen time, or injectable clocks/side effects for deterministic tests."
+        },
+        {
+          "text": "recommendations.md mentions branded/nominal types OR discriminated unions over magic strings \u2014 v1.3 guidance",
+          "passed": false,
+          "evidence": "No mention of branded/nominal types; discriminated unions are not recommended as an alternative to magic strings anywhere in the document."
+        },
+        {
+          "text": "recommendations.md flags barrel re-export files or 'export *' as an anti-pattern \u2014 v1.3 guidance (AR011)",
+          "passed": true,
+          "evidence": "Section 7 caps barrel files at one level and prefers direct imports over barrel index.ts re-exports."
+        },
+        {
+          "text": "recommendations.md mentions dependency pinning OR training-data / 'boring stack' considerations \u2014 v1.3 guidance",
+          "passed": true,
+          "evidence": "Section 16 'Pin and document external contracts' explicitly pins exact versions for network-boundary packages."
+        }
+      ],
+      "notes": []
+    }
+  ],
+  "run_summary": {
+    "with_skill": {
+      "pass_rate": {
+        "mean": 1.0,
+        "stddev": 0.0,
+        "min": 1.0,
+        "max": 1.0
+      },
+      "time_seconds": {
+        "mean": 111.2667,
+        "stddev": 19.981,
+        "min": 93.0,
+        "max": 140.7
+      },
+      "tokens": {
+        "mean": 39575.8333,
+        "stddev": 3878.6825,
+        "min": 34833,
+        "max": 44635
+      }
+    },
+    "without_skill": {
+      "pass_rate": {
+        "mean": 0.7635,
+        "stddev": 0.1571,
+        "min": 0.5714,
+        "max": 0.9333
+      },
+      "time_seconds": {
+        "mean": 93.8333,
+        "stddev": 11.1924,
+        "min": 83.7,
+        "max": 111.3
+      },
+      "tokens": {
+        "mean": 29312.3333,
+        "stddev": 400.2967,
+        "min": 28873,
+        "max": 29955
+      }
+    },
+    "delta": {
+      "pass_rate": "+0.24",
+      "time_seconds": "+17.4",
+      "tokens": "+10264"
+    }
+  },
+  "notes": []
+}

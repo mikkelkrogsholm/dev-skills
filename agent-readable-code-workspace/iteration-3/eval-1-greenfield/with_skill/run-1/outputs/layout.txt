@@ -1,0 +1,63 @@
+src/
+├── index.ts                          # Bun entrypoint: serve(app) + graceful shutdown
+├── app.ts                            # Hono app assembly: mounts feature routers, global middleware
+├── env.ts                            # Zod-parsed process.env -> typed Env object (exported once)
+├── deps.ts                            # buildDeps(env): returns { db, clock, logger, fetch } injected everywhere
+│
+├── db/
+│   ├── client.ts                     # drizzle(neon(env.DATABASE_URL)) — single export `db`
+│   ├── schema.ts                     # re-exports all feature schemas (for drizzle-kit only)
+│   └── migrations/                   # drizzle-kit output, never hand-edited
+│
+├── http/
+│   ├── errors.ts                     # AppError classes + toHttpResponse(err) — the ONLY error mapper
+│   ├── error-middleware.ts           # Hono onError wiring toHttpResponse
+│   ├── request-id.ts                 # middleware: x-request-id -> c.set('requestId', ...)
+│   └── openapi.ts                    # @hono/zod-openapi registry (optional, single file)
+│
+├── lib/                              # cross-feature primitives only; NOT a utils dumping ground
+│   ├── ids.ts                        # branded types: UserId, OrgId, InvoiceId + newUserId(clock)
+│   ├── money.ts                      # Money value object (frozen), Currency enum
+│   ├── result.ts                     # Result<T, E> discriminated union + helpers
+│   └── logger.ts                     # pino instance factory — takes env, returns logger
+│
+├── auth/                             # FEATURE SLICE: everything auth in one directory
+│   ├── routes.ts                     # Hono sub-app: POST /auth/login, /auth/logout, /auth/session
+│   ├── routes.test.ts                # route-level integration tests (bun test)
+│   ├── schema.ts                     # drizzle tables: users, sessions, password_resets
+│   ├── schema.test.ts                # migration smoke test
+│   ├── hash-password.ts              # one function, typed, pure (takes argon2 params)
+│   ├── hash-password.test.ts
+│   ├── issue-session.ts              # creates session row, returns signed cookie value
+│   ├── issue-session.test.ts
+│   ├── verify-session.ts             # middleware factory: (deps) => Hono middleware
+│   ├── verify-session.test.ts
+│   └── types.ts                      # Session, AuthContext, LoginRequest (z.infer from schemas)
+│
+├── users/                            # FEATURE SLICE
+│   ├── routes.ts                     # GET /users/me, PATCH /users/me, GET /users/:id
+│   ├── routes.test.ts
+│   ├── schema.ts                     # drizzle `users` table lives in auth/; this extends profiles
+│   ├── profiles-schema.ts            # drizzle `user_profiles` table
+│   ├── get-user-by-id.ts
+│   ├── get-user-by-id.test.ts
+│   ├── update-profile.ts
+│   ├── update-profile.test.ts
+│   └── types.ts                      # User, PublicUser, UpdateProfileInput (z.infer)
+│
+├── billing/                          # FEATURE SLICE
+│   ├── routes.ts                     # POST /billing/checkout, /billing/webhook, GET /billing/invoices
+│   ├── routes.test.ts
+│   ├── schema.ts                     # drizzle: customers, subscriptions, invoices, webhook_events
+│   ├── start-checkout.ts             # pure: takes deps + input, returns Stripe session URL
+│   ├── start-checkout.test.ts
+│   ├── handle-stripe-webhook.ts      # one exhaustive switch over event.type discriminated union
+│   ├── handle-stripe-webhook.test.ts
+│   ├── issue-refund.ts
+│   ├── issue-refund.test.ts
+│   ├── stripe-client.ts              # pinned stripe SDK, reads key from deps.env
+│   └── types.ts                      # Invoice, Subscription, StripeEvent union (z.infer)
+│
+└── health/
+    ├── routes.ts                     # GET /healthz (liveness), GET /readyz (db ping)
+    └── routes.test.ts

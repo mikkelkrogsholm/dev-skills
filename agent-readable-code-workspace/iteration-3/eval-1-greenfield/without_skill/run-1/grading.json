@@ -1,0 +1,80 @@
+{
+  "expectations": [
+    {
+      "text": "layout.txt organizes by feature (auth/, billing/, users/) rather than primarily by horizontal layer",
+      "passed": true,
+      "evidence": "src/features/ contains auth/, users/, billing/, health/ vertical slices each owning their routes, service, repo, schema, dto, and tests."
+    },
+    {
+      "text": "layout.txt colocates test files next to source files rather than in a distant tests/ tree",
+      "passed": true,
+      "evidence": "Each feature directory contains its own .test.ts file (auth.test.ts, users.test.ts, billing.test.ts, health.test.ts) alongside sources."
+    },
+    {
+      "text": "layout.txt contains concrete domain directories like auth, billing, or users",
+      "passed": true,
+      "evidence": "Layout explicitly contains features/auth/, features/users/, and features/billing/."
+    },
+    {
+      "text": "CONVENTIONS.md explicitly addresses naming \u2014 avoiding generic names or requiring domain-specific names",
+      "passed": false,
+      "evidence": "Section 2 covers file/type/function casing and suffixes but does not explicitly forbid generic names (e.g. utils.ts, handler.ts) nor require domain-specific verbs."
+    },
+    {
+      "text": "CONVENTIONS.md gives a concrete file-size guideline with a number",
+      "passed": true,
+      "evidence": "Section 3 states 'Hard cap: 200 lines per file' and 'Functions: 40 lines max.'"
+    },
+    {
+      "text": "CONVENTIONS.md requires type annotations on public / module-boundary functions",
+      "passed": false,
+      "evidence": "No explicit requirement for type annotations on exported/boundary functions; Zod validation at edges is covered but return-type annotations are not mandated."
+    },
+    {
+      "text": "CONVENTIONS.md mentions tests/lint/typecheck as the verification loop",
+      "passed": true,
+      "evidence": "Section 11 requires PRs to 'pass bun run check (typecheck + lint + test).'"
+    },
+    {
+      "text": "CONVENTIONS.md discourages dynamic/metaprogramming patterns for agent-traceability",
+      "passed": true,
+      "evidence": "Section 12: 'No magic. No decorators, no DI containers, no metadata reflection. Plain functions and objects.'"
+    },
+    {
+      "text": "CONVENTIONS.md explains at least one decision in terms of AI-agent behavior",
+      "passed": true,
+      "evidence": "Section 12 (AI-agent notes) explains that stable paths and named exports make grep/refactor predictable for agents."
+    },
+    {
+      "text": "CONVENTIONS.md recommends branded / nominal types for IDs (e.g. UserId as branded string) \u2014 v1.3 guidance",
+      "passed": false,
+      "evidence": "Section 7 specifies ULID strings as primary keys but never introduces branded/nominal types like type UserId = string & { __brand }."
+    },
+    {
+      "text": "CONVENTIONS.md prefers discriminated unions (or equivalent) over magic-string dispatch / string-keyed registries \u2014 v1.3 guidance",
+      "passed": false,
+      "evidence": "Discriminated unions are never mentioned and there is no guidance against magic-string dispatch or string-keyed registries."
+    },
+    {
+      "text": "CONVENTIONS.md addresses dependency pinning, version pinning, or 'boring stack' / training-data hygiene \u2014 v1.3 guidance",
+      "passed": true,
+      "evidence": "Section 5 mandates 'Pinned versions. No ^ or ~ in package.json for production deps; exact versions' and lists a core allowlist."
+    },
+    {
+      "text": "CONVENTIONS.md covers deterministic tests (seeded randomness, frozen time) OR injectable side effects (clock, fetch, env as arguments) \u2014 v1.3 guidance",
+      "passed": false,
+      "evidence": "Section 8 mentions transaction rollback and msw but not seeded randomness, frozen clocks, or injectable clock/fetch/env dependencies."
+    },
+    {
+      "text": "CONVENTIONS.md explicitly discourages barrel / re-export index files \u2014 v1.3 guidance (AR011)",
+      "passed": true,
+      "evidence": "Section 4: 'No barrel files except db/schema.ts ... Barrels defeat tree-shaking and hurt agent navigation.'"
+    }
+  ],
+  "summary": {
+    "pass_rate": 0.6429,
+    "passed": 9,
+    "failed": 5,
+    "total": 14
+  }
+}

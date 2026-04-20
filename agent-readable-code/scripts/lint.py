@@ -302,6 +302,20 @@ _JS_METHOD_RE = re.compile(
     r"([A-Za-z_]\w*)[ \t]*\([^)]*\)[ \t]*(?::[ \t]*[^{=;]+)?[ \t]*\{",
     re.MULTILINE,
 )
+# For AR005 TS/JS: `class X extends Y`. Mixin form `extends mixin(Base)` still counts the parent token as depth+1 (conservative).
+_JS_EXTENDS_RE = re.compile(
+    r"^[ \t]*(?:export[ \t]+(?:default[ \t]+)?)?(?:abstract[ \t]+)?class[ \t]+([A-Za-z_]\w*)(?:<[^>]*>)?[ \t]+extends[ \t]+([A-Za-z_$][\w$]*)",
+    re.MULTILINE,
+)
+# For AR006 TS: exported top-level function declarations and arrow-function const exports.
+_TS_EXPORT_FN_RE = re.compile(
+    r"^[ \t]*export[ \t]+(?:default[ \t]+)?(?:async[ \t]+)?function[ \t]+([A-Za-z_]\w*)[ \t]*(?:<[^>]*>[ \t]*)?\(",
+    re.MULTILINE,
+)
+_TS_EXPORT_ARROW_RE = re.compile(
+    r"^[ \t]*export[ \t]+(?:const|let)[ \t]+([A-Za-z_]\w*)[ \t]*(?::[ \t]*[^=\n]+)?=[ \t]*(?:async[ \t]+)?(?:<[^>]*>[ \t]*)?\(",
+    re.MULTILINE,
+)
 
 
 def _is_generic_class_name(name: str, banlist: set[str]) -> str | None:
@@ -457,6 +471,199 @@ def check_ar005_inheritance(path: Path, tree: ast.AST, module_classes: dict[str,
 
 
 _PUBLIC_DUNDERS = {"__init__", "__call__"}
+
+
+# ---------- TS/JS parser helpers (regex-level, no parser dependency) ----------
+
+
+def _find_matching_paren(s: str, open_idx: int) -> int:
+    """Given s[open_idx] == '(', return the index of the matching ')', or -1 if unbalanced.
+    Respects string/template-literal state so nested quotes don't confuse the counter."""
+    if open_idx >= len(s) or s[open_idx] != "(":
+        return -1
+    depth = 0
+    i = open_idx
+    in_str: str | None = None
+    while i < len(s):
+        c = s[i]
+        if in_str:
+            if c == "\\":
+                i += 2
+                continue
+            if c == in_str:
+                in_str = None
+        elif c in "'\"`":
+            in_str = c
+        elif c == "(":
+            depth += 1
+        elif c == ")":
+            depth -= 1
+            if depth == 0:
+                return i
+        i += 1
+    return -1
+
+
+def _split_params(s: str) -> list[str]:
+    """Split a parameter list by top-level commas, respecting parens/brackets/braces and strings."""
+    parts: list[str] = []
+    current: list[str] = []
+    depth = 0
+    in_str: str | None = None
+    for c in s:
+        if in_str:
+            current.append(c)
+            if c == in_str:
+                in_str = None
+            continue
+        if c in "'\"`":
+            in_str = c
+            current.append(c)
+            continue
+        if c in "([{":
+            depth += 1
+        elif c in ")]}":
+            depth -= 1
+        if c == "," and depth == 0:
+            parts.append("".join(current))
+            current = []
+        else:
+            current.append(c)
+    if current:
+        parts.append("".join(current))
+    return [p.strip() for p in parts if p.strip()]
+
+
+def _param_name_and_typed(param: str) -> tuple[str, bool]:
+    """Return (display_name, is_typed) for a single TS parameter.
+    A parameter is considered typed when it has an explicit `: Type` annotation,
+    or a default value (`= expr`) — TS infers the type from the default."""
+    p = param.strip()
+    display = p
+    # Strip leading modifiers (public/private/protected/readonly on constructor params)
+    p = re.sub(r"^(?:public|private|protected|readonly)[ \t]+", "", p)
+    # Strip leading rest operator
+    if p.startswith("..."):
+        p = p[3:].lstrip()
+        display = "..." + p.split(":")[0].split("=")[0].strip()
+    # Destructured name
+    if p.startswith("{") or p.startswith("["):
+        opener = p[0]
+        closer = "}" if opener == "{" else "]"
+        depth = 0
+        i = 0
+        while i < len(p):
+            if p[i] == opener:
+                depth += 1
+            elif p[i] == closer:
+                depth -= 1
+                if depth == 0:
+                    i += 1
+                    break
+            i += 1
+        after = p[i:].lstrip()
+        name = "{destructured}" if opener == "{" else "[destructured]"
+    else:
+        m = re.match(r"^[A-Za-z_$][\w$]*", p)
+        if not m:
+            return (display, True)  # unparseable; don't flag
+        name = m.group(0)
+        after = p[m.end():].lstrip()
+    if after.startswith("?"):
+        after = after[1:].lstrip()
+    return (name, after.startswith(":") or after.startswith("="))
+
+
+def _return_type_after(source: str, close_paren_idx: int) -> bool:
+    """Looking at source after the closing `)`, return True if there's a `: Type` before `{` or `=>`."""
+    i = close_paren_idx + 1
+    n = len(source)
+    # skip whitespace
+    while i < n and source[i] in " \t":
+        i += 1
+    if i >= n:
+        return False
+    return source[i] == ":"
+
+
+# ---------- AR005 & AR006 for TS/JS ----------
+
+
+def check_ar005_ts(path: Path, source: str, cfg: Config) -> list[Finding]:
+    """Build a per-file parent map from `class X extends Y` and flag depth > threshold.
+    External base classes (not defined in this file) count as depth 1 — same as the Python rule."""
+    parent: dict[str, str] = {}
+    first_line: dict[str, int] = {}
+    for m in _JS_EXTENDS_RE.finditer(source):
+        child, par = m.group(1), m.group(2)
+        parent[child] = par
+        first_line[child] = source[: m.start()].count("\n") + 1
+
+    def depth(name: str, visiting: set[str]) -> int:
+        if name in visiting or name not in parent:
+            return 0
+        visiting = visiting | {name}
+        par = parent[name]
+        if par in parent:
+            return 1 + depth(par, visiting)
+        return 1  # external parent
+
+    findings = []
+    max_depth = cfg.max_inheritance_depth
+    for cls in parent:
+        d = depth(cls, set())
+        if d > max_depth:
+            findings.append(
+                Finding(
+                    "AR005", str(path), first_line[cls],
+                    f"class '{cls}' has inheritance depth {d} (limit: {max_depth}); prefer composition",
+                    RULE_INFO["AR005"][1],
+                )
+            )
+    return findings
+
+
+def check_ar006_ts(path: Path, source: str) -> list[Finding]:
+    """TS-only AR006. Flag exported top-level functions and arrow-const exports whose
+    parameters lack types. Return-type inference is idiomatic in TypeScript and the
+    inference is sound, so missing return types are NOT flagged here — the real
+    hallucination surface is at the input seam. `.js`/`.mjs`/`.cjs` have no type
+    system — skipped entirely."""
+    if path.suffix not in (".ts", ".tsx"):
+        return []
+
+    findings: list[Finding] = []
+
+    def check_match(match: re.Match, kind: str) -> None:
+        name = match.group(1)
+        open_idx = match.end() - 1
+        close_idx = _find_matching_paren(source, open_idx)
+        if close_idx < 0:
+            return
+        params_str = source[open_idx + 1 : close_idx]
+        params = _split_params(params_str)
+        untyped_labels: list[str] = []
+        for p in params:
+            pname, typed = _param_name_and_typed(p)
+            if not typed:
+                untyped_labels.append(pname)
+        if not untyped_labels:
+            return
+        line = source[: match.start()].count("\n") + 1
+        findings.append(
+            Finding(
+                "AR006", str(path), line,
+                f"exported {kind} '{name}' — params without types: {', '.join(untyped_labels)}",
+                RULE_INFO["AR006"][1],
+            )
+        )
+
+    for m in _TS_EXPORT_FN_RE.finditer(source):
+        check_match(m, "function")
+    for m in _TS_EXPORT_ARROW_RE.finditer(source):
+        check_match(m, "arrow")
+
+    return findings
 
 
 def check_ar006_untyped(path: Path, tree: ast.AST, source_lines: list[str]) -> list[Finding]:
@@ -798,6 +1005,11 @@ def lint_path(root: Path, cfg: Config, enabled_rules: set[str]) -> list[Finding]
                     findings.extend(check_ar005_inheritance(path, tree, module_classes, cfg))
                 if "AR006" in enabled_rules:
                     findings.extend(check_ar006_untyped(path, tree, lines))
+        elif is_js(path, cfg):
+            if "AR005" in enabled_rules:
+                findings.extend(check_ar005_ts(path, source, cfg))
+            if "AR006" in enabled_rules:
+                findings.extend(check_ar006_ts(path, source))
 
     if "AR002" in enabled_rules:
         findings.extend(check_ar002_duplicates(all_files, cfg))

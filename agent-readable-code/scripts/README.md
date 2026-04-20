@@ -21,8 +21,8 @@ python scripts/lint.py <path> --max 10                # exit nonzero if >10 find
 | `AR002` | Near-duplicate 6-line blocks (coalesced into ranges) | all | moderate |
 | `AR003` | Generic class/function/method names (exact `Manager` + suffix `OrderManager`, `UserService`) and dumping-ground filenames (`utils.py`, `helpers.ts`...) | all | strong |
 | `AR004` | Metaprogramming hotspots (`__getattr__`, `eval`, `Proxy`, `Reflect`, dynamic `type()` class construction…) | all | moderate |
-| `AR005` | Class inheritance depth > 3 — review prompt, not a hard rule | Python only | heuristic |
-| `AR006` | Public function without type annotations or return type | Python only | strong |
+| `AR005` | Class inheritance depth > 3 — review prompt, not a hard rule | Python (via ast) + TS/JS (regex, single-inheritance chain within a file) | heuristic |
+| `AR006` | Public function without type annotations (Python: params + return; TS: params only — return inference is idiomatic) | Python (via ast) + TS only (regex on exported functions and arrow-const exports; `.js`/`.mjs`/`.cjs` skipped — no type system) | strong |
 | `AR007` | Tests scattered in `tests/` dirs instead of colocated | all | moderate |
 | `AR008` | Lines longer than 400 chars (minified files, monster string literals) | all | heuristic |
 | `AR011` | Barrel re-export files (>70% of content is `export * from` / `from X import *`) | all | moderate |
@@ -140,7 +140,7 @@ Every documented example has a fixture; every fixture has an asserted expected o
 
 ## Limitations
 
-- `AR005` and `AR006` are Python-only in v1. TypeScript AST support requires a parser dependency (`tree-sitter` or similar); planned for v2 behind an optional flag.
+- `AR005` and `AR006` support Python (via stdlib `ast`) and TypeScript (via regex — fast, zero-dep, good for common idioms but not a full parser). TS class-method AR006 and cross-file inheritance chains are not yet covered; flagged at declaration site only. For exotic TS (decorator metadata, conditional types, mapped types) the regex may under-report; it errs on the side of false negatives over false positives.
 - `AR002` uses exact-match hashing on normalized lines. It catches copy-paste duplicates well; it does not detect *near*-duplicates that differ semantically.
 - `AR003` class detection uses exact + suffix matching against a banlist (`OrderManager` fires, `ServiceWorker` does not). Prefix-only matches (`ServiceWorker`) are intentionally excluded to avoid noise on legitimate compound nouns.
 - `AR004` uses regex heuristics and can occasionally flag legitimate uses (e.g., intentional proxies in library code). Use inline/file suppressions.

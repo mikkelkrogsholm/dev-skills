@@ -60,6 +60,16 @@ EXPECTATIONS: dict[str, dict[str, int]] = {
     "bad_ts/barrel.ts": {
         "AR011": 1,   # barrel-only re-exports
     },
+    "bad_ts/inheritance.ts": {
+        "AR005": 1,   # User depth=4 (TS rule via regex)
+    },
+    "bad_ts/untyped.ts": {
+        # Only untyped params are flagged (not missing return types — TS infers those).
+        # createUser(name), double(x), saveOrder({id,total}) → 3 findings.
+        # greet has typed param + missing return → NOT flagged (return inference is idiomatic).
+        # chargeCustomer/add/joinStrings fully typed → not flagged.
+        "AR006": 3,
+    },
     "good_py/refunds.py": {
         # clean
     },

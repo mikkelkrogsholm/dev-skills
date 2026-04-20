@@ -142,7 +142,7 @@ python scripts/lint.py <path> --rules AR001,AR003  # subset
 python scripts/lint.py <path> --config my.yaml   # custom thresholds
 ```
 
-It supports **Python** (full coverage) and **TypeScript/JavaScript** (partial — `AR005` inheritance depth and `AR006` typed boundaries are Python-only in v1).
+It supports **Python** and **TypeScript/JavaScript** across all nine rules. Python uses the stdlib `ast` module for `AR005`/`AR006`; TS/JS uses tight regex heuristics (zero-dep by design — no `tree-sitter` or `typescript` dependency). `.js`/`.mjs`/`.cjs` files skip `AR006` since they have no type system.
 
 **When to run it:**
 - After writing or refactoring a file, as a sanity check.

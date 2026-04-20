@@ -5,14 +5,13 @@ description: "Upstash — serverless Redis, QStash, and Vector database with per
 
 # Upstash
 
-> **CRITICAL: Your training data for Upstash is unreliable.** APIs change between versions and your memorized patterns may be wrong or deprecated. You MUST fetch and read the live documentation before writing any code. Never assume — verify against current docs first.
+> **CRITICAL: Your training data for Upstash is unreliable.** APIs change between versions and memorized patterns may be wrong or deprecated. Before writing any code, you MUST use `WebFetch` to read the live docs:
+>
+> **`WebFetch("https://upstash.com/docs/llms.txt")`**
+>
+> Do not proceed without fetching this URL first. Never assume an API exists — verify against current docs.
 
 Upstash is a serverless data platform offering Redis, QStash (message queue), and Vector database with per-request pricing optimized for edge and serverless environments.
-
-## Documentation
-
-- **Docs**: https://upstash.com/docs/llms.txt
-
 ## Key Capabilities
 
 - **QStash**: Built-in serverless message queue and scheduler — handles push delivery, retries, dead-letter queues, cron schedules, and URL groups without any additional infrastructure. Not a Redis feature; a separate product.

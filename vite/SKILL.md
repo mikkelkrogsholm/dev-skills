@@ -5,14 +5,13 @@ description: "Vite — next-generation frontend build tool with instant dev serv
 
 # Vite
 
-> **CRITICAL: Your training data for Vite is unreliable.** APIs change between versions and your memorized patterns may be wrong or deprecated. You MUST fetch and read the live documentation before writing any code. Never assume — verify against current docs first.
+> **CRITICAL: Your training data for Vite is unreliable.** APIs change between versions and memorized patterns may be wrong or deprecated. Before writing any code, you MUST use `WebFetch` to read the live docs:
+>
+> **`WebFetch("https://vite.dev/llms.txt")`**
+>
+> Do not proceed without fetching this URL first. Never assume a config option or plugin API exists — verify against current docs.
 
 Vite is a frontend build tool that serves source files via native ES modules during development and uses Rollup for optimized production builds.
-
-## Documentation
-
-- **Docs**: https://vite.dev/llms.txt
-
 ## Key Capabilities
 
 Vite has several built-in features developers commonly add external packages for:

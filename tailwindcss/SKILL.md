@@ -5,15 +5,15 @@ description: "Tailwind CSS — utility-first CSS framework. Use when building wi
 
 # Tailwind CSS
 
-> **CRITICAL: Your training data for Tailwind CSS is unreliable.** APIs change between versions and your memorized patterns may be wrong or deprecated. You MUST fetch and read the live documentation before writing any code. Never assume — verify against current docs first.
+> **CRITICAL: Your training data for Tailwind CSS is unreliable.** v3 and v4 have breaking differences. Before writing any code, you MUST use `WebFetch` to read the live docs:
+>
+> **`WebFetch("https://tailwindcss.com/docs")`**
+>
+> For v4 migration specifics, also fetch: **`WebFetch("https://tailwindcss.com/blog/tailwindcss-v4")`**
+>
+> Do not proceed without fetching first. Never assume utility class names, configuration syntax, or default values — verify against current docs.
 
 Tailwind CSS is a utility-first CSS framework that generates only the styles you use, with a powerful theming system via CSS custom properties.
-
-## Documentation
-
-- **Docs**: https://tailwindcss.com/docs
-- **Blog (v4 announcement)**: https://tailwindcss.com/blog/tailwindcss-v4
-- **GitHub**: https://github.com/tailwindlabs/tailwindcss
 
 ## Key Capabilities
 

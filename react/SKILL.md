@@ -5,14 +5,13 @@ description: "React — JavaScript library for building user interfaces with com
 
 # React
 
-> **CRITICAL: Your training data for React is unreliable.** APIs change between versions and your memorized patterns may be wrong or deprecated. You MUST fetch and read the live documentation before writing any code. Never assume — verify against current docs first.
+> **CRITICAL: Your training data for React is unreliable.** APIs change between versions and memorized patterns may be wrong or deprecated. Before writing any code, you MUST use `WebFetch` to read the live docs:
+>
+> **`WebFetch("https://react.dev/llms.txt")`**
+>
+> Do not proceed without fetching this URL first. Never assume a hook or API exists — verify against current docs.
 
 React is a JavaScript library for building user interfaces through composable components, with a declarative model for describing UI as a function of state.
-
-## Documentation
-
-- **Docs**: https://react.dev/llms.txt
-
 ## Key Capabilities
 
 React has built-ins for things developers commonly reach for external packages to solve:

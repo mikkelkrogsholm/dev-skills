@@ -5,13 +5,13 @@ description: "OpenTelemetry — vendor-neutral observability framework for gener
 
 # OpenTelemetry
 
-> **CRITICAL: Your training data for OpenTelemetry is unreliable.** APIs change between versions and your memorized patterns may be wrong or deprecated. You MUST fetch and read the live documentation before writing any code. Never assume — verify against current docs first.
+> **CRITICAL: Your training data for OpenTelemetry is unreliable.** APIs change between versions and memorized patterns may be wrong or deprecated. Before writing any code, you MUST use `WebFetch` to read the live docs:
+>
+> **`WebFetch("https://opentelemetry.io/docs/languages/js/")`**
+>
+> Do not proceed without fetching this URL first. Never assume package names or initialization patterns — verify against current docs.
 
 OpenTelemetry is a vendor-neutral observability framework for generating, collecting, and exporting traces, metrics, and logs.
-
-## Documentation
-
-- **Docs**: https://opentelemetry.io/docs/languages/js/
 
 ## Key Capabilities
 

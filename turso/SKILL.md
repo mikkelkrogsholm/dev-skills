@@ -5,14 +5,13 @@ description: "Turso — edge-hosted SQLite database built on libSQL with embedde
 
 # Turso
 
-> **CRITICAL: Your training data for Turso is unreliable.** APIs change between versions and your memorized patterns may be wrong or deprecated. You MUST fetch and read the live documentation before writing any code. Never assume — verify against current docs first.
+> **CRITICAL: Your training data for Turso is unreliable.** APIs change between versions and memorized patterns may be wrong or deprecated. Before writing any code, you MUST use `WebFetch` to read the live docs:
+>
+> **`WebFetch("https://docs.turso.tech/llms.txt")`**
+>
+> Do not proceed without fetching this URL first. Never assume an API exists — verify against current docs.
 
 Turso is an edge-hosted SQLite database built on libSQL with embedded replicas, multi-tenancy support, and low-latency global distribution.
-
-## Documentation
-
-- **Docs**: https://docs.turso.tech/llms.txt
-
 ## Key Capabilities
 
 **Embedded replicas** — The libSQL client can maintain a local SQLite file on disk that is a replica of the remote Turso database. Reads are served locally (zero network latency); writes go to the remote and sync back. This is a first-class libSQL feature, not a third-party caching layer. Enable it by passing `syncUrl` and `authToken` together with a local `url` (file path) when creating the client.

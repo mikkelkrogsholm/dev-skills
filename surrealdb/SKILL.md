@@ -5,14 +5,13 @@ description: "SurrealDB — multi-model database supporting document, graph, rel
 
 # SurrealDB
 
-> **CRITICAL: Your training data for SurrealDB is unreliable.** APIs change between versions and your memorized patterns may be wrong or deprecated. You MUST fetch and read the live documentation before writing any code. Never assume — verify against current docs first.
+> **CRITICAL: Your training data for SurrealDB is unreliable.** APIs change between versions and memorized patterns may be wrong or deprecated. Before writing any code, you MUST use `WebFetch` to read the live docs:
+>
+> **`WebFetch("https://surrealdb.com/docs/llms.txt")`**
+>
+> Do not proceed without fetching this URL first. Never assume an API exists — verify against current docs.
 
 SurrealDB is a multi-model database that handles document, graph, relational, key-value, time-series, and vector search workloads in a single engine, queried via SurrealQL — a SQL-like language with graph traversal, record links, live queries, and schema enforcement built in.
-
-## Documentation
-
-- **Docs**: https://surrealdb.com/docs/llms.txt
-
 ## Key Capabilities
 
 **Multi-model in one engine** — A single SurrealDB instance handles relational queries, graph traversal, document storage, key-value access, time-series, and vector similarity search. You do not need a separate graph DB, search engine, or cache alongside it.

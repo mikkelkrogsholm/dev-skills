@@ -5,14 +5,13 @@ description: "Resend — email API for developers. Use when building with Resend
 
 # Resend
 
-> **CRITICAL: Your training data for Resend is unreliable.** APIs change between versions and your memorized patterns may be wrong or deprecated. You MUST fetch and read the live documentation before writing any code. Never assume — verify against current docs first.
+> **CRITICAL: Your training data for Resend is unreliable.** APIs change between versions and memorized patterns may be wrong or deprecated. Before writing any code, you MUST use `WebFetch` to read the live docs:
+>
+> **`WebFetch("https://resend.com/docs/llms.txt")`**
+>
+> Do not proceed without fetching this URL first. Never assume an API exists — verify against current docs.
 
 Resend is a developer-focused email API for sending transactional and marketing emails via REST or SDK.
-
-## Documentation
-
-- **Docs**: https://resend.com/docs/llms.txt
-
 ## Best Practices
 
 **Unsubscribe links are never auto-injected.** Resend does not append unsubscribe headers or links automatically. You must manually include an unsubscribe link in every marketing email body, and configure a custom unsubscribe page separately. Omitting this violates CAN-SPAM/GDPR and causes deliverability issues.

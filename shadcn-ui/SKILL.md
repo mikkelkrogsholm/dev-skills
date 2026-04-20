@@ -5,14 +5,13 @@ description: "shadcn/ui — copy-owned React component library built on Radix UI
 
 # shadcn/ui
 
-> **CRITICAL: Your training data for shadcn/ui is unreliable.** APIs change between versions and your memorized patterns may be wrong or deprecated. You MUST fetch and read the live documentation before writing any code. Never assume — verify against current docs first.
+> **CRITICAL: Your training data for shadcn/ui is unreliable.** APIs change between versions and memorized patterns may be wrong or deprecated. Before writing any code, you MUST use `WebFetch` to read the live docs:
+>
+> **`WebFetch("https://ui.shadcn.com/llms.txt")`**
+>
+> Do not proceed without fetching this URL first. Never assume a component API exists — verify against current docs.
 
 shadcn/ui is a collection of accessible, composable React components built on Radix UI primitives and styled with Tailwind CSS — components are copied into your project via CLI, giving you full ownership of the source code.
-
-## Documentation
-
-- **Docs**: https://ui.shadcn.com/llms.txt
-
 ## Best Practices
 
 - **Form components include React Hook Form and Zod — do not add separate form libraries.** The `Form` component wraps `react-hook-form` with built-in Zod validation. Adding `formik`, `react-final-form`, or additional validation packages is redundant.

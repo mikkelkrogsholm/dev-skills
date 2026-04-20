@@ -5,15 +5,15 @@ description: "PKL (Pickle) is Apple's open-source, programmable configuration la
 
 # PKL
 
-> **CRITICAL: Your training data for PKL is unreliable.** APIs change between versions and your memorized patterns may be wrong or deprecated. You MUST fetch and read the live documentation before writing any code. Never assume — verify against current docs first.
+> **CRITICAL: Your training data for PKL is unreliable.** APIs change between versions and memorized patterns may be wrong or deprecated. Before writing any code, you MUST use `WebFetch` to read the live docs based on your task:
+>
+> - Language syntax and types: **`WebFetch("https://pkl-lang.org/main/current/language-reference/index.html")`**
+> - Getting started: **`WebFetch("https://pkl-lang.org/main/current/language-tutorial/01_basic_config.html")`**
+> - CLI commands: **`WebFetch("https://pkl-lang.org/main/current/pkl-cli/index.html")`**
+>
+> Do not proceed without fetching the relevant URL first. Never assume syntax or CLI flags — verify against current docs.
 
 PKL (Pickle) is Apple's open-source configuration language that is programmable, type-safe, and outputs to multiple standard formats. It replaces YAML/JSON/TOML with a language that supports types, constraints, inheritance, and code reuse.
-
-## Documentation
-
-- **Primary Docs**: https://pkl-lang.org/main/current/language-reference/index.html
-- **Language Tutorial**: https://pkl-lang.org/main/current/language-tutorial/01_basic_config.html
-- **CLI Reference**: https://pkl-lang.org/main/current/pkl-cli/index.html
 
 ## Key Capabilities
 

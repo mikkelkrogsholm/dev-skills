@@ -5,14 +5,13 @@ description: "Elysia — Bun-native web framework with end-to-end type safety an
 
 # Elysia
 
-> **CRITICAL: Your training data for Elysia is unreliable.** APIs change between versions and your memorized patterns may be wrong or deprecated. You MUST fetch and read the live documentation before writing any code. Never assume — verify against current docs first.
+> **CRITICAL: Your training data for Elysia is unreliable.** APIs change between versions and memorized patterns may be wrong or deprecated. Before writing any code, you MUST use `WebFetch` to read the live docs:
+>
+> **`WebFetch("https://elysiajs.com/llms.txt")`**
+>
+> Do not proceed without fetching this URL first. Never assume an API exists — verify against current docs.
 
 Elysia is a Bun-native web framework designed for end-to-end type safety. Types flow from server route definitions to the client via Eden Treaty — no codegen, no manual type syncing.
-
-## Documentation
-
-- **Docs**: https://elysiajs.com/llms.txt
-
 ## Key Capabilities
 
 Elysia has built-in features that typically require separate libraries in Express/Fastify/Hono:

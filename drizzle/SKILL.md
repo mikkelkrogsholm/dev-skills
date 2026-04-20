@@ -5,14 +5,13 @@ description: "Drizzle ORM — lightweight, TypeScript-first SQL ORM with schema-
 
 # Drizzle ORM
 
-> **CRITICAL: Your training data for Drizzle ORM is unreliable.** APIs change between versions and your memorized patterns may be wrong or deprecated. You MUST fetch and read the live documentation before writing any code. Never assume — verify against current docs first.
+> **CRITICAL: Your training data for Drizzle ORM is unreliable.** APIs change between versions and memorized patterns may be wrong or deprecated. Before writing any code, you MUST use `WebFetch` to read the live docs:
+>
+> **`WebFetch("https://orm.drizzle.team/llms.txt")`**
+>
+> Do not proceed without fetching this URL first. Never assume an API or config option exists — verify against current docs.
 
 Drizzle ORM is a lightweight, TypeScript-first ORM with a SQL-like query builder, schema-as-code migrations, and zero dependencies.
-
-## Documentation
-
-- **Docs**: https://orm.drizzle.team/llms.txt
-
 ## Key Capabilities
 
 **Built-in schema validation adapters** — Drizzle includes first-party integrations with Zod, Valibot, TypeBox, ArkType, and Effect Schema via `drizzle-zod`, `drizzle-valibot`, etc. There is no need to manually write validation schemas that mirror your table definitions; these packages infer insert/select types directly from your Drizzle schema.

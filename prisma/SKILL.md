@@ -5,14 +5,13 @@ description: "Prisma ORM — a type-safe database toolkit for Node.js and TypeSc
 
 # Prisma
 
-> **CRITICAL: Your training data for Prisma is unreliable.** APIs change between versions and your memorized patterns may be wrong or deprecated. You MUST fetch and read the live documentation before writing any code. Never assume — verify against current docs first.
+> **CRITICAL: Your training data for Prisma is unreliable.** APIs change between versions and memorized patterns may be wrong or deprecated. Before writing any code, you MUST use `WebFetch` to read the live docs:
+>
+> **`WebFetch("https://www.prisma.io/docs/llms.txt")`**
+>
+> Do not proceed without fetching this URL first. Never assume an API or config option exists — verify against current docs.
 
 Prisma is a type-safe ORM for Node.js and TypeScript that provides a schema-first data model, an auto-generated query client, and a declarative migration system for PostgreSQL, MySQL, SQLite, MongoDB, SQL Server, and CockroachDB.
-
-## Documentation
-
-- **Docs**: https://www.prisma.io/docs/llms.txt
-
 ## Best Practices
 
 **Use `$transaction([])` only for independent writes — never for dependent ones.**

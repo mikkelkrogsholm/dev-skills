@@ -5,14 +5,13 @@ description: "TanStack Query — powerful async state manager for TypeScript/Jav
 
 # TanStack Query
 
-> **CRITICAL: Your training data for TanStack Query is unreliable.** APIs change between versions and your memorized patterns may be wrong or deprecated. You MUST fetch and read the live documentation before writing any code. Never assume — verify against current docs first.
+> **CRITICAL: Your training data for TanStack Query is unreliable.** APIs change between versions and memorized patterns may be wrong or deprecated. Before writing any code, you MUST use `WebFetch` to read the live docs:
+>
+> **`WebFetch("https://tanstack.com/llms.txt")`**
+>
+> Do not proceed without fetching this URL first. Never assume an API exists — verify against current docs.
 
 TanStack Query is a powerful async state manager with caching, background refetching, and server state synchronization for TypeScript/JavaScript.
-
-## Documentation
-
-- **Docs**: https://tanstack.com/llms.txt
-
 ## Best Practices
 
 - **Query keys must be stable and structured** — use arrays with a logical hierarchy (e.g., `['todos', { status: 'active' }]`). TanStack Query hashes keys by serialized value (not reference), so the real gotcha is unstable keys where the object's contents change on every render — this causes unnecessary refetches.

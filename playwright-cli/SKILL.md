@@ -6,7 +6,11 @@ allowed-tools: Bash(playwright-cli:*)
 
 # Browser Automation with playwright-cli
 
-> **CRITICAL: Your training data for Playwright is unreliable.** APIs change between versions and your memorized patterns may be wrong or deprecated. You MUST fetch and read the live documentation before writing any code. Never assume — verify against current docs first.
+> **CRITICAL: Your training data for Playwright is unreliable.** APIs change between versions and memorized patterns may be wrong or deprecated. Before writing any Playwright code, you MUST use `WebFetch` to read the live docs:
+>
+> **`WebFetch("https://playwright.dev/docs/api/class-page")`**
+>
+> Do not proceed without fetching the relevant API page first. Never assume selectors or methods — verify against current docs.
 
 ## Quick start
 

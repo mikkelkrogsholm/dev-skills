@@ -5,17 +5,15 @@ description: "Monaco Editor — the code editor that powers VS Code, for the bro
 
 # Monaco Editor
 
-> **CRITICAL: Your training data for Monaco Editor is unreliable.** APIs change between versions and your memorized patterns may be wrong or deprecated. You MUST fetch and read the live documentation before writing any code. Never assume — verify against current docs first.
+> **CRITICAL: Your training data for Monaco Editor is unreliable.** APIs change between versions and memorized patterns may be wrong or deprecated. Before writing any code, you MUST use `WebFetch` to read the live docs based on your task:
+>
+> - API usage and configuration: **`WebFetch("https://microsoft.github.io/monaco-editor/docs.html")`**
+> - TypeScript type signatures: **`WebFetch("https://microsoft.github.io/monaco-editor/typedoc/index.html")`**
+> - React wrapper (`@monaco-editor/react`): **`WebFetch("https://raw.githubusercontent.com/suren-atoyan/monaco-react/master/README.md")`**
+>
+> Do not proceed without fetching the relevant URL first. Never assume an API exists — verify against current docs.
 
 Monaco Editor is the browser-based code editor that powers VS Code. It provides syntax highlighting, IntelliSense, diff view, minimap, and more for 50+ languages.
-
-## Documentation
-
-- **Docs**: https://microsoft.github.io/monaco-editor/docs.html
-- **API Reference**: https://microsoft.github.io/monaco-editor/typedoc/index.html
-- **Playground**: https://microsoft.github.io/monaco-editor/playground.html
-- **GitHub**: https://github.com/microsoft/monaco-editor
-- **React wrapper**: https://github.com/suren-atoyan/monaco-react
 
 ## Key Capabilities
 

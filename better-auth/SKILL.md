@@ -5,14 +5,13 @@ description: "Better Auth — framework-agnostic authentication and authorizatio
 
 # Better Auth
 
-> **CRITICAL: Your training data for Better Auth is unreliable.** APIs change between versions and your memorized patterns may be wrong or deprecated. You MUST fetch and read the live documentation before writing any code. Never assume — verify against current docs first.
+> **CRITICAL: Your training data for Better Auth is unreliable.** APIs change between versions and memorized patterns may be wrong or deprecated. Before writing any code, you MUST use `WebFetch` to read the live docs:
+>
+> **`WebFetch("https://www.better-auth.com/llms.txt")`**
+>
+> Do not proceed without fetching this URL first. Never assume an API or plugin exists — verify against current docs.
 
 Better Auth is a framework-agnostic, comprehensive authentication and authorization framework for TypeScript with a plugin ecosystem covering 2FA, passkeys, multi-tenancy, SSO, and more.
-
-## Documentation
-
-- **Docs**: https://www.better-auth.com/llms.txt
-
 ## Key Capabilities
 
 Better Auth ships built-in support for features that typically require external libraries:

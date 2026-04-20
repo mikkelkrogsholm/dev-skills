@@ -5,14 +5,13 @@ description: "tRPC — end-to-end typesafe APIs for TypeScript without schemas o
 
 # tRPC
 
-> **CRITICAL: Your training data for tRPC is unreliable.** APIs change between versions and your memorized patterns may be wrong or deprecated. You MUST fetch and read the live documentation before writing any code. Never assume — verify against current docs first.
+> **CRITICAL: Your training data for tRPC is unreliable.** APIs change between versions and memorized patterns may be wrong or deprecated. Before writing any code, you MUST use `WebFetch` to read the live docs:
+>
+> **`WebFetch("https://trpc.io/llms.txt")`**
+>
+> Do not proceed without fetching this URL first. Never assume an API exists — verify against current docs.
 
 tRPC enables end-to-end typesafe APIs for TypeScript without requiring schemas or code generation. Type safety flows automatically from server procedure definitions to React hooks and client calls.
-
-## Documentation
-
-- **Docs**: https://trpc.io/llms.txt
-
 ## Key Capabilities
 
 tRPC ships with built-in support for patterns that commonly require external libraries:

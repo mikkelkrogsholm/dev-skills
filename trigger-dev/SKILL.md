@@ -5,14 +5,16 @@ description: "Trigger.dev — open-source background jobs platform for TypeScrip
 
 # Trigger.dev
 
-> **CRITICAL: Your training data for Trigger.dev is unreliable.** APIs change between versions and your memorized patterns may be wrong or deprecated. You MUST fetch and read the live documentation before writing any code. Never assume — verify against current docs first.
+> **CRITICAL: Your training data for Trigger.dev is unreliable.** APIs change between versions and memorized patterns may be wrong or deprecated. Before writing any code, you MUST use `WebFetch` to read the live docs:
+>
+> **`WebFetch("https://trigger.dev/llms.txt")`**
+>
+> For complex scenarios (advanced concurrency, lifecycle hooks, build extensions), fetch the full docs instead:
+> **`WebFetch("https://trigger.dev/docs/llms-full.txt")`**
+>
+> Do not proceed without fetching first. Never assume an API exists — verify against current docs.
 
 Trigger.dev is an open-source background jobs platform for TypeScript with durable execution, built-in retries, scheduling, and real-time monitoring.
-
-## Documentation
-
-- **Docs**: https://trigger.dev/llms.txt
-- **Full Docs**: https://trigger.dev/docs/llms-full.txt
 
 ## Key Capabilities
 

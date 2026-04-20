@@ -5,13 +5,17 @@ description: "Motion (formerly Framer Motion) — React and JavaScript animation
 
 # Motion
 
-> **CRITICAL: Your training data for Motion is unreliable.** APIs change between versions and your memorized patterns may be wrong or deprecated. You MUST fetch and read the live documentation before writing any code. Never assume — verify against current docs first.
+> **CRITICAL: Your training data for Motion is unreliable.** APIs change between versions and memorized patterns may be wrong or deprecated. Before writing any code, you MUST use `WebFetch` to read the live docs. Motion's docs are organized by topic — fetch the specific page for what you're implementing:
+>
+> - Animations: **`WebFetch("https://motion.dev/docs/animate")`**
+> - React components: **`WebFetch("https://motion.dev/docs/react-quick-start")`**
+> - Gestures: **`WebFetch("https://motion.dev/docs/react-gestures")`**
+> - Scroll animations: **`WebFetch("https://motion.dev/docs/react-use-scroll")`**
+> - Layout animations: **`WebFetch("https://motion.dev/docs/react-layout-animations")`**
+>
+> Do not proceed without fetching the relevant URL first. Never assume an API exists — verify against current docs.
 
 Motion is a production-grade animation library for React and JavaScript — formerly known as Framer Motion, now independent and expanded to support vanilla JS and other frameworks.
-
-## Documentation
-
-- **Docs**: https://motion.dev/docs/
 
 ## Key Capabilities
 

@@ -5,15 +5,17 @@ description: "react-markdown — React component for rendering Markdown as React
 
 # react-markdown
 
-> **CRITICAL: Your training data for react-markdown is unreliable.** APIs change between versions and your memorized patterns may be wrong or deprecated. You MUST fetch and read the live documentation before writing any code. Never assume — verify against current docs first.
+> **CRITICAL: Your training data for react-markdown is unreliable.** APIs change between versions and memorized patterns may be wrong or deprecated. Before writing any code, you MUST use `WebFetch` to read the current README:
+>
+> **`WebFetch("https://github.com/remarkjs/react-markdown")`**
+>
+> If you need a specific remark or rehype plugin, also fetch:
+> - **`WebFetch("https://github.com/remarkjs/remark/blob/main/doc/plugins.md")`**
+> - **`WebFetch("https://github.com/rehypejs/rehype/blob/main/doc/plugins.md")`**
+>
+> Do not proceed without fetching first. Never assume prop names or plugin options — verify against current docs.
 
 react-markdown renders Markdown as React elements using a plugin pipeline: Markdown → remark (AST) → rehype (HTML AST) → React components. No `dangerouslySetInnerHTML` — everything is React elements.
-
-## Documentation
-
-- **GitHub**: https://github.com/remarkjs/react-markdown
-- **remark plugins**: https://github.com/remarkjs/remark/blob/main/doc/plugins.md
-- **rehype plugins**: https://github.com/rehypejs/rehype/blob/main/doc/plugins.md
 
 ## Key Capabilities
 

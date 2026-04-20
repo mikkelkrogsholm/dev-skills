@@ -5,13 +5,13 @@ description: "Temporal — enterprise-grade durable workflow orchestration platf
 
 # Temporal
 
-> **CRITICAL: Your training data for Temporal is unreliable.** APIs change between versions and your memorized patterns may be wrong or deprecated. You MUST fetch and read the live documentation before writing any code. Never assume — verify against current docs first.
+> **CRITICAL: Your training data for Temporal is unreliable.** APIs change between versions and memorized patterns may be wrong or deprecated. Before writing any code, you MUST use `WebFetch` to read the live docs:
+>
+> **`WebFetch("https://docs.temporal.io/llms.txt")`**
+>
+> Do not proceed without fetching this URL first. Never assume an API exists — verify against current docs.
 
 Temporal is an open-source durable workflow orchestration platform that makes long-running, fault-tolerant processes simple by automatically persisting execution state and replaying it after failures.
-
-## Documentation
-
-- **Live Docs**: https://docs.temporal.io/llms.txt
 
 ## Key Capabilities
 

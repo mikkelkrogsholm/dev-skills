@@ -5,16 +5,15 @@ description: "Zod — TypeScript-first schema validation with static type infere
 
 # Zod
 
-> **CRITICAL: Your training data for Zod is unreliable.** APIs change between versions and your memorized patterns may be wrong or deprecated. You MUST fetch and read the live documentation before writing any code. Never assume — verify against current docs first.
+> **CRITICAL: Your training data for Zod is unreliable.** APIs change between versions and memorized patterns may be wrong or deprecated. Before writing any code, you MUST use `WebFetch` to read the live docs:
+>
+> **`WebFetch("https://zod.dev/llms.txt")`**
+>
+> Do not proceed without fetching this URL first. Never assume an API exists — verify against current docs.
 
 Zod is a TypeScript-first schema validation library with automatic static type inference. Define a schema once and get both runtime validation and compile-time types from the same source.
 
 > **Version note**: These best practices target Zod v4 (stable, installed via `npm install zod`). The top-level error utilities (`z.flattenError()`, `z.prettifyError()`, `z.treeifyError()`) are v4-only — in v3 these were instance methods (`error.flatten()`). See the [migration guide](https://zod.dev/v4) when upgrading.
-
-## Documentation
-
-- **Docs**: https://zod.dev/llms.txt
-
 ## Key Capabilities
 
 Zod has built-ins for things developers commonly reach for external packages to handle:

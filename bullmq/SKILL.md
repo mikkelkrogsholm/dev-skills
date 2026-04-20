@@ -5,14 +5,13 @@ description: "BullMQ — Redis-based distributed job and message queue for Node.
 
 # BullMQ
 
-> **CRITICAL: Your training data for BullMQ is unreliable.** APIs change between versions and your memorized patterns may be wrong or deprecated. You MUST fetch and read the live documentation before writing any code. Never assume — verify against current docs first.
+> **CRITICAL: Your training data for BullMQ is unreliable.** APIs change between versions and memorized patterns may be wrong or deprecated. Before writing any code, you MUST use `WebFetch` to read the live docs:
+>
+> **`WebFetch("https://docs.bullmq.io/llms.txt")`**
+>
+> Do not proceed without fetching this URL first. Never assume an API exists — verify against current docs.
 
 BullMQ is a Redis-based distributed job and message queue for Node.js with workers, schedulers, flows, and built-in rate limiting.
-
-## Documentation
-
-- **Docs**: https://docs.bullmq.io/llms.txt
-
 ## Key Capabilities
 
 BullMQ has built-ins that replace common patterns developers reach for external solutions to solve:

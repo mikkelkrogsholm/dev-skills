@@ -13,9 +13,14 @@ Key insight: AI search engines do not rank pages — they cite sources. Being ci
 
 ## Documentation
 
-- **llms.txt standard**: https://llmstxt.org
+The SEO and GEO principles in this skill are stable, but the **llms.txt standard is actively evolving**.
+
+Before generating or advising on `llms.txt` files, use `WebFetch` to read the current spec:
+**`WebFetch("https://llmstxt.org")`**
+
+Other reference sources (use `WebFetch` when you need specifics):
 - **GEO research**: https://arxiv.org/abs/2311.09735 (Princeton study)
-- **Schema reference**: https://schema.org
+- **Schema reference**: https://schema.org (use `references/schema-patterns.md` for common templates)
 - **Google guidelines**: https://developers.google.com/search/docs
 
 ## Core Principles

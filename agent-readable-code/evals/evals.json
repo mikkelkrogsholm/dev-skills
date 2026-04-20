@@ -1,0 +1,58 @@
+{
+  "skill_name": "agent-readable-code",
+  "evals": [
+    {
+      "id": 0,
+      "name": "refactor-bad-python-file",
+      "prompt": "I have a Python file at /Users/mikkelfreltoftkrogsholm/Projekter/dev-skills/agent-readable-code/scripts/fixtures/bad_py/utils.py that I want to rewrite so an AI coding agent (like Claude Code or Cursor) can maintain it correctly.\n\nPlease produce three artifacts saved to the output directory:\n  - problems.md: a concrete list of what's wrong with this file from an AI-maintainability perspective\n  - refactored.py: a rewritten version that fixes the problems (you may split into multiple files if that's the right answer — but at minimum save one file called refactored.py with the cleaned-up code)\n  - rationale.md: a short explanation of why each change matters, grounded in concrete failure modes for AI agents\n\nDo not just explain what's wrong in prose — produce the actual refactored code.",
+      "files": ["/Users/mikkelfreltoftkrogsholm/Projekter/dev-skills/agent-readable-code/scripts/fixtures/bad_py/utils.py"],
+      "assertions": [
+        { "id": "identifies-generic-filename", "text": "problems.md explicitly names 'utils.py' as a dumping-ground / generic filename problem" },
+        { "id": "identifies-generic-class-name", "text": "problems.md calls out the generic class name 'Manager' as a naming problem" },
+        { "id": "identifies-dynamic-dispatch", "text": "problems.md identifies __getattr__ / dynamic dispatch as a problem for AI agents" },
+        { "id": "identifies-eval-usage", "text": "problems.md flags the use of eval() as an anti-pattern" },
+        { "id": "identifies-deep-inheritance", "text": "problems.md identifies the deep inheritance chain" },
+        { "id": "identifies-untyped-signatures", "text": "problems.md notes that public functions lack type annotations / return types" },
+        { "id": "refactored-has-type-annotations", "text": "refactored.py's public functions have type annotations on parameters and return values" },
+        { "id": "refactored-removes-dynamic-dispatch", "text": "refactored.py does not use __getattr__ for runtime method dispatch" },
+        { "id": "refactored-removes-eval", "text": "refactored.py does not call eval() or exec() on user input" },
+        { "id": "refactored-renames-generic-classes", "text": "refactored.py replaces the generic 'Manager' class name with something domain-specific (or removes it)" },
+        { "id": "refactored-flattens-inheritance", "text": "refactored.py's inheritance chain is at most 2 levels deep (or uses composition)" },
+        { "id": "rationale-cites-agent-failure-modes", "text": "rationale.md grounds recommendations in specific AI-agent failure modes rather than generic clean-code arguments" }
+      ]
+    },
+    {
+      "id": 1,
+      "name": "greenfield-typescript-api",
+      "prompt": "I'm starting a new TypeScript API service. Stack: Hono + Drizzle + Postgres (on Neon), deployed to Bun. I plan to maintain this service mostly by working with Claude Code and Cursor over the next couple of years.\n\nPlease produce two artifacts saved to the output directory:\n  - layout.txt: a recommended initial directory/file tree for the repo\n  - CONVENTIONS.md: a short conventions doc\n\nBe concrete and opinionated. Don't write a generic TypeScript style guide — focus on decisions that specifically affect how well AI agents can read and modify the code.",
+      "files": [],
+      "assertions": [
+        { "id": "layout-uses-vertical-slices", "text": "layout.txt organizes by feature (auth/, billing/, users/) rather than primarily by horizontal layer" },
+        { "id": "layout-colocates-tests", "text": "layout.txt colocates test files next to source files rather than in a distant tests/ tree" },
+        { "id": "layout-has-concrete-feature-dirs", "text": "layout.txt contains concrete domain directories like auth, billing, or users" },
+        { "id": "conventions-covers-naming", "text": "CONVENTIONS.md explicitly addresses naming — avoiding generic names or requiring domain-specific names" },
+        { "id": "conventions-covers-file-size", "text": "CONVENTIONS.md gives a concrete file-size guideline with a number" },
+        { "id": "conventions-covers-typed-boundaries", "text": "CONVENTIONS.md requires type annotations on public / module-boundary functions" },
+        { "id": "conventions-covers-verification", "text": "CONVENTIONS.md mentions tests/lint/typecheck as the verification loop" },
+        { "id": "conventions-discourages-metaprogramming", "text": "CONVENTIONS.md discourages dynamic/metaprogramming patterns for agent-traceability" },
+        { "id": "conventions-mentions-agent-specific-rationale", "text": "CONVENTIONS.md explains at least one decision in terms of AI-agent behavior" }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "principles-prioritized-list",
+      "prompt": "What are the most impactful things I should do to make code easier for AI coding agents to read and modify correctly? I am NOT asking how to use AI to write code. I am asking the inverse. Produce recommendations.md: a practical, prioritized list with concrete examples, grounded in specific failure modes.",
+      "files": [],
+      "assertions": [
+        { "id": "mentions-naming-for-grep", "text": "recommendations.md discusses naming with explicit reference to grep-ability, retrieval, or localization" },
+        { "id": "mentions-feature-colocation", "text": "recommendations.md recommends organizing code by feature / vertical slice rather than horizontal layer" },
+        { "id": "mentions-metaprogramming-risk", "text": "recommendations.md warns against metaprogramming, reflection, or dynamic dispatch" },
+        { "id": "mentions-typed-boundaries", "text": "recommendations.md recommends typed public boundaries / type annotations at module seams" },
+        { "id": "mentions-verification-loop", "text": "recommendations.md recommends verification affordances tied to preventing agent hallucination spirals" },
+        { "id": "mentions-file-size-or-duplicates", "text": "recommendations.md addresses file size, near-duplicates, or str_replace breakage" },
+        { "id": "uses-failure-modes-not-platitudes", "text": "recommendations.md grounds reasoning in specific agent failure modes rather than generic clean-code platitudes" },
+        { "id": "is-prioritized", "text": "recommendations.md presents the list in a prioritized order" }
+      ]
+    }
+  ]
+}

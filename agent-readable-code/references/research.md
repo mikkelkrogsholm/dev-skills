@@ -14,6 +14,7 @@ Citations and evidence strength for every rule in the linter. Use when explainin
 | AR001 file size (800 lines) | **heuristic** | lost-in-the-middle position bias + vendor reports; **exact number is tunable** | low-medium |
 | AR008 long lines (400 chars) | **heuristic** | tool-output formatting reports; **exact number is tunable** | low |
 | AR005 inheritance depth (>3) | **heuristic** | case studies + extrapolation; **treat as a review prompt, not a hard rule** | low |
+| AR011 barrel re-export files | **moderate** | vendor guidance (Aider's `/add` tips, Cursor rule docs) + mechanistic reasoning | medium |
 
 **What "heuristic" means here:** the direction of the rule is right (deeper inheritance is harder for agents to reason about than shallower), but the specific threshold is an operational choice. Teams should tune via `--config`.
 
@@ -97,6 +98,18 @@ Citations and evidence strength for every rule in the linter. Use when explainin
 - Surge HQ 693-line spiral (linked above): no feedback signal until human review, which arrived after 39 wrong turns.
 
 **Practical implication:** colocate tests (`foo.ts` + `foo.test.ts`) so agents find and run them without exploration. Provide one command that runs everything.
+
+---
+
+## AR011 — Barrel re-export files
+
+**Claim:** Files whose only content is `export * from` / `export { foo } from` add a grep hop between consumers and the defining symbol, and break tree-shaking.
+
+- **Aider — Tips.** "Only `/add` files you actually intend to edit; unrelated files distract and confuse the LLM." Barrel files force the agent to follow an extra hop before reaching the real source. https://aider.chat/docs/usage/tips.html
+- **Cursor — Rules docs.** Explicit recommendation to reference *defining* files rather than re-exports in rules and examples. https://cursor.com/docs/rules
+- Mechanistic: an agent asked "where is `createUser` defined?" greps and finds the barrel first. It has to open the barrel, read the `from` clause, then grep again. On a large tree this doubles tool-call count before the agent has even started working.
+
+**Practical implication:** import from the defining file. Keep barrels only where a tool requires them (Drizzle's `db/schema/index.ts`, package entry points).
 
 ---
 

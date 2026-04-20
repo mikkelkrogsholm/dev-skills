@@ -25,6 +25,7 @@ python scripts/lint.py <path> --max 10                # exit nonzero if >10 find
 | `AR006` | Public function without type annotations or return type | Python only | strong |
 | `AR007` | Tests scattered in `tests/` dirs instead of colocated | all | moderate |
 | `AR008` | Lines longer than 400 chars (minified files, monster string literals) | all | heuristic |
+| `AR011` | Barrel re-export files (>70% of content is `export * from` / `from X import *`) | all | moderate |
 
 Evidence strength: **strong** = controlled empirical study or first-hand vendor postmortem. **moderate** = case studies + vendor guidance. **heuristic** = directionally right, threshold is tunable. Full citations in `../references/research.md`.
 

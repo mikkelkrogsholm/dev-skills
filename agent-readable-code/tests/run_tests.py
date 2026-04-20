@@ -57,6 +57,9 @@ EXPECTATIONS: dict[str, dict[str, int]] = {
     "bad_ts/generated.min.js": {
         "AR008": 1,   # single file-level finding (not per-line)
     },
+    "bad_ts/barrel.ts": {
+        "AR011": 1,   # barrel-only re-exports
+    },
     "good_py/refunds.py": {
         # clean
     },

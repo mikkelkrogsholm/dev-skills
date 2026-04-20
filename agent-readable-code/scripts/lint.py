@@ -151,6 +151,12 @@ RULE_INFO = {
         "heuristic",
         "wrap the literal; move minified/generated files to dist/ or .gitignore",
     ),
+    "AR011": (
+        "barrel re-export file",
+        "adds a grep hop; hides defining file; breaks tree-shaking",
+        "moderate",
+        "import from the defining file; delete the barrel (keep only where tool requires it, e.g. Drizzle schema index)",
+    ),
 }
 
 
@@ -618,6 +624,39 @@ def check_ar002_duplicates(all_files: list[tuple[Path, list[str]]], cfg: Config)
     return findings
 
 
+_BARREL_TS_RE = re.compile(r"^\s*export\s+(?:\*|\{[^}]*\})\s+from\s+['\"]")
+_BARREL_PY_RE = re.compile(r"^\s*from\s+\S+\s+import\s+\*\s*$")
+
+
+def check_ar011_barrel(path: Path, lines: list[str], cfg: Config) -> list[Finding]:
+    """Flag files whose non-trivial content is almost entirely re-exports.
+    These add a grep hop between consumers and the defining file, and break tree-shaking."""
+    meaningful = []
+    for ln in lines:
+        stripped = ln.strip()
+        if not stripped:
+            continue
+        if stripped.startswith(("//", "#", "/*", "*", "*/")):
+            continue
+        meaningful.append(stripped)
+    if len(meaningful) < 5:
+        return []
+    is_py = is_python(path, cfg)
+    barrel_re = _BARREL_PY_RE if is_py else _BARREL_TS_RE
+    barrel_lines = sum(1 for ln in meaningful if barrel_re.match(ln))
+    if barrel_lines / len(meaningful) > 0.7:
+        return [
+            Finding(
+                "AR011",
+                str(path),
+                1,
+                f"{barrel_lines}/{len(meaningful)} meaningful lines are re-exports; this is a barrel file",
+                RULE_INFO["AR011"][1],
+            )
+        ]
+    return []
+
+
 def check_ar007_test_colocation(root: Path, all_files: list[tuple[Path, list[str]]], cfg: Config) -> list[Finding]:
     """Heuristic: if there's a top-level tests/ or __tests__ directory with >5 test files
     AND src/ has <5 colocated test files, flag it."""
@@ -743,6 +782,8 @@ def lint_path(root: Path, cfg: Config, enabled_rules: set[str]) -> list[Finding]
             findings.extend(check_ar003_symbols(path, source, cfg))
         if "AR004" in enabled_rules:
             findings.extend(check_ar004_metaprog(path, source, cfg))
+        if "AR011" in enabled_rules:
+            findings.extend(check_ar011_barrel(path, lines, cfg))
 
         if is_python(path, cfg):
             try:

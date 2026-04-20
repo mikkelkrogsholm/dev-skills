@@ -47,9 +47,11 @@ This isn't directly lintable, but shows up as a pattern through `AR007` (scatter
 Code the agent can't trace with grep or a simple AST walk is code the agent hallucinates around. That includes:
 
 - Metaprogramming: `__getattr__`, `eval`, `exec`, `importlib.import_module`, JS `Proxy`, `Reflect`, runtime monkey-patching.
+- **Magic-string dispatch**: `registerHandler("user.created", ...)` spread across 40 files, or event buses keyed by string. Agents can't trace a string across the repo the way they trace a typed reference. Prefer a discriminated union + one exhaustive `switch`, or a single registry file imported explicitly by consumers.
 - Deep inheritance chains (>3 levels) — agents fabricate method resolution paths that don't exist.
 - Decorator stacks that rewrite behavior silently.
 - Heavy dependency injection where control flow is invisible to grep.
+- Barrel re-exports (`export * from './foo'` files that contain nothing else). They add a grep hop and break tree-shaking. Consumers should import from the defining file.
 
 Prefer composition, explicit imports/exports, and direct function calls. Static code graphs are what retrievers (Aider's repo-map, Cursor's embeddings, Claude Code's grep loop) actually traverse.
 
@@ -68,6 +70,37 @@ An agent without a feedback loop hallucinates into spirals (documented case: 693
 - Type errors that fail loudly at the edit site, not at runtime.
 
 "If you can't verify it, don't ship it" is the highest-leverage rule in every AI coding tool vendor's docs.
+
+### 7. Determinism and injectable side effects
+
+The same failure pattern that makes verification loops fragile: non-determinism. Agents cannot debug a test that fails 1-in-10 runs — they retry until context runs out, then either disable the test or declare success.
+
+- **Seed all randomness.** Frozen IDs, seeded `Math.random`, `faker.seed()`. UUID-in-snapshots is a near-guaranteed flake source.
+- **Freeze time in tests.** Never let a test depend on `new Date()` or `time.time()` without an injected clock.
+- **Pass `clock`, `fetch`, `logger`, `env`, `db` as arguments** to functions that need them. A function whose signature reveals its side effects is one an agent can test; a function that reaches into globals for `process.env` is one the agent will quietly call wrong.
+
+### 8. Language-specific patterns that close hallucination surface
+
+General principles above apply everywhere. These are idioms per language that have concrete agent-readability wins and that the linter can't fully police.
+
+**Python:**
+- **`__all__` on every module** that has public exports. It's the one signal Python has for "import this, not that" — agents otherwise import private helpers and create coupling you didn't intend.
+- **`slots=True` on dataclasses** when you don't need dynamic attributes. An agent writing `user.foo = bar` on a slotted dataclass hits `AttributeError` immediately; on a normal class it silently succeeds and the bug surfaces three edits later.
+- **`frozen=True`** for value objects. Prevents an agent from mutating what it thinks is immutable.
+
+**TypeScript:**
+- **Branded types for IDs**: `type UserId = string & { readonly __brand: 'UserId' }`. Agents routinely swap `userId` and `orgId` when both are plain `string`; branded types make the swap a compile error.
+- **Discriminated unions over magic strings**: `type Event = { kind: 'created'; userId: UserId } | { kind: 'deleted'; userId: UserId }` — the compiler enumerates cases and agents can't invent a variant.
+- **`as const` on literal tuples and records** so types narrow to the literal. Widening to `string` throws away information the agent needs.
+- **Infer from one source of truth**: `z.infer<typeof Schema>`, `typeof table.$inferSelect`. Parallel hand-maintained type declarations drift; an agent updates one, the others silently lie.
+
+### 9. Training-data hygiene
+
+Agents work best with code that looks like the code they were trained on. This isn't snobbery — it's a real signal:
+
+- **Prefer frameworks with large, stable public presence** (Hono, Drizzle, Zod, Prisma, Bun, React) over bespoke internal DSLs or cutting-edge libraries. The agent has seen the former thousands of times; the latter, rarely.
+- **Pin dependency versions** (no `^` on load-bearing packages). An agent's memory of the API for `stripe@v14` is wrong for `stripe@v18`; pinning makes the docs the agent can fetch match the version you run.
+- **Treat "boring stack" as a legitimate agent-performance axis.** A vanilla Postgres + Drizzle + Hono + React app will get better agent edits than an equivalently-powerful EffectTS + XState + custom-DSL setup, even if the latter is technically superior.
 
 ---
 

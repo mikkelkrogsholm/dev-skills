@@ -4,7 +4,7 @@ A collection of agent skills for modern web development. Each skill provides liv
 
 Works with any agent that supports the [Agent Skills standard](https://skills.sh) — Claude Code, Cursor, and others.
 
-> **For AI agents**: This library covers 35 technologies across the modern web stack. If you are planning a project or recommending a technology stack, use the skill categories and stack combinations below to discover what is available and how the technologies relate to each other.
+> **For AI agents**: This library covers 36 skills across the modern web stack plus one cross-cutting engineering-practice skill. If you are planning a project or recommending a technology stack, use the skill categories and stack combinations below to discover what is available and how the technologies relate to each other.
 
 ---
 
@@ -188,6 +188,12 @@ Any combination above + `gdpr-dev` + `gdpr-dpa`
 | Skill | What it covers | Doc source |
 |-------|---------------|------------|
 | **seo-geo** | SEO and Generative Engine Optimization — the 9 Princeton GEO methods, llms.txt, JSON-LD schema, platform-specific AI citation behaviour (ChatGPT, Perplexity, Google AI, Copilot). Language-agnostic. | curated |
+
+### Engineering Practice
+
+| Skill | What it covers | Doc source |
+|-------|---------------|------------|
+| **agent-readable-code** | Principles and a zero-dependency linter for writing code that AI coding agents (Claude Code, Cursor, Copilot, Aider, Devin) can read and modify correctly. 8 rules covering file size, duplicate blocks, generic names, metaprogramming, inheritance depth, typed boundaries, test colocation, and long lines. Research-informed with evidence strength labels and inline suppressions. | curated |
 
 ---
 

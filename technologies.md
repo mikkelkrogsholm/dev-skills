@@ -29,3 +29,4 @@ One skill per technology. Work through them in order.
 | 23 | Neon | llms.txt | https://neon.com/llms.txt | done |
 | 24 | Turso | llms.txt | https://docs.turso.tech/llms.txt | done |
 | 25 | OpenTelemetry | website | https://opentelemetry.io/docs/languages/js/ | done |
+| 26 | agent-readable-code | curated | — (principles + zero-dep linter) | done |

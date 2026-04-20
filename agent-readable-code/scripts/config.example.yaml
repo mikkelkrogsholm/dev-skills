@@ -1,0 +1,15 @@
+# agent-readable-code linter config
+# Copy to project root or pass via --config
+# All fields are optional; unspecified fields use the defaults shown.
+
+file_size_lines: 800
+long_line_chars: 400
+duplicate_min_lines: 6
+duplicate_min_similarity: 0.9
+max_inheritance_depth: 3
+
+banlist_names: [Manager, Service, Helper, Handler, Util, Utils, Processor, Wrapper]
+banlist_functions: [process, handle, doStuff, do_stuff, doWork, run, execute]
+banlist_filenames: [utils, util, helpers, helper, misc, common, stuff, lib]
+
+ignore_dirs: [.git, node_modules, dist, build, .venv, venv, __pycache__, .next, .turbo, coverage, .pytest_cache]

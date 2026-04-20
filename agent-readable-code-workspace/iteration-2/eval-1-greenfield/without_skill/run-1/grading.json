@@ -1,0 +1,80 @@
+{
+  "expectations": [
+    {
+      "text": "layout.txt organizes by feature (auth/, billing/, users/) rather than primarily by horizontal layer",
+      "passed": true,
+      "evidence": "src/features/ contains auth, users, billing, health with per-feature routes/service/repo/schemas."
+    },
+    {
+      "text": "layout.txt colocates test files next to source files rather than in a distant tests/ tree",
+      "passed": true,
+      "evidence": "Each feature folder includes a *.test.ts (auth.test.ts, users.test.ts, billing.test.ts) colocated with source."
+    },
+    {
+      "text": "layout.txt contains concrete domain directories like auth, billing, or users",
+      "passed": true,
+      "evidence": "features/auth/, features/users/, features/billing/, features/health/ are all listed."
+    },
+    {
+      "text": "CONVENTIONS.md explicitly addresses naming \u2014 doesn't allow generic names or requires domain-specific names",
+      "passed": true,
+      "evidence": "Dedicated 'Directory and file naming' and 'Symbol naming' sections prescribe kebab-case, <feature>.<role>.ts, and verb-noun handlers."
+    },
+    {
+      "text": "CONVENTIONS.md gives a concrete file-size guideline with a number",
+      "passed": true,
+      "evidence": "File size section: 'Hard cap: 300 lines per file. Soft target: ~150 lines.'"
+    },
+    {
+      "text": "CONVENTIONS.md requires type annotations on public / module-boundary functions",
+      "passed": false,
+      "evidence": "No explicit rule requiring type annotations on public/exported function signatures; only mentions JSDoc on public services and inferred Zod types."
+    },
+    {
+      "text": "CONVENTIONS.md mentions tests/lint/typecheck as the verification loop",
+      "passed": false,
+      "evidence": "Testing section covers bun test but there is no mention of lint or typecheck as a combined verification command or loop."
+    },
+    {
+      "text": "CONVENTIONS.md discourages dynamic/metaprogramming patterns for agent-traceability",
+      "passed": false,
+      "evidence": "No rules against eval, Proxy, dynamic import, monkey-patching, or magic-string dispatch; only dependency direction rules."
+    },
+    {
+      "text": "CONVENTIONS.md explains at least one decision in terms of AI-agent behavior",
+      "passed": true,
+      "evidence": "Opening states 'built to be maintained primarily by AI agents' and multiple rules cite agent behavior (e.g., 'Barrels hide dependencies from agents')."
+    },
+    {
+      "text": "CONVENTIONS.md recommends branded / nominal types for IDs (e.g. UserId as branded string) \u2014 v1.3 guidance",
+      "passed": false,
+      "evidence": "No mention of branded, nominal, or opaque ID types; lib/id.ts is only 'ULID/UUID generation'."
+    },
+    {
+      "text": "CONVENTIONS.md prefers discriminated unions (or equivalent) over magic-string dispatch / string-keyed registries \u2014 v1.3 guidance",
+      "passed": false,
+      "evidence": "No guidance on discriminated unions or against magic-string dispatch/registries anywhere in the file."
+    },
+    {
+      "text": "CONVENTIONS.md addresses dependency pinning, version pinning, or 'boring stack' / training-data hygiene \u2014 v1.3 guidance",
+      "passed": true,
+      "evidence": "Dependency rules: 'Pin exact versions in package.json (no ^ or ~). Upgrades are explicit commits.'"
+    },
+    {
+      "text": "CONVENTIONS.md covers deterministic tests (seeded randomness, frozen time) OR injectable side effects (clock, fetch, env as arguments) \u2014 v1.3 guidance",
+      "passed": true,
+      "evidence": "Services take db as a parameter, lib/time.ts is described as 'Clock abstraction for tests', and tests use transactions/truncation for isolation."
+    },
+    {
+      "text": "CONVENTIONS.md explicitly discourages barrel / re-export index files \u2014 v1.3 guidance (AR011)",
+      "passed": true,
+      "evidence": "Explicitly states 'Do not create index.ts barrels inside a feature. Import the exact file. Barrels hide dependencies from agents.'"
+    }
+  ],
+  "summary": {
+    "pass_rate": 0.6429,
+    "passed": 9,
+    "failed": 5,
+    "total": 14
+  }
+}

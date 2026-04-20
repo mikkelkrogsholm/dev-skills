@@ -1,0 +1,43 @@
+{
+  "eval_id": 1,
+  "eval_name": "greenfield-typescript-api",
+  "prompt": "Recommend initial layout and CONVENTIONS.md for a new Hono + Drizzle + Postgres TypeScript API that will be maintained mostly by Claude Code and Cursor.",
+  "assertions": [
+    {
+      "id": "layout-uses-vertical-slices",
+      "text": "layout.txt organizes by feature (auth/, billing/, users/) rather than primarily by horizontal layer (controllers/, services/, models/ as top-level)"
+    },
+    {
+      "id": "layout-colocates-tests",
+      "text": "layout.txt colocates test files next to source files (*.test.ts or *.spec.ts adjacent to source) rather than segregating them into a distant tests/ tree"
+    },
+    {
+      "id": "layout-has-concrete-feature-dirs",
+      "text": "layout.txt contains concrete domain directories like auth, billing, or users (not just generic scaffold)"
+    },
+    {
+      "id": "conventions-covers-naming",
+      "text": "CONVENTIONS.md explicitly addresses naming — e.g. avoiding generic names (Manager/Service/Handler) or requiring domain-specific names"
+    },
+    {
+      "id": "conventions-covers-file-size",
+      "text": "CONVENTIONS.md gives a concrete file-size guideline (a number, e.g. under 500 or 800 lines)"
+    },
+    {
+      "id": "conventions-covers-typed-boundaries",
+      "text": "CONVENTIONS.md requires type annotations on public / module-boundary functions"
+    },
+    {
+      "id": "conventions-covers-verification",
+      "text": "CONVENTIONS.md mentions tests/lint/typecheck as the verification loop (colocated tests, a single bash command, or similar)"
+    },
+    {
+      "id": "conventions-discourages-metaprogramming",
+      "text": "CONVENTIONS.md discourages dynamic/metaprogramming patterns (reflection, runtime dispatch, heavy DI frameworks) — or equivalent — for agent-traceability reasons"
+    },
+    {
+      "id": "conventions-mentions-agent-specific-rationale",
+      "text": "CONVENTIONS.md explains at least one decision in terms of AI-agent behavior (grep-ability, context windows, str_replace, hallucination) rather than generic clean-code reasoning"
+    }
+  ]
+}

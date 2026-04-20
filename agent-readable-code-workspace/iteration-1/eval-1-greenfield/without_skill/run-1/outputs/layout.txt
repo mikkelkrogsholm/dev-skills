@@ -1,0 +1,82 @@
+src/
+├── index.ts                      # Entry: builds app, starts Bun.serve
+├── app.ts                        # Hono app composition (mounts feature routers)
+├── env.ts                        # Zod-parsed process.env. Import from here, never process.env directly
+├── config/
+│   ├── constants.ts              # App-wide constants (pagination defaults, limits)
+│   └── logger.ts                 # Pino (or similar) instance
+├── db/
+│   ├── client.ts                 # Drizzle client + Neon driver setup
+│   ├── schema/
+│   │   ├── index.ts              # Re-exports every table for drizzle-kit
+│   │   ├── users.ts              # users, sessions, accounts tables
+│   │   ├── billing.ts            # customers, subscriptions, invoices, prices
+│   │   └── auth.ts               # verification_tokens, password_resets
+│   ├── migrations/               # drizzle-kit output. Do not hand-edit
+│   └── seed.ts                   # Dev/test seed script (bun run db:seed)
+├── features/                     # One folder per bounded context. Self-contained.
+│   ├── auth/
+│   │   ├── auth.routes.ts        # Hono router. Only HTTP concerns.
+│   │   ├── auth.service.ts       # Business logic. No Hono imports.
+│   │   ├── auth.repo.ts          # All Drizzle queries for this feature
+│   │   ├── auth.schemas.ts       # Zod request/response schemas
+│   │   ├── auth.types.ts         # Inferred types + domain types
+│   │   ├── auth.errors.ts        # Feature-specific error classes
+│   │   └── auth.test.ts          # bun test. Co-located with the code.
+│   ├── users/
+│   │   ├── users.routes.ts
+│   │   ├── users.service.ts
+│   │   ├── users.repo.ts
+│   │   ├── users.schemas.ts
+│   │   ├── users.types.ts
+│   │   └── users.test.ts
+│   └── billing/
+│       ├── billing.routes.ts
+│       ├── billing.service.ts
+│       ├── billing.repo.ts
+│       ├── billing.schemas.ts
+│       ├── billing.types.ts
+│       ├── billing.webhooks.ts   # Stripe webhook handlers (signature verified)
+│       └── billing.test.ts
+├── middleware/
+│   ├── auth.ts                   # requireUser, requireRole
+│   ├── error-handler.ts          # Maps AppError → HTTP response
+│   ├── request-id.ts
+│   └── rate-limit.ts
+├── lib/                          # Cross-feature utilities. No business logic.
+│   ├── errors.ts                 # AppError base class + subclasses
+│   ├── result.ts                 # Result<T, E> helpers if used
+│   ├── id.ts                     # ULID/nanoid generation
+│   ├── crypto.ts                 # hash, verify, token helpers
+│   ├── http.ts                   # Typed fetch wrapper
+│   └── time.ts                   # Date helpers, always UTC
+├── integrations/                 # Third-party clients. One file per vendor.
+│   ├── stripe.ts
+│   ├── resend.ts
+│   └── sentry.ts
+├── jobs/                         # Background tasks (if BullMQ/Trigger/cron)
+│   ├── index.ts                  # Job registry
+│   └── send-welcome-email.ts
+└── types/
+    ├── hono.d.ts                 # Hono ContextVariableMap augmentation
+    └── env.d.ts                  # ImportMetaEnv if needed
+
+tests/
+├── e2e/                          # Full-stack tests hitting a real app instance
+│   └── auth.e2e.test.ts
+└── helpers/
+    ├── test-db.ts                # Ephemeral Neon branch per test run
+    └── factories.ts              # Test data builders
+
+scripts/
+├── db-branch.ts                  # Create/delete Neon preview branches
+└── check-env.ts                  # Validate .env against env.ts schema
+
+Root files (for reference, not inside src/):
+- drizzle.config.ts
+- bunfig.toml
+- tsconfig.json                   # "strict": true, "noUncheckedIndexedAccess": true
+- package.json
+- .env.example                    # Must list every var env.ts requires
+- CONVENTIONS.md
+- README.md

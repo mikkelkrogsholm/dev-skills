@@ -1,0 +1,55 @@
+{
+  "eval_id": 0,
+  "eval_name": "refactor-bad-python-file",
+  "prompt": "Refactor /Users/mikkelfreltoftkrogsholm/Projekter/dev-skills/agent-readable-code/scripts/fixtures/bad_py/utils.py so an AI agent can maintain it. Produce problems.md, refactored.py, rationale.md.",
+  "assertions": [
+    {
+      "id": "identifies-generic-filename",
+      "text": "problems.md explicitly names 'utils.py' as a dumping-ground / generic filename problem"
+    },
+    {
+      "id": "identifies-generic-class-name",
+      "text": "problems.md calls out the generic class name 'Manager' as a naming problem"
+    },
+    {
+      "id": "identifies-dynamic-dispatch",
+      "text": "problems.md identifies __getattr__ / dynamic dispatch (the DynamicAPI class) as a problem for AI agents"
+    },
+    {
+      "id": "identifies-eval-usage",
+      "text": "problems.md flags the use of eval() as an anti-pattern"
+    },
+    {
+      "id": "identifies-deep-inheritance",
+      "text": "problems.md identifies the deep inheritance chain (Base -> Entity -> Persisted -> Auditable -> User)"
+    },
+    {
+      "id": "identifies-untyped-signatures",
+      "text": "problems.md notes that public functions lack type annotations / return types"
+    },
+    {
+      "id": "refactored-has-type-annotations",
+      "text": "refactored.py's public functions have type annotations on parameters and return values"
+    },
+    {
+      "id": "refactored-removes-dynamic-dispatch",
+      "text": "refactored.py does not use __getattr__ for runtime method dispatch"
+    },
+    {
+      "id": "refactored-removes-eval",
+      "text": "refactored.py does not call eval() or exec() on user input"
+    },
+    {
+      "id": "refactored-renames-generic-classes",
+      "text": "refactored.py replaces the generic 'Manager' class name with something domain-specific (or removes it)"
+    },
+    {
+      "id": "refactored-flattens-inheritance",
+      "text": "refactored.py's inheritance chain is at most 2 levels deep (or uses composition instead)"
+    },
+    {
+      "id": "rationale-cites-agent-failure-modes",
+      "text": "rationale.md grounds recommendations in specific AI-agent failure modes (e.g. grep misses, hallucination, str_replace breakage) rather than generic clean-code arguments"
+    }
+  ]
+}

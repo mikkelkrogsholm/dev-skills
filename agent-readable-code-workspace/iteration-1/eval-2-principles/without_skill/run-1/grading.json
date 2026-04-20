@@ -1,0 +1,50 @@
+{
+  "expectations": [
+    {
+      "text": "recommendations.md discusses naming with explicit reference to grep-ability, retrieval, or localization (not just 'use good names')",
+      "passed": true,
+      "evidence": "Section 4 says 'Name things so that a grep for the feature name finds everything. If a feature is called \"checkout\", every file related to it should contain that string.'"
+    },
+    {
+      "text": "recommendations.md recommends organizing code by feature / vertical slice rather than by horizontal layer",
+      "passed": true,
+      "evidence": "Section 5 'Collocate code, tests, types, and schema' recommends putting foo.ts/foo.test.ts/foo.types.ts/foo.schema.ts in the same directory rather than separate /tests, /types, /schemas trees."
+    },
+    {
+      "text": "recommendations.md warns against metaprogramming, reflection, or dynamic dispatch and explains why it hurts agents specifically",
+      "passed": true,
+      "evidence": "Section 4 says 'Avoid decorators / metaclasses / monkey-patching for core behavior' and 'Avoid magic strings that map to handlers' because agents follow imports and reimplement code they can't grep."
+    },
+    {
+      "text": "recommendations.md recommends typed public boundaries / type annotations at module seams",
+      "passed": true,
+      "evidence": "Section 1 'Make the type system the contract' prescribes strict TS, mypy --strict, and 'Validate all external inputs at the boundary with Zod / Pydantic / Valibot so that internal code has real types'."
+    },
+    {
+      "text": "recommendations.md recommends verification affordances (colocated tests, single command for lint+test+typecheck, fast feedback) and ties this to preventing agent hallucination spirals",
+      "passed": true,
+      "evidence": "Section 2 'Give the agent a fast, deterministic feedback loop' prescribes 'one command that does type-check + lint + unit tests in under ~30 seconds' and notes agents 'will confidently invent APIs that \"look right\" when they cannot verify', turning hallucination into a compile failure."
+    },
+    {
+      "text": "recommendations.md addresses file size, near-duplicates, or apply-model / str_replace breakage",
+      "passed": false,
+      "evidence": "Section 6 addresses file size ('A 2000-line file blows the context window') but does not mention near-duplicate blocks breaking str_replace / SEARCH-REPLACE / apply-model edits specifically."
+    },
+    {
+      "text": "recommendations.md grounds the reasoning in specific agent failure modes (e.g. mid-context position bias, grep misses, str_replace ambiguity, hallucinated APIs, spiral edits) rather than generic 'clean code' platitudes",
+      "passed": true,
+      "evidence": "Names concrete failure modes such as 'agents confidently invent APIs', 'any propagates silently', 'agents follow imports... if they can't find a symbol via grep... they assume it doesn't exist and reimplement it', and 'context window blows' on 2000-line files."
+    },
+    {
+      "text": "recommendations.md presents the list in a prioritized order (top 3, ranked list, or similar) rather than flat unordered bullets",
+      "passed": true,
+      "evidence": "Structured as 'Tier 1 \u2014 Highest leverage', 'Tier 2 \u2014 High leverage', 'Tier 3 \u2014 Meaningful polish' with numbered items 1-20 and a final 'minimal checklist you can apply this week'."
+    }
+  ],
+  "summary": {
+    "pass_rate": 0.875,
+    "passed": 7,
+    "failed": 1,
+    "total": 8
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "expectations": [
+    {
+      "text": "recommendations.md discusses naming with explicit reference to grep-ability, retrieval, or localization (not just 'use good names')",
+      "passed": true,
+      "evidence": "Section 1 is 'Name things for localization' and states 'Agents localize code by grepping names... Aider's repo-map and Cursor's retrieval both rank code by symbol references' and '`grep refund` now returns one file'."
+    },
+    {
+      "text": "recommendations.md recommends organizing code by feature / vertical slice rather than by horizontal layer",
+      "passed": true,
+      "evidence": "Section 2 is explicitly titled 'Colocate by feature (vertical slices), not by technical layer' and contrasts src/billing/refunds/ against controllers/services/middleware layering."
+    },
+    {
+      "text": "recommendations.md warns against metaprogramming, reflection, or dynamic dispatch and explains why it hurts agents specifically",
+      "passed": true,
+      "evidence": "Section 6 'Prefer static, grep-traceable dependencies over metaprogramming' names __getattr__, eval, Proxy, Reflect and cites ETH SRI Lab / DAPLab evidence that agents hallucinate around untraceable code."
+    },
+    {
+      "text": "recommendations.md recommends typed public boundaries / type annotations at module seams",
+      "passed": true,
+      "evidence": "Section 3 says 'Annotate every public function signature. Types are the contract retrievers and constrained-generation systems trust' and Section 10 covers validating at module boundaries with Zod/Pydantic."
+    },
+    {
+      "text": "recommendations.md recommends verification affordances (colocated tests, single command for lint+test+typecheck, fast feedback) and ties this to preventing agent hallucination spirals",
+      "passed": true,
+      "evidence": "Section 4 'Give the agent a verification loop' cites the Surge HQ 'Gemini produced 693 lines of wrong patches over 39 turns' spiral and prescribes colocated tests plus one Makefile/justfile command for lint+typecheck+tests."
+    },
+    {
+      "text": "recommendations.md addresses file size, near-duplicates, or apply-model / str_replace breakage",
+      "passed": true,
+      "evidence": "Section 5 explicitly discusses Morph LLM apply-model failures on >1,000 line files and 'Claude Code's `str_replace` and Aider's SEARCH/REPLACE both require unique context lines' breaking on duplicates."
+    },
+    {
+      "text": "recommendations.md grounds the reasoning in specific agent failure modes (e.g. mid-context position bias, grep misses, str_replace ambiguity, hallucinated APIs, spiral edits) rather than generic 'clean code' platitudes",
+      "passed": true,
+      "evidence": "Cites 'lost in the middle' position bias (Liu et al. 2023), str_replace/SEARCH-REPLACE ambiguity, Gemini 693-line hallucination spiral, grep misses on __getattr__, and SWE-Bench Pro multi-file edit failure rates."
+    },
+    {
+      "text": "recommendations.md presents the list in a prioritized order (top 3, ranked list, or similar) rather than flat unordered bullets",
+      "passed": true,
+      "evidence": "The document is divided into 'Priority 1 \u2014 The non-negotiables', 'Priority 2 \u2014 Structural rules', 'Priority 3 \u2014 Meta-level scaffolding' with numbered items 1-10 and a final 'Fix in this order' ordering."
+    }
+  ],
+  "summary": {
+    "pass_rate": 1.0,
+    "passed": 8,
+    "failed": 0,
+    "total": 8
+  }
+}

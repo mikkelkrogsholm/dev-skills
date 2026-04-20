@@ -1,0 +1,97 @@
+src/
+├── main.ts                          # Bun entrypoint: build app, start server. No business logic.
+├── app.ts                           # Compose Hono app: mount feature routes, attach middleware.
+├── env.ts                           # Parse process.env via zod; export typed `env`. One source of truth.
+├── context.ts                       # AppContext type: { db, clock, logger, env, fetch }. Injected everywhere.
+│
+├── features/                        # VERTICAL SLICES. One folder per domain concept.
+│   │                                # A feature owns: routes, handlers, db access, schemas, types, tests.
+│   │                                # Agents should be able to grep one folder and act correctly.
+│   │
+│   ├── auth/
+│   │   ├── auth.routes.ts           # Hono router: POST /auth/login, /auth/logout, /auth/refresh
+│   │   ├── auth.handlers.ts         # Route handlers — thin; call into functions below.
+│   │   ├── auth.passwords.ts        # hashPassword, verifyPassword (argon2/bcrypt wrapper)
+│   │   ├── auth.sessions.ts         # createSession, revokeSession, loadSessionById
+│   │   ├── auth.tokens.ts           # signAccessToken, verifyAccessToken (JWT or opaque)
+│   │   ├── auth.middleware.ts       # requireUser, requireAdmin — attaches user to c.var
+│   │   ├── auth.schemas.ts          # zod request/response schemas
+│   │   ├── auth.types.ts            # Session, AuthedUser, branded SessionId
+│   │   ├── auth.errors.ts           # InvalidCredentials, SessionExpired (typed error classes)
+│   │   ├── auth.passwords.test.ts
+│   │   ├── auth.sessions.test.ts
+│   │   └── auth.handlers.test.ts
+│   │
+│   ├── users/
+│   │   ├── users.routes.ts          # GET /users/me, PATCH /users/me, GET /users/:id
+│   │   ├── users.handlers.ts
+│   │   ├── users.queries.ts         # getUserById, findUserByEmail, listUsers (read side)
+│   │   ├── users.mutations.ts       # createUser, updateUserProfile, softDeleteUser (write side)
+│   │   ├── users.schemas.ts         # zod CreateUserInput, UpdateUserInput, UserResponse
+│   │   ├── users.types.ts           # UserId (branded), User, PublicUser
+│   │   ├── users.errors.ts          # UserNotFound, EmailAlreadyInUse
+│   │   ├── users.queries.test.ts
+│   │   ├── users.mutations.test.ts
+│   │   └── users.handlers.test.ts
+│   │
+│   ├── billing/
+│   │   ├── billing.routes.ts        # POST /billing/checkout, /billing/portal, /billing/webhook
+│   │   ├── billing.handlers.ts
+│   │   ├── billing.stripe.ts        # Thin Stripe client wrapper. Stripe version pinned.
+│   │   ├── billing.checkout.ts      # createCheckoutSession, resumeCheckout
+│   │   ├── billing.subscriptions.ts # syncSubscriptionFromStripe, cancelSubscription
+│   │   ├── billing.webhooks.ts      # handleStripeWebhook — discriminated union on event.type
+│   │   ├── billing.schemas.ts
+│   │   ├── billing.types.ts         # CustomerId, SubscriptionId (branded), PlanTier
+│   │   ├── billing.errors.ts
+│   │   ├── billing.checkout.test.ts
+│   │   ├── billing.webhooks.test.ts
+│   │   └── billing.handlers.test.ts
+│   │
+│   └── health/
+│       ├── health.routes.ts         # GET /health, /health/db — liveness + readiness
+│       ├── health.handlers.ts
+│       └── health.handlers.test.ts
+│
+├── db/                              # Database layer — one folder, not scattered.
+│   ├── client.ts                    # Neon serverless driver + Drizzle; exports `makeDb(env)`.
+│   ├── schema.ts                    # All Drizzle tables. Infer types via table.$inferSelect.
+│   ├── migrations/                  # drizzle-kit generated SQL. Do not hand-edit.
+│   │   └── .gitkeep
+│   └── seed.ts                      # Dev seed script. Seeded RNG for reproducibility.
+│
+├── lib/                             # Cross-feature utilities. NOT a dumping ground.
+│   │                                # Each file does ONE named thing. No utils.ts / helpers.ts.
+│   ├── ids.ts                       # newUserId, newSessionId (branded ID factories)
+│   ├── clock.ts                     # Clock interface + SystemClock + TestClock
+│   ├── logger.ts                    # pino wrapper; injected, never imported as singleton
+│   ├── result.ts                    # Result<T, E> type for expected-failure code paths
+│   └── http-errors.ts               # HttpError class + toHonoResponse mapper
+│
+├── middleware/                      # Cross-cutting Hono middleware only. Feature middleware
+│   ├── request-id.ts                # lives inside its feature folder.
+│   ├── error-handler.ts             # Maps typed errors → JSON responses
+│   ├── cors.ts
+│   └── rate-limit.ts
+│
+└── types/
+    └── branded.ts                   # Brand<T, Tag> helper. Consumed by feature *.types.ts files.
+
+test/                                # Integration + e2e only. Unit tests live next to source.
+├── setup.ts                         # Spin up test db branch on Neon; freeze clock.
+├── fixtures.ts                      # Seeded factories: makeUser(), makeSubscription()
+└── integration/
+    ├── auth.flow.test.ts            # login → access protected route → refresh → logout
+    └── billing.flow.test.ts         # checkout → webhook → subscription active
+
+scripts/
+├── check.sh                         # bun lint && bun typecheck && bun test — single verification command
+├── db-migrate.ts                    # drizzle-kit migrate wrapper
+└── db-branch.ts                     # Create ephemeral Neon branch for CI
+
+drizzle.config.ts
+tsconfig.json
+package.json                         # Pinned versions (no ^) on hono, drizzle, stripe, @neondatabase/serverless
+CONVENTIONS.md
+CLAUDE.md                            # Agent context: commands, boundaries, canonical examples
+.env.example

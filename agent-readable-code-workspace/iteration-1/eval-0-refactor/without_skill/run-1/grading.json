@@ -1,0 +1,70 @@
+{
+  "expectations": [
+    {
+      "text": "problems.md explicitly names 'utils.py' as a dumping-ground / generic filename problem",
+      "passed": true,
+      "evidence": "Section 1 'Filename carries no semantic information' names `utils.py` and says the intro calls it a 'dumping-ground module'."
+    },
+    {
+      "text": "problems.md calls out the generic class name 'Manager' as a naming problem",
+      "passed": true,
+      "evidence": "Section 2 lists 'Manager, Base, Entity' among generic, semantically empty identifiers."
+    },
+    {
+      "text": "problems.md identifies __getattr__ / dynamic dispatch (the DynamicAPI class) as a problem for AI agents",
+      "passed": true,
+      "evidence": "Section 5 bullet calls out 'DynamicAPI.__getattr__ returning lambda **kw: None \u2014 every attribute access succeeds with a no-op.'"
+    },
+    {
+      "text": "problems.md flags the use of eval() as an anti-pattern",
+      "passed": true,
+      "evidence": "Section 5 first bullet: 'eval(expr) \u2014 arbitrary string execution... It is also a security hole.'"
+    },
+    {
+      "text": "problems.md identifies the deep inheritance chain (Base -> Entity -> Persisted -> Auditable -> User)",
+      "passed": true,
+      "evidence": "Section 6 'Deep, empty inheritance chain' writes out 'User -> Auditable -> Persisted -> Entity -> Base, five levels, every intermediate class empty.'"
+    },
+    {
+      "text": "problems.md notes that public functions lack type annotations / return types",
+      "passed": true,
+      "evidence": "Section 3 'Missing type annotations on public API' lists five functions with 'no parameter types and no return type.'"
+    },
+    {
+      "text": "refactored.py's public functions have type annotations on parameters and return values",
+      "passed": true,
+      "evidence": "Public functions such as `add_integers(left: int, right: int) -> int`, `normalize_user_payload(payload: Mapping[str, object]) -> dict[str, object]`, and `safe_eval_arithmetic(expression: str) -> int | float` all have full annotations."
+    },
+    {
+      "text": "refactored.py does not use __getattr__ for runtime method dispatch",
+      "passed": true,
+      "evidence": "The file contains no `__getattr__` and the rationale/comments state 'Removed DynamicAPI.__getattr__ entirely.'"
+    },
+    {
+      "text": "refactored.py does not call eval() or exec() on user input",
+      "passed": true,
+      "evidence": "No `eval(` or `exec(` call appears; `safe_eval_arithmetic` uses `ast.parse` with a walker and allow-listed operators."
+    },
+    {
+      "text": "refactored.py replaces the generic 'Manager' class name with something domain-specific (or removes it)",
+      "passed": true,
+      "evidence": "Manager is removed; the rationale notes 'do_stuff \u2192 removed; its work is User.rename / User.deactivate / User.touch.'"
+    },
+    {
+      "text": "refactored.py's inheritance chain is at most 2 levels deep (or uses composition instead)",
+      "passed": true,
+      "evidence": "`User` is a single flat `@dataclass(slots=True)` with no base classes, collapsing the original 5-level chain."
+    },
+    {
+      "text": "rationale.md grounds recommendations in specific AI-agent failure modes (e.g. grep misses, hallucination, str_replace breakage) rather than generic clean-code arguments",
+      "passed": true,
+      "evidence": "Rationale explains failure modes such as 'agents will pile type-checks, I/O, and validation into it because process accepts anything', 'Dynamic imports defeat rename refactors', and 'An agent writing tests against such an API will produce passing tests for non-existent methods.'"
+    }
+  ],
+  "summary": {
+    "pass_rate": 1.0,
+    "passed": 12,
+    "failed": 0,
+    "total": 12
+  }
+}

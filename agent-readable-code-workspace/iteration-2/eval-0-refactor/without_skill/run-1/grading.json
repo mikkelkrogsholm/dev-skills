@@ -1,0 +1,85 @@
+{
+  "expectations": [
+    {
+      "text": "problems.md explicitly names 'utils.py' as a dumping-ground / generic filename problem",
+      "passed": true,
+      "evidence": "Section 1 'Meaningless module name (utils.py)' and the intro call it a 'dumping-ground' module."
+    },
+    {
+      "text": "problems.md calls out the generic class name 'Manager' as a naming problem",
+      "passed": false,
+      "evidence": "Section 2 names process/handle/do_stuff but never mentions the class name 'Manager' specifically."
+    },
+    {
+      "text": "problems.md identifies __getattr__ / dynamic dispatch as a problem for AI agents",
+      "passed": true,
+      "evidence": "Section 7 '__getattr__-based dispatch (DynamicAPI)' explicitly addresses this pattern."
+    },
+    {
+      "text": "problems.md flags the use of eval() as an anti-pattern",
+      "passed": true,
+      "evidence": "Section 5 flags eval(expr) on caller-supplied input as a security hole and unbounded behavior surface."
+    },
+    {
+      "text": "problems.md identifies the deep inheritance chain",
+      "passed": true,
+      "evidence": "Section 8 names 'Base -> Entity -> Persisted -> Auditable -> User' as a 5-level inheritance chain."
+    },
+    {
+      "text": "problems.md notes that public functions lack type annotations / return types",
+      "passed": true,
+      "evidence": "Section 3 'No type annotations on public functions' calls this out explicitly."
+    },
+    {
+      "text": "refactored.py's public functions have type annotations on parameters and return values",
+      "passed": true,
+      "evidence": "identity(value: T) -> T and add_integers(left: int, right: int) -> int are fully annotated, as are mark_persisted/touch."
+    },
+    {
+      "text": "refactored.py does not use __getattr__ for runtime method dispatch",
+      "passed": true,
+      "evidence": "No __getattr__ defined in refactored.py; DynamicAPI was removed."
+    },
+    {
+      "text": "refactored.py does not call eval() or exec() on user input",
+      "passed": true,
+      "evidence": "run_expression and eval were removed entirely; no eval/exec calls remain."
+    },
+    {
+      "text": "refactored.py replaces the generic 'Manager' class name with something domain-specific (or removes it)",
+      "passed": true,
+      "evidence": "No Manager class exists in the refactored file."
+    },
+    {
+      "text": "refactored.py's inheritance chain is at most 2 levels deep (or uses composition)",
+      "passed": true,
+      "evidence": "User is a flat @dataclass with no inheritance chain."
+    },
+    {
+      "text": "rationale.md grounds recommendations in specific AI-agent failure modes rather than generic clean-code arguments",
+      "passed": true,
+      "evidence": "Every section has a 'Failure mode avoided' subsection naming concrete agent behaviors (fabricated types, silent no-op calls, rename refactors breaking dynamic imports)."
+    },
+    {
+      "text": "refactored.py declares __all__ to make the public surface explicit (v1.3 guidance \u2014 Python-specific)",
+      "passed": true,
+      "evidence": "Lines 24-28 declare __all__ with User, add_integers, identity."
+    },
+    {
+      "text": "refactored.py uses @dataclass(slots=True) or @dataclass(frozen=True) to prevent ad-hoc attribute fabrication (v1.3 guidance)",
+      "passed": false,
+      "evidence": "User is declared as a plain @dataclass without slots=True or frozen=True."
+    },
+    {
+      "text": "rationale.md or problems.md explains why slots/__all__ matters for agents (hallucinated attributes, import of internal helpers) \u2014 the v1.3 framing",
+      "passed": false,
+      "evidence": "Rationale mentions __all__ preventing internal helper imports but never discusses slots/frozen semantics as a guard against hallucinated attributes."
+    }
+  ],
+  "summary": {
+    "pass_rate": 0.8,
+    "passed": 12,
+    "failed": 3,
+    "total": 15
+  }
+}

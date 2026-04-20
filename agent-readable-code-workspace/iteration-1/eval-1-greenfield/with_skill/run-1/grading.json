@@ -1,0 +1,55 @@
+{
+  "expectations": [
+    {
+      "text": "layout.txt organizes by feature (auth/, billing/, users/) rather than primarily by horizontal layer (controllers/, services/, models/ as top-level)",
+      "passed": true,
+      "evidence": "Layout uses src/features/{auth,users,billing}/ with no top-level controllers/services/models directories."
+    },
+    {
+      "text": "layout.txt colocates test files next to source files (*.test.ts or *.spec.ts adjacent to source) rather than segregating them into a distant tests/ tree",
+      "passed": true,
+      "evidence": "Each feature dir contains colocated tests like auth.routes.test.ts and auth.service.test.ts next to source files."
+    },
+    {
+      "text": "layout.txt contains concrete domain directories like auth, billing, or users (not just generic scaffold)",
+      "passed": true,
+      "evidence": "src/features/ contains concrete auth/, users/, and billing/ directories with domain-specific files."
+    },
+    {
+      "text": "CONVENTIONS.md explicitly addresses naming \u2014 e.g. avoiding generic names (Manager/Service/Handler) or requiring domain-specific names",
+      "passed": true,
+      "evidence": "Section 2 bans name fragments Manager, Service (class suffix), Helper, Util, Handler, Common, Misc and requires verbs with domain objects."
+    },
+    {
+      "text": "CONVENTIONS.md gives a concrete file-size guideline (a number, e.g. under 500 or 800 lines)",
+      "passed": true,
+      "evidence": "Section 3 states 'Hard ceiling: 400 lines per file. Soft target: 250.'"
+    },
+    {
+      "text": "CONVENTIONS.md requires type annotations on public / module-boundary functions",
+      "passed": true,
+      "evidence": "Section 5: 'Public function signatures are fully typed. No any, no implicit return types on exported functions.'"
+    },
+    {
+      "text": "CONVENTIONS.md mentions tests/lint/typecheck as the verification loop (colocated tests, a single bash command, or similar)",
+      "passed": true,
+      "evidence": "Section 7: 'One verifiable command: bun run check runs typecheck + lint + tests.'"
+    },
+    {
+      "text": "CONVENTIONS.md discourages dynamic/metaprogramming patterns (reflection, runtime dispatch, heavy DI frameworks) \u2014 or equivalent \u2014 for agent-traceability reasons",
+      "passed": true,
+      "evidence": "Section 4 forbids Proxy, Reflect.defineProperty, runtime monkey-patching, dynamic imports of app modules, DI containers, with rationale 'Control flow must be visible to grep.'"
+    },
+    {
+      "text": "CONVENTIONS.md explains at least one decision in terms of AI-agent behavior (grep-ability, context windows, str_replace, hallucination) rather than generic clean-code reasoning",
+      "passed": true,
+      "evidence": "Multiple agent-centric justifications, e.g. 'Files over 400 reliably break apply-model edits and burn context' and 'a class hierarchy the agent will fabricate methods into.'"
+    }
+  ],
+  "summary": {
+    "pass_rate": 1.0,
+    "passed": 9,
+    "failed": 0,
+    "total": 9
+  }
+}

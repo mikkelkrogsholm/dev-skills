@@ -1,0 +1,70 @@
+{
+  "expectations": [
+    {
+      "text": "problems.md explicitly names 'utils.py' as a dumping-ground / generic filename problem",
+      "passed": true,
+      "evidence": "Section 1 is titled 'Dumping-ground filename (AR003)' and explicitly calls out `utils.py` as on the banlist with purpose unclear from name."
+    },
+    {
+      "text": "problems.md calls out the generic class name 'Manager' as a naming problem",
+      "passed": true,
+      "evidence": "Table row 4 lists `class Manager` stating 'Noun Manager on the banlist' as a naming problem."
+    },
+    {
+      "text": "problems.md identifies __getattr__ / dynamic dispatch (the DynamicAPI class) as a problem for AI agents",
+      "passed": true,
+      "evidence": "Row 13 of section 4 names `DynamicAPI.__getattr__` saying 'Every attribute access synthesizes a no-op lambda. No method a tool can jump to.'"
+    },
+    {
+      "text": "problems.md flags the use of eval() as an anti-pattern",
+      "passed": true,
+      "evidence": "Section 4 row 11 lists `eval(expr)` as 'Arbitrary string evaluation. Grep for foo( will never find calls that pass through eval.'"
+    },
+    {
+      "text": "problems.md identifies the deep inheritance chain (Base -> Entity -> Persisted -> Auditable -> User)",
+      "passed": true,
+      "evidence": "Section 5 explicitly shows 'User -> Auditable -> Persisted -> Entity -> Base (depth 4, limit 3)'."
+    },
+    {
+      "text": "problems.md notes that public functions lack type annotations / return types",
+      "passed": true,
+      "evidence": "Section 3 'Missing type annotations at public boundaries (AR006)' lists 5 signatures with 'No param types, no return type.'"
+    },
+    {
+      "text": "refactored.py's public functions have type annotations on parameters and return values",
+      "passed": true,
+      "evidence": "All public functions like `normalize_email(email: str) -> str`, `sum_event_counts(a: int, b: int) -> int`, and `format_audit_event(event: AuditEvent, format_name: str) -> str` have full annotations."
+    },
+    {
+      "text": "refactored.py does not use __getattr__ for runtime method dispatch",
+      "passed": true,
+      "evidence": "No `__getattr__` appears in the refactored code; the docstring explicitly states 'DynamicAPI.__getattr__ deleted.'"
+    },
+    {
+      "text": "refactored.py does not call eval() or exec() on user input",
+      "passed": true,
+      "evidence": "No `eval(` or `exec(` call appears in the refactor; docstring notes 'eval and importlib.import_module helpers were removed.'"
+    },
+    {
+      "text": "refactored.py replaces the generic 'Manager' class name with something domain-specific (or removes it)",
+      "passed": true,
+      "evidence": "Manager is removed; its behavior is moved to the domain class `AuditTrail.record` as noted in the docstring."
+    },
+    {
+      "text": "refactored.py's inheritance chain is at most 2 levels deep (or uses composition instead)",
+      "passed": true,
+      "evidence": "User is a flat `@dataclass` that composes `AuditTrail` via a field; no inheritance chain remains."
+    },
+    {
+      "text": "rationale.md grounds recommendations in specific AI-agent failure modes (e.g. grep misses, hallucination, str_replace breakage) rather than generic clean-code arguments",
+      "passed": true,
+      "evidence": "Each section cites concrete failure modes: 'SweRank 2025 identifies file localization as the #1 bottleneck', 'Liu et al. 2025 measured a drop from 87.3% -> 58.7%', 'ETH SRI Fixing Correct Code postmortem', and 'Surge HQ 693-line-spiral postmortem'."
+    }
+  ],
+  "summary": {
+    "pass_rate": 1.0,
+    "passed": 12,
+    "failed": 0,
+    "total": 12
+  }
+}

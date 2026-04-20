@@ -1,0 +1,80 @@
+{
+  "expectations": [
+    {
+      "text": "layout.txt organizes by feature (auth/, billing/, users/) rather than primarily by horizontal layer",
+      "passed": true,
+      "evidence": "Layout has a top-level src/features/ with auth, users, billing, health subfolders each containing their own routes/handlers/queries/types."
+    },
+    {
+      "text": "layout.txt colocates test files next to source files rather than in a distant tests/ tree",
+      "passed": true,
+      "evidence": "Each feature folder includes *.test.ts files alongside source (e.g., auth.passwords.test.ts next to auth.passwords.ts)."
+    },
+    {
+      "text": "layout.txt contains concrete domain directories like auth, billing, or users",
+      "passed": true,
+      "evidence": "features/auth/, features/users/, features/billing/, features/health/ are all present."
+    },
+    {
+      "text": "CONVENTIONS.md explicitly addresses naming \u2014 avoiding generic names or requiring domain-specific names",
+      "passed": true,
+      "evidence": "Section 2 bans 'Manager', 'Service', 'Helper', 'Util', 'data', 'info', 'temp' and requires verbs describing full effect."
+    },
+    {
+      "text": "CONVENTIONS.md gives a concrete file-size guideline with a number",
+      "passed": true,
+      "evidence": "Section 3 states 'Hard ceiling: 400 lines per file. Warn at 300.' with line length 200 chars."
+    },
+    {
+      "text": "CONVENTIONS.md requires type annotations on public / module-boundary functions",
+      "passed": true,
+      "evidence": "Section 5: 'Public function signatures are fully typed. No implicit any, no unannotated returns on exported functions.'"
+    },
+    {
+      "text": "CONVENTIONS.md mentions tests/lint/typecheck as the verification loop",
+      "passed": true,
+      "evidence": "Section 9: 'bun run check runs bun lint && bun typecheck && bun test. This is the agent's feedback loop.'"
+    },
+    {
+      "text": "CONVENTIONS.md discourages dynamic/metaprogramming patterns for agent-traceability",
+      "passed": true,
+      "evidence": "Section 4: 'No eval, no Proxy, no runtime monkey-patching, no dynamic import()... Control flow must be visible to grep.'"
+    },
+    {
+      "text": "CONVENTIONS.md explains at least one decision in terms of AI-agent behavior",
+      "passed": true,
+      "evidence": "Preamble states 'Optimized for maintenance by AI agents' and many rules cite agent behavior (apply-model merges, grep, etc.)."
+    },
+    {
+      "text": "CONVENTIONS.md recommends branded / nominal types for IDs (e.g. UserId as branded string) \u2014 v1.3 guidance",
+      "passed": true,
+      "evidence": "Section 5: 'Branded IDs. UserId, SessionId, CustomerId, SubscriptionId are string & { readonly __brand: ... }'"
+    },
+    {
+      "text": "CONVENTIONS.md prefers discriminated unions (or equivalent) over magic-string dispatch / string-keyed registries \u2014 v1.3 guidance",
+      "passed": true,
+      "evidence": "Section 4/5: 'No magic-string dispatch' and 'Discriminated unions over strings' with explicit StripeEvent example."
+    },
+    {
+      "text": "CONVENTIONS.md addresses dependency pinning, version pinning, or 'boring stack' / training-data hygiene \u2014 v1.3 guidance",
+      "passed": true,
+      "evidence": "Section 4: 'Pinned versions. package.json has no ^ or ~...' and 'Boring stack only... all in training data.'"
+    },
+    {
+      "text": "CONVENTIONS.md covers deterministic tests (seeded randomness, frozen time) OR injectable side effects (clock, fetch, env as arguments) \u2014 v1.3 guidance",
+      "passed": true,
+      "evidence": "Section 6: injectable clock/logger/env/fetch via AppContext; Section 9: 'Tests freeze the clock and seed randomness.'"
+    },
+    {
+      "text": "CONVENTIONS.md explicitly discourages barrel / re-export index files \u2014 v1.3 guidance (AR011)",
+      "passed": true,
+      "evidence": "Section 3: 'No barrel files (index.ts that only re-exports). Consumers import from the defining file.'"
+    }
+  ],
+  "summary": {
+    "pass_rate": 1.0,
+    "passed": 14,
+    "failed": 0,
+    "total": 14
+  }
+}

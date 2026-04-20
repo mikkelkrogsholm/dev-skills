@@ -1,0 +1,70 @@
+{
+  "expectations": [
+    {
+      "text": "recommendations.md discusses naming with explicit reference to grep-ability, retrieval, or localization",
+      "passed": true,
+      "evidence": "Rec. 3 'Name things the way an agent would grep for them' explicitly ties naming to grep-based localization and model comprehension accuracy."
+    },
+    {
+      "text": "recommendations.md recommends organizing code by feature / vertical slice rather than horizontal layer",
+      "passed": true,
+      "evidence": "Rec. 4 'Colocate features; don't scatter across layers' explicitly contrasts vertical feature slices against horizontal layers with a concrete directory example."
+    },
+    {
+      "text": "recommendations.md warns against metaprogramming, reflection, or dynamic dispatch",
+      "passed": true,
+      "evidence": "Rec. 8 'Prefer static, grep-traceable code over metaprogramming' warns against __getattr__, eval, Proxy, Reflect, magic-string dispatch, and decorator stacks."
+    },
+    {
+      "text": "recommendations.md recommends typed public boundaries / type annotations at module seams",
+      "passed": true,
+      "evidence": "Rec. 9 'Use types as anti-hallucination anchors at boundaries' explicitly requires typed public signatures on every exported function."
+    },
+    {
+      "text": "recommendations.md recommends verification affordances tied to preventing agent hallucination spirals",
+      "passed": true,
+      "evidence": "Rec. 1 'Give the agent a single verification command' explicitly cites hallucination spirals and the 693-lines/39-turns failure mode."
+    },
+    {
+      "text": "recommendations.md addresses file size, near-duplicates, or str_replace breakage",
+      "passed": true,
+      "evidence": "Rec. 6 covers 800-line apply-model limits and 'lost in the middle'; Rec. 7 explicitly names str_replace failure on non-unique surrounding lines."
+    },
+    {
+      "text": "recommendations.md grounds reasoning in specific agent failure modes rather than generic clean-code platitudes",
+      "passed": true,
+      "evidence": "Names concrete failure modes including hallucination spirals, str_replace non-uniqueness, lost-in-the-middle mid-context bias, grep misses, and context-window limits."
+    },
+    {
+      "text": "recommendations.md presents the list in a prioritized order",
+      "passed": true,
+      "evidence": "Document is organized in explicit Tier 1/2/3 sections with a numbered ordering and an explicit 'Priority summary' top-5."
+    },
+    {
+      "text": "recommendations.md covers deterministic tests (seeded randomness, frozen time) OR injectable side effects \u2014 v1.3 guidance",
+      "passed": true,
+      "evidence": "Rec. 2 'Eliminate flakiness and inject side effects' covers seeded randomness, frozen time via injected clock, and injected fetch/logger/env/db."
+    },
+    {
+      "text": "recommendations.md mentions branded/nominal types OR discriminated unions over magic strings \u2014 v1.3 guidance",
+      "passed": true,
+      "evidence": "Rec. 9 introduces branded UserId/OrgId types; Rec. 8 shows a concrete swap from magic-string event bus to discriminated union."
+    },
+    {
+      "text": "recommendations.md flags barrel re-export files or 'export *' as an anti-pattern \u2014 v1.3 guidance (AR011)",
+      "passed": true,
+      "evidence": "Rec. 8 flags 'Barrel re-exports (export * from ./foo) \u2014 adds a grep hop, breaks tree-shaking'; Rec. 14 repeats the avoidance."
+    },
+    {
+      "text": "recommendations.md mentions dependency pinning OR training-data / 'boring stack' considerations \u2014 v1.3 guidance",
+      "passed": true,
+      "evidence": "Rec. 12 'Choose boring, well-trained frameworks' discusses training-data resemblance and explicitly recommends pinning dependency versions."
+    }
+  ],
+  "summary": {
+    "pass_rate": 1.0,
+    "passed": 12,
+    "failed": 0,
+    "total": 12
+  }
+}

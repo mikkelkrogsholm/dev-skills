@@ -1,0 +1,463 @@
+{
+  "metadata": {
+    "skill_name": "agent-readable-code",
+    "skill_path": "<path/to/skill>",
+    "executor_model": "<model-name>",
+    "analyzer_model": "<model-name>",
+    "timestamp": "2026-04-20T18:21:02Z",
+    "evals_run": [
+      0,
+      1,
+      2
+    ],
+    "runs_per_configuration": 3
+  },
+  "runs": [
+    {
+      "eval_id": 0,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 12,
+        "failed": 0,
+        "total": 12,
+        "time_seconds": 151.2,
+        "tokens": 47037,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "problems.md explicitly names 'utils.py' as a dumping-ground / generic filename problem",
+          "passed": true,
+          "evidence": "Section 1 is titled 'Dumping-ground filename (AR003)' and explicitly calls out `utils.py` as on the banlist with purpose unclear from name."
+        },
+        {
+          "text": "problems.md calls out the generic class name 'Manager' as a naming problem",
+          "passed": true,
+          "evidence": "Table row 4 lists `class Manager` stating 'Noun Manager on the banlist' as a naming problem."
+        },
+        {
+          "text": "problems.md identifies __getattr__ / dynamic dispatch (the DynamicAPI class) as a problem for AI agents",
+          "passed": true,
+          "evidence": "Row 13 of section 4 names `DynamicAPI.__getattr__` saying 'Every attribute access synthesizes a no-op lambda. No method a tool can jump to.'"
+        },
+        {
+          "text": "problems.md flags the use of eval() as an anti-pattern",
+          "passed": true,
+          "evidence": "Section 4 row 11 lists `eval(expr)` as 'Arbitrary string evaluation. Grep for foo( will never find calls that pass through eval.'"
+        },
+        {
+          "text": "problems.md identifies the deep inheritance chain (Base -> Entity -> Persisted -> Auditable -> User)",
+          "passed": true,
+          "evidence": "Section 5 explicitly shows 'User -> Auditable -> Persisted -> Entity -> Base (depth 4, limit 3)'."
+        },
+        {
+          "text": "problems.md notes that public functions lack type annotations / return types",
+          "passed": true,
+          "evidence": "Section 3 'Missing type annotations at public boundaries (AR006)' lists 5 signatures with 'No param types, no return type.'"
+        },
+        {
+          "text": "refactored.py's public functions have type annotations on parameters and return values",
+          "passed": true,
+          "evidence": "All public functions like `normalize_email(email: str) -> str`, `sum_event_counts(a: int, b: int) -> int`, and `format_audit_event(event: AuditEvent, format_name: str) -> str` have full annotations."
+        },
+        {
+          "text": "refactored.py does not use __getattr__ for runtime method dispatch",
+          "passed": true,
+          "evidence": "No `__getattr__` appears in the refactored code; the docstring explicitly states 'DynamicAPI.__getattr__ deleted.'"
+        },
+        {
+          "text": "refactored.py does not call eval() or exec() on user input",
+          "passed": true,
+          "evidence": "No `eval(` or `exec(` call appears in the refactor; docstring notes 'eval and importlib.import_module helpers were removed.'"
+        },
+        {
+          "text": "refactored.py replaces the generic 'Manager' class name with something domain-specific (or removes it)",
+          "passed": true,
+          "evidence": "Manager is removed; its behavior is moved to the domain class `AuditTrail.record` as noted in the docstring."
+        },
+        {
+          "text": "refactored.py's inheritance chain is at most 2 levels deep (or uses composition instead)",
+          "passed": true,
+          "evidence": "User is a flat `@dataclass` that composes `AuditTrail` via a field; no inheritance chain remains."
+        },
+        {
+          "text": "rationale.md grounds recommendations in specific AI-agent failure modes (e.g. grep misses, hallucination, str_replace breakage) rather than generic clean-code arguments",
+          "passed": true,
+          "evidence": "Each section cites concrete failure modes: 'SweRank 2025 identifies file localization as the #1 bottleneck', 'Liu et al. 2025 measured a drop from 87.3% -> 58.7%', 'ETH SRI Fixing Correct Code postmortem', and 'Surge HQ 693-line-spiral postmortem'."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 1,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 9,
+        "failed": 0,
+        "total": 9,
+        "time_seconds": 88.2,
+        "tokens": 32447,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "layout.txt organizes by feature (auth/, billing/, users/) rather than primarily by horizontal layer (controllers/, services/, models/ as top-level)",
+          "passed": true,
+          "evidence": "Layout uses src/features/{auth,users,billing}/ with no top-level controllers/services/models directories."
+        },
+        {
+          "text": "layout.txt colocates test files next to source files (*.test.ts or *.spec.ts adjacent to source) rather than segregating them into a distant tests/ tree",
+          "passed": true,
+          "evidence": "Each feature dir contains colocated tests like auth.routes.test.ts and auth.service.test.ts next to source files."
+        },
+        {
+          "text": "layout.txt contains concrete domain directories like auth, billing, or users (not just generic scaffold)",
+          "passed": true,
+          "evidence": "src/features/ contains concrete auth/, users/, and billing/ directories with domain-specific files."
+        },
+        {
+          "text": "CONVENTIONS.md explicitly addresses naming \u2014 e.g. avoiding generic names (Manager/Service/Handler) or requiring domain-specific names",
+          "passed": true,
+          "evidence": "Section 2 bans name fragments Manager, Service (class suffix), Helper, Util, Handler, Common, Misc and requires verbs with domain objects."
+        },
+        {
+          "text": "CONVENTIONS.md gives a concrete file-size guideline (a number, e.g. under 500 or 800 lines)",
+          "passed": true,
+          "evidence": "Section 3 states 'Hard ceiling: 400 lines per file. Soft target: 250.'"
+        },
+        {
+          "text": "CONVENTIONS.md requires type annotations on public / module-boundary functions",
+          "passed": true,
+          "evidence": "Section 5: 'Public function signatures are fully typed. No any, no implicit return types on exported functions.'"
+        },
+        {
+          "text": "CONVENTIONS.md mentions tests/lint/typecheck as the verification loop (colocated tests, a single bash command, or similar)",
+          "passed": true,
+          "evidence": "Section 7: 'One verifiable command: bun run check runs typecheck + lint + tests.'"
+        },
+        {
+          "text": "CONVENTIONS.md discourages dynamic/metaprogramming patterns (reflection, runtime dispatch, heavy DI frameworks) \u2014 or equivalent \u2014 for agent-traceability reasons",
+          "passed": true,
+          "evidence": "Section 4 forbids Proxy, Reflect.defineProperty, runtime monkey-patching, dynamic imports of app modules, DI containers, with rationale 'Control flow must be visible to grep.'"
+        },
+        {
+          "text": "CONVENTIONS.md explains at least one decision in terms of AI-agent behavior (grep-ability, context windows, str_replace, hallucination) rather than generic clean-code reasoning",
+          "passed": true,
+          "evidence": "Multiple agent-centric justifications, e.g. 'Files over 400 reliably break apply-model edits and burn context' and 'a class hierarchy the agent will fabricate methods into.'"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 2,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 8,
+        "failed": 0,
+        "total": 8,
+        "time_seconds": 126.9,
+        "tokens": 41424,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "recommendations.md discusses naming with explicit reference to grep-ability, retrieval, or localization (not just 'use good names')",
+          "passed": true,
+          "evidence": "Section 1 is 'Name things for localization' and states 'Agents localize code by grepping names... Aider's repo-map and Cursor's retrieval both rank code by symbol references' and '`grep refund` now returns one file'."
+        },
+        {
+          "text": "recommendations.md recommends organizing code by feature / vertical slice rather than by horizontal layer",
+          "passed": true,
+          "evidence": "Section 2 is explicitly titled 'Colocate by feature (vertical slices), not by technical layer' and contrasts src/billing/refunds/ against controllers/services/middleware layering."
+        },
+        {
+          "text": "recommendations.md warns against metaprogramming, reflection, or dynamic dispatch and explains why it hurts agents specifically",
+          "passed": true,
+          "evidence": "Section 6 'Prefer static, grep-traceable dependencies over metaprogramming' names __getattr__, eval, Proxy, Reflect and cites ETH SRI Lab / DAPLab evidence that agents hallucinate around untraceable code."
+        },
+        {
+          "text": "recommendations.md recommends typed public boundaries / type annotations at module seams",
+          "passed": true,
+          "evidence": "Section 3 says 'Annotate every public function signature. Types are the contract retrievers and constrained-generation systems trust' and Section 10 covers validating at module boundaries with Zod/Pydantic."
+        },
+        {
+          "text": "recommendations.md recommends verification affordances (colocated tests, single command for lint+test+typecheck, fast feedback) and ties this to preventing agent hallucination spirals",
+          "passed": true,
+          "evidence": "Section 4 'Give the agent a verification loop' cites the Surge HQ 'Gemini produced 693 lines of wrong patches over 39 turns' spiral and prescribes colocated tests plus one Makefile/justfile command for lint+typecheck+tests."
+        },
+        {
+          "text": "recommendations.md addresses file size, near-duplicates, or apply-model / str_replace breakage",
+          "passed": true,
+          "evidence": "Section 5 explicitly discusses Morph LLM apply-model failures on >1,000 line files and 'Claude Code's `str_replace` and Aider's SEARCH/REPLACE both require unique context lines' breaking on duplicates."
+        },
+        {
+          "text": "recommendations.md grounds the reasoning in specific agent failure modes (e.g. mid-context position bias, grep misses, str_replace ambiguity, hallucinated APIs, spiral edits) rather than generic 'clean code' platitudes",
+          "passed": true,
+          "evidence": "Cites 'lost in the middle' position bias (Liu et al. 2023), str_replace/SEARCH-REPLACE ambiguity, Gemini 693-line hallucination spiral, grep misses on __getattr__, and SWE-Bench Pro multi-file edit failure rates."
+        },
+        {
+          "text": "recommendations.md presents the list in a prioritized order (top 3, ranked list, or similar) rather than flat unordered bullets",
+          "passed": true,
+          "evidence": "The document is divided into 'Priority 1 \u2014 The non-negotiables', 'Priority 2 \u2014 Structural rules', 'Priority 3 \u2014 Meta-level scaffolding' with numbered items 1-10 and a final 'Fix in this order' ordering."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 0,
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 12,
+        "failed": 0,
+        "total": 12,
+        "time_seconds": 123.5,
+        "tokens": 32326,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "problems.md explicitly names 'utils.py' as a dumping-ground / generic filename problem",
+          "passed": true,
+          "evidence": "Section 1 'Filename carries no semantic information' names `utils.py` and says the intro calls it a 'dumping-ground module'."
+        },
+        {
+          "text": "problems.md calls out the generic class name 'Manager' as a naming problem",
+          "passed": true,
+          "evidence": "Section 2 lists 'Manager, Base, Entity' among generic, semantically empty identifiers."
+        },
+        {
+          "text": "problems.md identifies __getattr__ / dynamic dispatch (the DynamicAPI class) as a problem for AI agents",
+          "passed": true,
+          "evidence": "Section 5 bullet calls out 'DynamicAPI.__getattr__ returning lambda **kw: None \u2014 every attribute access succeeds with a no-op.'"
+        },
+        {
+          "text": "problems.md flags the use of eval() as an anti-pattern",
+          "passed": true,
+          "evidence": "Section 5 first bullet: 'eval(expr) \u2014 arbitrary string execution... It is also a security hole.'"
+        },
+        {
+          "text": "problems.md identifies the deep inheritance chain (Base -> Entity -> Persisted -> Auditable -> User)",
+          "passed": true,
+          "evidence": "Section 6 'Deep, empty inheritance chain' writes out 'User -> Auditable -> Persisted -> Entity -> Base, five levels, every intermediate class empty.'"
+        },
+        {
+          "text": "problems.md notes that public functions lack type annotations / return types",
+          "passed": true,
+          "evidence": "Section 3 'Missing type annotations on public API' lists five functions with 'no parameter types and no return type.'"
+        },
+        {
+          "text": "refactored.py's public functions have type annotations on parameters and return values",
+          "passed": true,
+          "evidence": "Public functions such as `add_integers(left: int, right: int) -> int`, `normalize_user_payload(payload: Mapping[str, object]) -> dict[str, object]`, and `safe_eval_arithmetic(expression: str) -> int | float` all have full annotations."
+        },
+        {
+          "text": "refactored.py does not use __getattr__ for runtime method dispatch",
+          "passed": true,
+          "evidence": "The file contains no `__getattr__` and the rationale/comments state 'Removed DynamicAPI.__getattr__ entirely.'"
+        },
+        {
+          "text": "refactored.py does not call eval() or exec() on user input",
+          "passed": true,
+          "evidence": "No `eval(` or `exec(` call appears; `safe_eval_arithmetic` uses `ast.parse` with a walker and allow-listed operators."
+        },
+        {
+          "text": "refactored.py replaces the generic 'Manager' class name with something domain-specific (or removes it)",
+          "passed": true,
+          "evidence": "Manager is removed; the rationale notes 'do_stuff \u2192 removed; its work is User.rename / User.deactivate / User.touch.'"
+        },
+        {
+          "text": "refactored.py's inheritance chain is at most 2 levels deep (or uses composition instead)",
+          "passed": true,
+          "evidence": "`User` is a single flat `@dataclass(slots=True)` with no base classes, collapsing the original 5-level chain."
+        },
+        {
+          "text": "rationale.md grounds recommendations in specific AI-agent failure modes (e.g. grep misses, hallucination, str_replace breakage) rather than generic clean-code arguments",
+          "passed": true,
+          "evidence": "Rationale explains failure modes such as 'agents will pile type-checks, I/O, and validation into it because process accepts anything', 'Dynamic imports defeat rename refactors', and 'An agent writing tests against such an API will produce passing tests for non-existent methods.'"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 1,
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.6667,
+        "passed": 6,
+        "failed": 3,
+        "total": 9,
+        "time_seconds": 94.8,
+        "tokens": 28963,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "layout.txt organizes by feature (auth/, billing/, users/) rather than primarily by horizontal layer (controllers/, services/, models/ as top-level)",
+          "passed": true,
+          "evidence": "src/features/ contains auth/, users/, billing/ subfolders; there is no top-level controllers/ or models/ directory (middleware/ and lib/ are supporting, not primary layering)."
+        },
+        {
+          "text": "layout.txt colocates test files next to source files (*.test.ts or *.spec.ts adjacent to source) rather than segregating them into a distant tests/ tree",
+          "passed": true,
+          "evidence": "Each feature folder includes a colocated auth.test.ts / users.test.ts / billing.test.ts alongside source (E2E tests in tests/e2e are a separate category)."
+        },
+        {
+          "text": "layout.txt contains concrete domain directories like auth, billing, or users (not just generic scaffold)",
+          "passed": true,
+          "evidence": "src/features/ contains concrete auth/, users/, billing/ directories with domain-named files."
+        },
+        {
+          "text": "CONVENTIONS.md explicitly addresses naming \u2014 e.g. avoiding generic names (Manager/Service/Handler) or requiring domain-specific names",
+          "passed": true,
+          "evidence": "Section 4 requires verb-first exports ('createUser'), specifies kebab-case files, and rejects names like 'handlePost' or generic 'UserSchema'."
+        },
+        {
+          "text": "CONVENTIONS.md gives a concrete file-size guideline (a number, e.g. under 500 or 800 lines)",
+          "passed": true,
+          "evidence": "Section 3: '300 lines per file is the soft limit... 500 lines is a hard ceiling. CI fails above this.'"
+        },
+        {
+          "text": "CONVENTIONS.md requires type annotations on public / module-boundary functions",
+          "passed": false,
+          "evidence": "Section 6 emphasizes inferring types from Zod/Drizzle but does not explicitly require annotated signatures on exported/public functions."
+        },
+        {
+          "text": "CONVENTIONS.md mentions tests/lint/typecheck as the verification loop (colocated tests, a single bash command, or similar)",
+          "passed": false,
+          "evidence": "Testing section mentions 'bun test' and colocation, but there is no single verification command combining typecheck + lint + tests as the agent feedback loop."
+        },
+        {
+          "text": "CONVENTIONS.md discourages dynamic/metaprogramming patterns (reflection, runtime dispatch, heavy DI frameworks) \u2014 or equivalent \u2014 for agent-traceability reasons",
+          "passed": false,
+          "evidence": "No explicit prohibition of Proxy, Reflect, dynamic imports, or DI containers; the conventions focus on layering and imports but do not address metaprogramming."
+        },
+        {
+          "text": "CONVENTIONS.md explains at least one decision in terms of AI-agent behavior (grep-ability, context windows, str_replace, hallucination) rather than generic clean-code reasoning",
+          "passed": true,
+          "evidence": "Multiple agent-centric rationales, e.g. 'Large files defeat agents: context windows fill with irrelevant code' and 'agent search (grep createUser) returns the definition...'"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 2,
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.875,
+        "passed": 7,
+        "failed": 1,
+        "total": 8,
+        "time_seconds": 101.7,
+        "tokens": 28620,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "recommendations.md discusses naming with explicit reference to grep-ability, retrieval, or localization (not just 'use good names')",
+          "passed": true,
+          "evidence": "Section 4 says 'Name things so that a grep for the feature name finds everything. If a feature is called \"checkout\", every file related to it should contain that string.'"
+        },
+        {
+          "text": "recommendations.md recommends organizing code by feature / vertical slice rather than by horizontal layer",
+          "passed": true,
+          "evidence": "Section 5 'Collocate code, tests, types, and schema' recommends putting foo.ts/foo.test.ts/foo.types.ts/foo.schema.ts in the same directory rather than separate /tests, /types, /schemas trees."
+        },
+        {
+          "text": "recommendations.md warns against metaprogramming, reflection, or dynamic dispatch and explains why it hurts agents specifically",
+          "passed": true,
+          "evidence": "Section 4 says 'Avoid decorators / metaclasses / monkey-patching for core behavior' and 'Avoid magic strings that map to handlers' because agents follow imports and reimplement code they can't grep."
+        },
+        {
+          "text": "recommendations.md recommends typed public boundaries / type annotations at module seams",
+          "passed": true,
+          "evidence": "Section 1 'Make the type system the contract' prescribes strict TS, mypy --strict, and 'Validate all external inputs at the boundary with Zod / Pydantic / Valibot so that internal code has real types'."
+        },
+        {
+          "text": "recommendations.md recommends verification affordances (colocated tests, single command for lint+test+typecheck, fast feedback) and ties this to preventing agent hallucination spirals",
+          "passed": true,
+          "evidence": "Section 2 'Give the agent a fast, deterministic feedback loop' prescribes 'one command that does type-check + lint + unit tests in under ~30 seconds' and notes agents 'will confidently invent APIs that \"look right\" when they cannot verify', turning hallucination into a compile failure."
+        },
+        {
+          "text": "recommendations.md addresses file size, near-duplicates, or apply-model / str_replace breakage",
+          "passed": false,
+          "evidence": "Section 6 addresses file size ('A 2000-line file blows the context window') but does not mention near-duplicate blocks breaking str_replace / SEARCH-REPLACE / apply-model edits specifically."
+        },
+        {
+          "text": "recommendations.md grounds the reasoning in specific agent failure modes (e.g. mid-context position bias, grep misses, str_replace ambiguity, hallucinated APIs, spiral edits) rather than generic 'clean code' platitudes",
+          "passed": true,
+          "evidence": "Names concrete failure modes such as 'agents confidently invent APIs', 'any propagates silently', 'agents follow imports... if they can't find a symbol via grep... they assume it doesn't exist and reimplement it', and 'context window blows' on 2000-line files."
+        },
+        {
+          "text": "recommendations.md presents the list in a prioritized order (top 3, ranked list, or similar) rather than flat unordered bullets",
+          "passed": true,
+          "evidence": "Structured as 'Tier 1 \u2014 Highest leverage', 'Tier 2 \u2014 High leverage', 'Tier 3 \u2014 Meaningful polish' with numbered items 1-20 and a final 'minimal checklist you can apply this week'."
+        }
+      ],
+      "notes": []
+    }
+  ],
+  "run_summary": {
+    "with_skill": {
+      "pass_rate": {
+        "mean": 1.0,
+        "stddev": 0.0,
+        "min": 1.0,
+        "max": 1.0
+      },
+      "time_seconds": {
+        "mean": 122.1,
+        "stddev": 31.7731,
+        "min": 88.2,
+        "max": 151.2
+      },
+      "tokens": {
+        "mean": 40302.6667,
+        "stddev": 7359.3523,
+        "min": 32447,
+        "max": 47037
+      }
+    },
+    "without_skill": {
+      "pass_rate": {
+        "mean": 0.8472,
+        "stddev": 0.1684,
+        "min": 0.6667,
+        "max": 1.0
+      },
+      "time_seconds": {
+        "mean": 106.6667,
+        "stddev": 14.9808,
+        "min": 94.8,
+        "max": 123.5
+      },
+      "tokens": {
+        "mean": 29969.6667,
+        "stddev": 2047.8385,
+        "min": 28620,
+        "max": 32326
+      }
+    },
+    "delta": {
+      "pass_rate": "+0.15",
+      "time_seconds": "+15.4",
+      "tokens": "+10333"
+    }
+  },
+  "notes": []
+}

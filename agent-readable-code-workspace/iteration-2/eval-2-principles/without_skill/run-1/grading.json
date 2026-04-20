@@ -1,0 +1,70 @@
+{
+  "expectations": [
+    {
+      "text": "recommendations.md discusses naming with explicit reference to grep-ability, retrieval, or localization",
+      "passed": true,
+      "evidence": "Rec. 1 'Make the repo navigable by grep and filename' explicitly ties naming and filenames to Grep/Glob retrieval behavior."
+    },
+    {
+      "text": "recommendations.md recommends organizing code by feature / vertical slice rather than horizontal layer",
+      "passed": false,
+      "evidence": "The document discusses colocation of schema/types/code and cohesive units but never explicitly recommends vertical feature slices over horizontal layers."
+    },
+    {
+      "text": "recommendations.md warns against metaprogramming, reflection, or dynamic dispatch",
+      "passed": true,
+      "evidence": "Rec. 20 'Avoid metaprogramming that defeats static analysis' warns against proxies, eval, dynamic this, and auto-registration."
+    },
+    {
+      "text": "recommendations.md recommends typed public boundaries / type annotations at module seams",
+      "passed": true,
+      "evidence": "Rec. 2 and Rec. 3 require typed self-sufficient signatures, branded IDs, and validated typed boundaries via z.infer."
+    },
+    {
+      "text": "recommendations.md recommends verification affordances tied to preventing agent hallucination spirals",
+      "passed": true,
+      "evidence": "Rec. 18 'Observability hooks that the agent can use to verify its work' ties fast feedback loops to preventing 'I think this works' self-deception."
+    },
+    {
+      "text": "recommendations.md addresses file size, near-duplicates, or str_replace breakage",
+      "passed": true,
+      "evidence": "Rec. 4 addresses file size (~200-400, above 600 guessing); does not explicitly name str_replace but discusses partial-context edits."
+    },
+    {
+      "text": "recommendations.md grounds reasoning in specific agent failure modes rather than generic clean-code platitudes",
+      "passed": true,
+      "evidence": "Names concrete failure modes including grep ambiguity, partial-context edits above ~600 lines, hidden side effects, and codegen overwrites, though it omits str_replace and mid-context bias specifically."
+    },
+    {
+      "text": "recommendations.md presents the list in a prioritized order",
+      "passed": true,
+      "evidence": "Organized in explicit Tier 1-4 sections with numbered items and a final checklist."
+    },
+    {
+      "text": "recommendations.md covers deterministic tests (seeded randomness, frozen time) OR injectable side effects \u2014 v1.3 guidance",
+      "passed": true,
+      "evidence": "Rec. 5 recommends passing I/O clients (db, stripe) as explicit arguments rather than module-level singletons, satisfying injectable side effects."
+    },
+    {
+      "text": "recommendations.md mentions branded/nominal types OR discriminated unions over magic strings \u2014 v1.3 guidance",
+      "passed": true,
+      "evidence": "Rec. 3 explicitly recommends branded/nominal IDs (UserId, OrgId, Cents) and discriminated union results."
+    },
+    {
+      "text": "recommendations.md flags barrel re-export files or 'export *' as an anti-pattern \u2014 v1.3 guidance (AR011)",
+      "passed": true,
+      "evidence": "Rec. 1 explicitly says 'Avoid index.ts barrel files that re-export everything' and includes it in the final checklist."
+    },
+    {
+      "text": "recommendations.md mentions dependency pinning OR training-data / 'boring stack' considerations \u2014 v1.3 guidance",
+      "passed": false,
+      "evidence": "The document explicitly down-weights popular frameworks ('Use popular frameworks the AI knows ... weighted far less') and never mentions dependency pinning or training-data considerations as guidance to follow."
+    }
+  ],
+  "summary": {
+    "pass_rate": 0.8333,
+    "passed": 10,
+    "failed": 2,
+    "total": 12
+  }
+}

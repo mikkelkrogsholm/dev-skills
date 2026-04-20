@@ -1,0 +1,55 @@
+{
+  "expectations": [
+    {
+      "text": "layout.txt organizes by feature (auth/, billing/, users/) rather than primarily by horizontal layer (controllers/, services/, models/ as top-level)",
+      "passed": true,
+      "evidence": "src/features/ contains auth/, users/, billing/ subfolders; there is no top-level controllers/ or models/ directory (middleware/ and lib/ are supporting, not primary layering)."
+    },
+    {
+      "text": "layout.txt colocates test files next to source files (*.test.ts or *.spec.ts adjacent to source) rather than segregating them into a distant tests/ tree",
+      "passed": true,
+      "evidence": "Each feature folder includes a colocated auth.test.ts / users.test.ts / billing.test.ts alongside source (E2E tests in tests/e2e are a separate category)."
+    },
+    {
+      "text": "layout.txt contains concrete domain directories like auth, billing, or users (not just generic scaffold)",
+      "passed": true,
+      "evidence": "src/features/ contains concrete auth/, users/, billing/ directories with domain-named files."
+    },
+    {
+      "text": "CONVENTIONS.md explicitly addresses naming \u2014 e.g. avoiding generic names (Manager/Service/Handler) or requiring domain-specific names",
+      "passed": true,
+      "evidence": "Section 4 requires verb-first exports ('createUser'), specifies kebab-case files, and rejects names like 'handlePost' or generic 'UserSchema'."
+    },
+    {
+      "text": "CONVENTIONS.md gives a concrete file-size guideline (a number, e.g. under 500 or 800 lines)",
+      "passed": true,
+      "evidence": "Section 3: '300 lines per file is the soft limit... 500 lines is a hard ceiling. CI fails above this.'"
+    },
+    {
+      "text": "CONVENTIONS.md requires type annotations on public / module-boundary functions",
+      "passed": false,
+      "evidence": "Section 6 emphasizes inferring types from Zod/Drizzle but does not explicitly require annotated signatures on exported/public functions."
+    },
+    {
+      "text": "CONVENTIONS.md mentions tests/lint/typecheck as the verification loop (colocated tests, a single bash command, or similar)",
+      "passed": false,
+      "evidence": "Testing section mentions 'bun test' and colocation, but there is no single verification command combining typecheck + lint + tests as the agent feedback loop."
+    },
+    {
+      "text": "CONVENTIONS.md discourages dynamic/metaprogramming patterns (reflection, runtime dispatch, heavy DI frameworks) \u2014 or equivalent \u2014 for agent-traceability reasons",
+      "passed": false,
+      "evidence": "No explicit prohibition of Proxy, Reflect, dynamic imports, or DI containers; the conventions focus on layering and imports but do not address metaprogramming."
+    },
+    {
+      "text": "CONVENTIONS.md explains at least one decision in terms of AI-agent behavior (grep-ability, context windows, str_replace, hallucination) rather than generic clean-code reasoning",
+      "passed": true,
+      "evidence": "Multiple agent-centric rationales, e.g. 'Large files defeat agents: context windows fill with irrelevant code' and 'agent search (grep createUser) returns the definition...'"
+    }
+  ],
+  "summary": {
+    "pass_rate": 0.6667,
+    "passed": 6,
+    "failed": 3,
+    "total": 9
+  }
+}

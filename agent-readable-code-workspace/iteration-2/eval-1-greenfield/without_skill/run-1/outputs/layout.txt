@@ -1,0 +1,68 @@
+src/
+├── index.ts                        # Bun entry point; boots Hono app, binds port
+├── app.ts                          # Builds and exports the Hono app (no listen)
+├── env.ts                          # Zod-parsed process.env; exports typed `env`
+├── config/
+│   ├── constants.ts                # Hardcoded non-secret values (limits, timeouts)
+│   └── feature-flags.ts            # Static feature flag definitions
+├── db/
+│   ├── client.ts                   # Neon + Drizzle client; exports `db`
+│   ├── schema.ts                   # Re-exports every table from ./schema/*
+│   ├── schema/
+│   │   ├── users.ts                # users, sessions tables
+│   │   ├── auth.ts                 # accounts, verification_tokens, api_keys
+│   │   ├── billing.ts              # customers, subscriptions, invoices
+│   │   └── audit.ts                # audit_log table
+│   ├── migrations/                 # drizzle-kit generated SQL; do not edit by hand
+│   │   └── meta/
+│   └── seed.ts                     # Idempotent dev/test seed script
+├── features/
+│   ├── auth/
+│   │   ├── auth.routes.ts          # Hono sub-app: /auth/*
+│   │   ├── auth.service.ts         # Pure business logic; takes `db` as arg
+│   │   ├── auth.repo.ts            # All Drizzle queries for this feature
+│   │   ├── auth.schemas.ts         # Zod request/response schemas
+│   │   ├── auth.types.ts           # Inferred types + domain types
+│   │   ├── auth.errors.ts          # Feature-specific AppError subclasses
+│   │   └── auth.test.ts            # bun:test; colocated with the feature
+│   ├── users/
+│   │   ├── users.routes.ts
+│   │   ├── users.service.ts
+│   │   ├── users.repo.ts
+│   │   ├── users.schemas.ts
+│   │   ├── users.types.ts
+│   │   └── users.test.ts
+│   ├── billing/
+│   │   ├── billing.routes.ts
+│   │   ├── billing.service.ts
+│   │   ├── billing.repo.ts
+│   │   ├── billing.schemas.ts
+│   │   ├── billing.types.ts
+│   │   ├── billing.webhooks.ts     # Stripe webhook handler (raw body)
+│   │   └── billing.test.ts
+│   └── health/
+│       └── health.routes.ts        # /healthz, /readyz
+├── middleware/
+│   ├── auth.middleware.ts          # Reads session/JWT, sets c.var.user
+│   ├── error.middleware.ts         # Maps AppError -> HTTP; logs unknowns
+│   ├── logger.middleware.ts        # Request log with requestId
+│   ├── request-id.middleware.ts    # Generates/propagates x-request-id
+│   └── rate-limit.middleware.ts
+├── lib/
+│   ├── errors.ts                   # AppError base class + HTTP mapping
+│   ├── result.ts                   # Result<T, E> helpers (optional)
+│   ├── id.ts                       # ULID/UUID generation
+│   ├── hash.ts                     # Password + token hashing
+│   ├── time.ts                     # Clock abstraction for tests
+│   └── logger.ts                   # pino/console wrapper
+├── integrations/
+│   ├── stripe.ts                   # Stripe SDK client + thin wrappers
+│   ├── resend.ts                   # Email client
+│   └── README.md                   # One-liner per integration + env vars
+├── types/
+│   ├── hono.d.ts                   # Augments Hono Variables/Bindings
+│   └── env.d.ts                    # ImportMetaEnv typing if needed
+└── test/
+    ├── setup.ts                    # bun:test preload; test DB, fixtures
+    ├── factories.ts                # buildUser(), buildSubscription(), etc.
+    └── helpers.ts                  # request() helper that wraps app.fetch

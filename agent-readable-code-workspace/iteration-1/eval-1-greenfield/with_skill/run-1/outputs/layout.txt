@@ -1,0 +1,58 @@
+repo-root/
+├── src/
+│   ├── server.ts                      # Hono app wiring: mounts each feature's routes. No business logic.
+│   ├── env.ts                         # Zod-parsed process.env. Single source of truth for config.
+│   ├── db/
+│   │   ├── client.ts                  # Neon + Drizzle client. Exports `db`.
+│   │   ├── schema.ts                  # Re-exports every feature's schema.ts. The one file migrations read.
+│   │   └── migrations/                # drizzle-kit output. Generated; do not hand-edit.
+│   │       └── .gitkeep
+│   ├── features/
+│   │   ├── auth/
+│   │   │   ├── auth.routes.ts         # Hono sub-app: /auth/login, /auth/logout, /auth/session
+│   │   │   ├── auth.routes.test.ts    # Route-level tests (hit the Hono app in-process)
+│   │   │   ├── auth.service.ts        # signInWithPassword, issueSession, revokeSession (verbs, not nouns)
+│   │   │   ├── auth.service.test.ts
+│   │   │   ├── auth.schema.ts         # Drizzle tables: sessions, password_reset_tokens
+│   │   │   ├── auth.types.ts          # Session, AuthenticatedRequest — types used across the feature
+│   │   │   ├── auth.middleware.ts     # requireSession(). Re-exported from here, nowhere else.
+│   │   │   └── auth.errors.ts         # InvalidCredentialsError, SessionExpiredError
+│   │   ├── users/
+│   │   │   ├── users.routes.ts
+│   │   │   ├── users.routes.test.ts
+│   │   │   ├── users.service.ts       # createUser, updateUserProfile, deleteUserAndPurgeData
+│   │   │   ├── users.service.test.ts
+│   │   │   ├── users.schema.ts        # users table, profiles table
+│   │   │   ├── users.types.ts
+│   │   │   └── users.queries.ts       # Drizzle queries too long to inline in service.ts
+│   │   └── billing/
+│   │       ├── billing.routes.ts      # /billing/checkout, /billing/portal, /billing/webhook
+│   │       ├── billing.routes.test.ts
+│   │       ├── billing.service.ts     # startCheckoutSession, handleStripeWebhook, syncSubscription
+│   │       ├── billing.service.test.ts
+│   │       ├── billing.schema.ts      # subscriptions, invoices, webhook_events (for idempotency)
+│   │       ├── billing.types.ts
+│   │       ├── billing.stripe.ts      # Stripe SDK adapter. Only file that imports `stripe`.
+│   │       └── billing.errors.ts
+│   ├── platform/                      # Cross-cutting code that truly has no feature home.
+│   │   ├── http/
+│   │   │   ├── error-handler.ts       # Hono onError: maps domain errors -> HTTP
+│   │   │   └── request-id.ts
+│   │   ├── logging/
+│   │   │   └── logger.ts              # pino instance; import `logger` everywhere
+│   │   └── validation/
+│   │       └── zod-middleware.ts      # typed request-body validator
+│   └── testing/
+│       ├── db.ts                      # spins up ephemeral Neon branch per test run
+│       └── fixtures.ts                # makeUser(), makeSubscription() factories
+├── scripts/
+│   ├── db-migrate.ts                  # bun run scripts/db-migrate.ts
+│   └── db-seed.ts
+├── drizzle.config.ts
+├── package.json
+├── tsconfig.json
+├── bunfig.toml
+├── .env.example
+├── CONVENTIONS.md
+├── AGENTS.md                          # Agent entrypoint: commands, boundaries, canonical feature example.
+└── README.md

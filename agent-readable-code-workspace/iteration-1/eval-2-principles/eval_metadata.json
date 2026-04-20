@@ -1,0 +1,39 @@
+{
+  "eval_id": 2,
+  "eval_name": "principles-prioritized-list",
+  "prompt": "What should I do to make code easier for AI coding agents to read and modify? Prioritized list with concrete examples, grounded in specific failure modes.",
+  "assertions": [
+    {
+      "id": "mentions-naming-for-grep",
+      "text": "recommendations.md discusses naming with explicit reference to grep-ability, retrieval, or localization (not just 'use good names')"
+    },
+    {
+      "id": "mentions-feature-colocation",
+      "text": "recommendations.md recommends organizing code by feature / vertical slice rather than by horizontal layer"
+    },
+    {
+      "id": "mentions-metaprogramming-risk",
+      "text": "recommendations.md warns against metaprogramming, reflection, or dynamic dispatch and explains why it hurts agents specifically"
+    },
+    {
+      "id": "mentions-typed-boundaries",
+      "text": "recommendations.md recommends typed public boundaries / type annotations at module seams"
+    },
+    {
+      "id": "mentions-verification-loop",
+      "text": "recommendations.md recommends verification affordances (colocated tests, single command for lint+test+typecheck, fast feedback) and ties this to preventing agent hallucination spirals"
+    },
+    {
+      "id": "mentions-file-size-or-duplicates",
+      "text": "recommendations.md addresses file size, near-duplicates, or apply-model / str_replace breakage"
+    },
+    {
+      "id": "uses-failure-modes-not-platitudes",
+      "text": "recommendations.md grounds the reasoning in specific agent failure modes (e.g. mid-context position bias, grep misses, str_replace ambiguity, hallucinated APIs, spiral edits) rather than generic 'clean code' platitudes"
+    },
+    {
+      "id": "is-prioritized",
+      "text": "recommendations.md presents the list in a prioritized order (top 3, ranked list, or similar) rather than flat unordered bullets"
+    }
+  ]
+}

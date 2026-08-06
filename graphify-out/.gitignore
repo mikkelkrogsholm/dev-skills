@@ -1,1 +1,4 @@
 cache/last_query_stamp
+cache/ast/
+.graphify_labels.json
+.graphify_labels.json.sig

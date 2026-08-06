@@ -1,0 +1,14 @@
+.git/
+.worktrees/
+.secrets/
+.hermes/
+.venv/
+node_modules/
+dist/
+build/
+coverage/
+artifacts/
+qa/
+graphify-out/
+deliveries/
+backups/

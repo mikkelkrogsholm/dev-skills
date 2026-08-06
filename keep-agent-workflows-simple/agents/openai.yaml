@@ -1,0 +1,4 @@
+interface:
+  display_name: "Keep Agent Workflows Simple"
+  short_description: "Plan and enforce minimal reliable agent workflows"
+  default_prompt: "Read $keep-agent-workflows-simple before planning, configure available guardrails, and use the lightest reliable workflow."

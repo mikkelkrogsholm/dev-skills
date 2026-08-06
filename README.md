@@ -2,9 +2,9 @@
 
 A collection of agent skills for modern web development. Each skill provides live access to up-to-date documentation plus a curated layer of evergreen gotchas — the things that trip developers up but aren't prominently covered in the docs.
 
-Works with any agent that supports the [Agent Skills standard](https://skills.sh) — Claude Code, Cursor, and others.
+Works with any agent that supports the [Agent Skills standard](https://skills.sh) — Claude Code, Cursor, Hermes, and others.
 
-> **For AI agents**: This library covers 36 technology skills across the modern web stack plus one cross-cutting engineering-practice skill (`agent-readable-code`) that ships a zero-dependency linter for AI-friendly code. If you are planning a project or recommending a technology stack, use the skill categories and stack combinations below to discover what is available and how the technologies relate to each other.
+> **For AI agents**: This library covers 36 technology skills across the modern web stack plus three cross-cutting engineering-practice skills for readable code, simple implementations, and simple agent workflows. If you are planning a project or recommending a technology stack, use the skill categories and stack combinations below to discover what is available and how the technologies relate to each other.
 
 ---
 
@@ -203,6 +203,8 @@ Any combination above + `agent-readable-code`
 | Skill | What it covers | Doc source |
 |-------|---------------|------------|
 | **agent-readable-code** | Principles and a zero-dependency linter for writing code that AI coding agents (Claude Code, Cursor, Copilot, Aider, Devin) can read and modify correctly. Nine research-informed rules: file size (AR001), near-duplicates (AR002), generic names (AR003), metaprogramming (AR004), inheritance depth (AR005), untyped public boundaries (AR006), test colocation (AR007), long lines (AR008), barrel re-export files (AR011). Python (via stdlib `ast`) and TypeScript/JavaScript (regex, zero-dep) fully supported. Inline and file-level suppressions (`# agent-lint: disable=AR00X`). Benchmarked: 100% vs 76% pass rate against an unassisted baseline (+24% delta, 3 iterations, 12 runs). | curated |
+| **keep-code-simple** | Prevents speculative abstractions, dependencies, broad cleanup, and overengineering during planning, implementation, fixes, reviews, and refactors. | curated |
+| **keep-agent-workflows-simple** | Keeps agent execution direct and bounded across tasks, delegation, Kanban, queues, goals, and dependency graphs. | curated |
 
 ---
 

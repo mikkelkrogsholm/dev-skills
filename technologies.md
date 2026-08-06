@@ -30,3 +30,5 @@ One skill per technology. Work through them in order.
 | 24 | Turso | llms.txt | https://docs.turso.tech/llms.txt | done |
 | 25 | OpenTelemetry | website | https://opentelemetry.io/docs/languages/js/ | done |
 | 26 | agent-readable-code | curated | — (principles + zero-dep linter) | done |
+| 27 | keep-code-simple | curated | — (engineering simplicity contract) | done |
+| 28 | keep-agent-workflows-simple | curated | — (agent workflow simplicity contract) | done |

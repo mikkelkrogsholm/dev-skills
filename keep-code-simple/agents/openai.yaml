@@ -1,0 +1,4 @@
+interface:
+  display_name: "Keep Code Simple"
+  short_description: "Plan and implement the smallest correct change"
+  default_prompt: "Read $keep-code-simple before planning, then implement the smallest clear and verifiable change."

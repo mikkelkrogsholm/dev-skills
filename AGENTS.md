@@ -30,11 +30,11 @@ SKILL.md frontmatter:
 - `name`: kebab-case, max 64 chars
 - `description`: the trigger — what the agent reads to decide whether to activate. Max 1024 chars. No angle brackets.
 
-### Available skills (36 total)
+### Available skills (38 total)
 
 See README.md for the full categorised list with stack combinations.
 
-Categories: Runtime, Frameworks, UI/Animation, Databases, Auth/Storage, APIs/Payments, State/Routing, Background Jobs, Search, Observability, Deployment, Configuration, GDPR/Compliance, SEO/GEO.
+Categories: Runtime, Frameworks, UI/Animation, Databases, Auth/Storage, APIs/Payments, State/Routing, Background Jobs, Search, Observability, Deployment, Configuration, GDPR/Compliance, SEO/GEO, Engineering Practice.
 
 ### Recommended stacks
 
